@@ -1,0 +1,250 @@
+<!doctype html>
+<html>
+<link rel="stylesheet" type="text/css" href="css/popup.css">
+<body>
+	<div id="container">
+		<div id="wrapper">
+			<div id="header">
+				<div id="close">&#215;</div>
+				<div id="title">reddit Match Threader</div>
+			</div>
+			<ul id="navigation">
+				<li class="selected" data-nav="meta">Meta</li>
+				<li data-nav="teams">Teams</li>
+				<li data-nav="stats">Stats</li>
+				<li data-nav="updates">Updates</li>
+			</ul>
+			<div id="navoutput">
+				<div class="page" data-page="meta">
+					<!--<h1>Meta</h1>-->
+					<div class="frm-group">
+						<input type="text" placeholder="Home Team" data-input="meta-home" />
+						<label>Home Team</label>
+					</div>
+					<div class="frm-group">
+						<input type="text" placeholder="Away Team" data-input="meta-away" />
+						<label>Away Team</label>
+					</div>
+					<div class="frm-group">
+						<input type="text" placeholder="Venue" data-input="meta-venue" />
+						<label>Venue</label>
+					</div>
+					<div class="frm-group">
+						<input type="text" placeholder="Kick-Off" data-input="meta-kickoff" />
+						<label>Kick-Off</label>
+					</div>
+					<div class="frm-group">
+						<input type="text" placeholder="Referee" data-input="meta-referee" />
+						<label>Referee</label>
+					</div>
+					<div class="frm-group">
+						<select data-input="sprite-tournament">
+							<option value="[](#sprite7-p403)">UEFA Champions League</option>
+							<option value="[](#sprite7-p327)">EFL Premier League</option>
+							<option value="[](#sprite7-p408)">UEFA Europa League</option>
+							<option value="[](#sprite7-p368)">Emirates FA Cup</option>
+							<option value="[](#sprite8-p79)">EFL Cup</option>
+							<option value="[](#icon-ball)">Other</option>
+						</select>
+						<input type="hidden" data-input="meta-tournament" />
+						<label>Tournament</label>
+					</div>
+				</div>
+				<div class="page" data-page="teams">
+					<!--<h1>Teams</h1>-->
+					<div id="cont-teams" class="col">
+						<div class="col-1">
+							<h2>Home</h2>
+							<h3>Starting XI</h3>
+							<ul class="frm-group team-list" data-team="home" data-squad="xi">
+								<li class="col"><div><input data-input="home-xi-0" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-1" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-2" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-3" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-4" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-5" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-6" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-7" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-8" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-9" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-xi-10" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+							</ul>
+							<h3>Bench</h3>
+							<ul class="frm-group team-list bench" data-team="home" data-squad="bench">
+								<li class="col"><div><input data-input="home-bench-0" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-bench-1" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-bench-2" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-bench-3" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-bench-4" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-bench-5" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="home-bench-6" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+							</ul>
+						</div>
+						<div class="col-1">
+							<h2>Away</h2>
+							<h3>Starting XI</h3>
+							<ul class="frm-group team-list" data-team="away" data-squad="xi">
+								<li class="col"><div><input data-input="away-xi-0" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-1" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-2" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-3" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-4" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-5" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-7" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-6" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-8" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-9" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-xi-10" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+							</ul>
+							<h3>Bench</h3>
+							<ul class="frm-group team-list bench" data-team="away" data-squad="bench">
+								<li class="col"><div><input data-input="away-bench-0" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-bench-1" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-bench-2" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-bench-3" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-bench-4" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-bench-5" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+								<li class="col"><div><input data-input="away-bench-6" /></div><div><span></span></div><div><a href="#">+</a></div></li>
+							</ul>
+						</div>
+						<div>
+							<input class="playersp" type="hidden" value="" data-input="home-xi-0-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-1-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-2-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-3-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-4-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-5-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-6-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-7-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-8-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-9-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-xi-10-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-bench-0-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-bench-1-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-bench-2-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-bench-3-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-bench-4-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-bench-5-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="home-bench-6-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-0-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-1-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-2-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-3-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-4-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-5-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-7-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-6-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-8-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-9-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-xi-10-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-bench-0-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-bench-1-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-bench-2-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-bench-3-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-bench-4-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-bench-5-sprites" />
+							<input class="playersp" type="hidden" value="" data-input="away-bench-6-sprites" />
+				</div>
+					</div>
+				</div>
+				<div class="page" data-page="stats">
+					<!--<h1>Stats</h1>-->
+					<div class="col col-center frm-group">
+						<div class="stats-value"><h3>Home</h3></div>
+						<div class="stats-label"><h3>Stat</h3></div>
+						<div class="stats-value"><h3>Away</h3></div>
+					</div>
+					<div class="col col-center frm-group">
+						<div class="stats-value"><input data-input="stat-home-shotson" type="number" value="0" min="0" max="100" /></div>
+						<div class="stats-label">Shots (On Target)</div>
+						<div class="stats-value"><input data-input="stat-away-shotson" type="number" value="0" min="0" max="100" /></div>
+					</div>
+					<div class="col col-center frm-group">
+						<div class="stats-value"><input data-input="stat-home-shotsoff" type="number" value="0" min="0" max="100" /></div>
+						<div class="stats-label">Shots (Off Target)</div>
+						<div class="stats-value"><input data-input="stat-away-shotsoff" type="number" value="0" min="0" max="100" /></div>
+					</div>
+					<div class="col col-center frm-group">
+						<div class="stats-value"><input data-input="stat-home-possession" type="number" value="0" min="0" max="100" /></div>
+						<div class="stats-label">Possession (%)</div>
+						<div class="stats-value"><input data-input="stat-away-possession" type="number" value="0" min="0" max="100" /></div>
+					</div>
+					<div class="col col-center frm-group">
+						<div class="stats-value"><input data-input="stat-home-corners" type="number" value="0" min="0" max="100" /></div>
+						<div class="stats-label">Corners</div>
+						<div class="stats-value"><input data-input="stat-away-corners" type="number" value="0" min="0" max="100" /></div>
+					</div>
+					<div class="col col-center frm-group">
+						<div class="stats-value"><input data-input="stat-home-fouls" type="number" value="0" min="0" max="100" /></div>
+						<div class="stats-label">Fouls</div>
+						<div class="stats-value"><input data-input="stat-away-fouls" type="number" value="0" min="0" max="100" /></div>
+					</div>
+					<div class="col col-center frm-group">
+						<div class="stats-value"><input data-input="stat-home-offsides" type="number" value="0" min="0" max="100" /></div>
+						<div class="stats-label">Offsides</div>
+						<div class="stats-value"><input data-input="stat-away-offsides" type="number" value="0" min="0" max="100" /></div>
+					</div>
+					<div class="col col-center frm-group">
+						<div class="stats-value"><input data-input="stat-home-yellows" type="number" value="0" min="0" max="100" /></div>
+						<div class="stats-label">Bookings</div>
+						<div class="stats-value"><input data-input="stat-away-yellows" type="number" value="0" min="0" max="100" /></div>
+					</div>
+					<div class="col col-center frm-group">
+						<div class="stats-value"><input data-input="stat-home-reds" type="number" value="0" min="0" max="100" /></div>
+						<div class="stats-label">Sending-Offs</div>
+						<div class="stats-value"><input data-input="stat-away-reds" type="number" value="0" min="0" max="100" /></div>
+					</div>
+				</div>
+				<div class="page" data-page="updates">
+					<!--<h1>Updates</h1>-->
+				</div>
+			</div>
+
+			<div id="confirmOutput">
+				<button data-action="submit">Update</button>
+			</div>
+
+		</div>
+	</div>
+	<!-- modals/popups -->
+	<div class="modal-cont">
+		<div class="modal" data-modal="playerevent">
+			<h1>Add Player Event</h1>
+			<div class="modal-body">
+				<!--<label>Minute</label>
+				<div class="frm-group">
+					<input type="number" name="player-min" min="0" max="120" placeholder="Min" />
+				</div>-->
+				<div class="frm-group">
+					<label>Player</label>
+					<input data-input="player-name" name="player-name" value="" data-playerid="" disabled />
+				</div>
+				<div class="frm-group">
+					<label>Event</label>
+					<select data-input="player-sprite" name="player-sprite">
+						<option value="">No new icon</option>
+						<option value="icon-ball">Goal</option>
+						<option value="icon-red-ball">Own Goal</option>
+						<option value="icon-yellow">Booking</option>
+						<option value="icon-red">Sending Off</option>
+						<option value="icon-red-cross">Injury</option>
+						<option value="icon-down">Sub Off</option>
+						<option value="icon-up">Sub On</option>
+						<option value="icon-star">MoTM</option>
+					</select>
+				</div>
+				<div class="frm-group">
+					<label>Existing Info</label>
+					<ul class="existing"></ul>
+				</div>
+				<div class="modal-footer">
+					<a href="#" class="modal-close">Cancel</a>
+					<a href="#" class="modal-confirm">Confirm Changes</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/popup.js"></script>
+</body>
+</html>
