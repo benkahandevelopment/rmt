@@ -8,24 +8,8 @@ The files are an unpackaged Chrome extension. Enable "Developer Mode" on chrome:
 
 ## Contribution
 
-Please get in touch via Git
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Please get in touch via GitHub or reddit (/u/magicwings) for details on how to contribute to this project.
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+* **Ben Kahan** - [Ben Kahan Development](https://github.com/benkahandevelopment), [/u/magicwings](https://reddit.com/u/magicwings)
