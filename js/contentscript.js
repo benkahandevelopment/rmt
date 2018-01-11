@@ -27,6 +27,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 
 		//Start data handling
 		var d = request.data;
+		var u = request.commentary;
 		var $textarea = $(".md-container .md textarea:eq(0)");
 		var c = $textarea.val();
 
@@ -55,9 +56,12 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 		//Stats
 		c = replaceStats(c, d);
 
+		//Commentary
+		c = replaceCommentary(c, u);
+
 		$textarea.val(c);
 
-		$("#siteTable div.usertext-buttons button.save")[0].click();
+		//$("#siteTable div.usertext-buttons button.save")[0].click();
 
 		/*setTimeout(function(){
 			$("#siteTable div.usertext-buttons button.save")[0].click();
@@ -101,6 +105,14 @@ function replaceMeta(startVal, metaName, spriteName, requestData){
 		ret = withMeta.replace(new RegExp(sanitise("[](#rmt-start-"+spriteName[i]+")")+".*"+sanitise("[](#rmt-end-"+spriteName[i]+")"),"g"), "[](#rmt-start-"+spriteName[i]+")"+val+"[](#rmt-end-"+spriteName[i]+")");
 	});
 	return ret;
+}
+
+function replaceCommentary(startVal, requestData){
+	//console.log(1);
+	var r = startVal.replace("{{FULL_COMMENTARY}}", "[](#rmt-start-full-commentary)[](#rmt-end-full-commentary)");
+	console.log(sanitise("[](#rmt-start-full-commentary)")+".*"+sanitise("[](#rmt-end-full-commentary)"));
+	r = r.replace(/\[\]\(\#rmt\-start\-full\-commentary\)[\s\S]*\[\]\(\#rmt\-end\-full\-commentary\)/g, "[](#rmt-start-full-commentary)"+requestData+"[](#rmt-end-full-commentary)");
+	return r;
 }
 
 function replaceTeams(startVal, requestData){

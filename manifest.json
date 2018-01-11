@@ -28,11 +28,7 @@
     ],
     "web_accessible_resources": [
         "js/jquery.min.js",
-        "js/jqueryui.min.js",
-        "icon16.png",
-        "icon32.png",
-        "icon64.png",
-        "icon128.png"
+        "js/jqueryui.min.js"
     ],
     "icons": {
         "16":"icon16.png",

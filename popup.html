@@ -144,7 +144,7 @@
 							<input class="playersp" type="hidden" value="" data-input="away-bench-4-sprites" />
 							<input class="playersp" type="hidden" value="" data-input="away-bench-5-sprites" />
 							<input class="playersp" type="hidden" value="" data-input="away-bench-6-sprites" />
-				</div>
+						</div>
 					</div>
 				</div>
 				<div class="page" data-page="stats">
@@ -197,6 +197,39 @@
 				</div>
 				<div class="page" data-page="updates">
 					<!--<h1>Updates</h1>-->
+					<div class="updates-header">
+						<h3>Add Commentary</h3>
+						<div class="col">
+							<div class="frm-group col-1">
+								<select data-input="comm-prepend" class="ignore">
+									<option value="" data-prepend="" >No icon</option>
+									<option value="icon-ball" data-prepend="GOAL" >Goal</option>
+									<option value="icon-red-ball" data-prepend="OWN GOAL" >Own Goal</option>
+									<option value="icon-yellow" data-prepend="BOOKING" >Booking</option>
+									<option value="icon-red" data-prepend="SENT OFF" >Sending Off</option>
+									<option value="icon-red-cross" data-prepend="INJURY" >Injury</option>
+									<option value="icon-sub" data-prepend="SUB" >Substitution</option>
+									<option value="icon-star" data-prepend="" >MoTM</option>
+								</select>
+								<label>Icon</label>
+							</div>
+							<div class="frm-group col-1">
+								<input type="number" data-input="comm-minute" class="ignore" min="0" max="120" placeholder="Minute" />
+								<label>Minute (int. 0-120)</label>
+							</div>
+						</div>
+						<div class="frm-group">
+							<input type="text" class="ignore" data-input="comm-text" placeholder="Commentary" />
+							<label>Commentary</label>
+						</div>
+						<div class="frm-group saveCommentary-cont">
+							<button id="saveCommentary">Add</button>
+						</div>
+					</div>
+					<div class="updates-cont">
+						<h3>History</h3>
+						<ul data-output="commentary"></ul>
+					</div>
 				</div>
 			</div>
 
@@ -217,11 +250,11 @@
 				</div>-->
 				<div class="frm-group">
 					<label>Player</label>
-					<input data-input="player-name" name="player-name" value="" data-playerid="" disabled />
+					<input data-input="player-name" class="ignore" name="player-name" value="" data-playerid="" disabled />
 				</div>
 				<div class="frm-group">
 					<label>Event</label>
-					<select data-input="player-sprite" name="player-sprite">
+					<select data-input="player-sprite" name="player-sprite" class="ignore">
 						<option value="">No new icon</option>
 						<option value="icon-ball">Goal</option>
 						<option value="icon-red-ball">Own Goal</option>

@@ -11,6 +11,14 @@
 
     //Submit
     $("#confirmOutput button[data-action=submit]").click(submit);
+    $("#saveCommentary").click(addCommentary);
+
+    //Commentary
+    $("select[data-input=comm-prepend]").change(function(e){
+        var $t = $("input[data-input=comm-text]");
+        var p = $(this).find(":selected").attr("data-prepend");
+        if($.trim($t.val()).length<1&&p!=""){ $t.val("**"+p+"**: "); }
+    });
 
     //Navigation
     $("#navigation li").click(function(){
@@ -25,6 +33,16 @@
         o.savedInputs.forEach(function(i,v){ $("[data-input="+i[0]+"]").val(i[1]); });
         refreshSprites();
     });
+
+    //Check and load saved commentary
+    chrome.storage.sync.get({"savedCommentary":[]}, function(o){
+        o.savedCommentary.forEach(function(v,i){
+            $("ul[data-output=commentary]").append("<li data-text='"+v+"'>"+unescape(v)+"</li>");
+            /*each(function(e){
+                ret+= unescape($(this).attr("data-text"))+"  \n";
+            });*/
+        });
+    })
 
     //Return key goes to next visible input
     $("input").keyup(function(e){
@@ -98,7 +116,7 @@ function saveInputs(){
     });
 
     var savedInputs = [];
-    $("input, textarea, select").each(function(){
+    $("input, textarea, select").not(".ignore").each(function(){
         savedInputs.push([$(this).attr("data-input"), $(this).val()]);
     });
 
@@ -106,11 +124,21 @@ function saveInputs(){
     return savedInputs;
 }
 
+function saveCommentary(){
+    var savedCommentary = [];
+    $("ul[data-output=commentary] li").each(function(e){
+        savedCommentary.push($(this).attr("data-text"))+"  \n";
+    });
+    chrome.storage.sync.set({"savedCommentary":savedCommentary});
+    return savedCommentary;
+}
+
 function submit(){
     var data = saveInputs();
+    var commentary = getCommentary();
 
     chrome.tabs.getSelected(null, function(tab){
-        chrome.tabs.sendRequest(tab.id, { data : data }, function(response){
+        chrome.tabs.sendRequest(tab.id, { data : data, commentary : commentary }, function(response){
             //console.log(response);
         });
     });
@@ -138,4 +166,24 @@ function refreshSprites(){
             $("input[data-input="+playerid+"]").parent().parent().find("span:eq(0)").html("");
         }
     });
+}
+
+function addCommentary(){
+    var min = $("input[data-input=comm-minute]").val()+"'";
+    var ico = $("select[data-input=comm-prepend]").find(":selected").val()=="" ? "" : "[](#"+$("select[data-input=comm-prepend]").find(":selected").val()+")";
+    var com = $("input[data-input=comm-text]").val();
+
+    var dataOutput = " "+min+"|"+ico+"|"+com;
+    var actualOutput = "<li data-text='"+escape(dataOutput)+"'>"+dataOutput+"</li>";
+
+    $("ul[data-output=commentary]").prepend(actualOutput);
+    saveCommentary();
+}
+
+function getCommentary(){
+    var ret = "";
+    $("ul[data-output=commentary] li").each(function(e){
+        ret = unescape($(this).attr("data-text"))+"  \n" + ret;
+    });
+    return ret;
 }
