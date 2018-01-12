@@ -61,7 +61,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 
 		$textarea.val(c);
 
-		//$("#siteTable div.usertext-buttons button.save")[0].click();
+		$("#siteTable div.usertext-buttons button.save")[0].click();
 
 		/*setTimeout(function(){
 			$("#siteTable div.usertext-buttons button.save")[0].click();
@@ -101,7 +101,7 @@ function replaceMeta(startVal, metaName, spriteName, requestData){
 	var ret = startVal;
 	metaName.forEach(function(v,i){
 		var val = findVal(requestData,spriteName[i]);
-		var withMeta = ret.replace("{{"+v+"}}", "[](#rmt-start-"+spriteName[i]+")[](#rmt-end-"+spriteName[i]+")");
+		var withMeta = ret.replace(new RegExp(sanitise("{{"+v+"}}"),"g"), "[](#rmt-start-"+spriteName[i]+")[](#rmt-end-"+spriteName[i]+")");
 		ret = withMeta.replace(new RegExp(sanitise("[](#rmt-start-"+spriteName[i]+")")+".*"+sanitise("[](#rmt-end-"+spriteName[i]+")"),"g"), "[](#rmt-start-"+spriteName[i]+")"+val+"[](#rmt-end-"+spriteName[i]+")");
 	});
 	return ret;
@@ -154,49 +154,101 @@ function replaceStats(startVal, requestData){
 	var ac = presets.away_color;
 
 	var stats_full = "";
-		h = parseInt(findVal(requestData, "stat-home-shotson"));
-		a = parseInt(findVal(requestData, "stat-away-shotson"));
-		hl = isNaN(h) ? 0 : (h>20||a>20 ? Math.round(h/(h+a)*10)*2 : h);
-		al = isNaN(a) ? 0 : (h>20||a>20 ? 20-hl : a);
-	stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")|Shots (on target)|["+a+"](#bar-"+al+"-"+ac+")  \n";
-		h = parseInt(findVal(requestData, "stat-home-shotsoff"));
-		a = parseInt(findVal(requestData, "stat-away-shotsoff"));
-		hl = isNaN(h) ? 0 : (h>20||a>20 ? Math.round(h/(h+a)*10)*2 : h);
-		al = isNaN(a) ? 0 : (h>20||a>20 ? 20-hl : a);
-	stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Shots (off target) |["+a+"](#bar-"+al+"-"+ac+")  \n";
-		h = parseInt(findVal(requestData, "stat-home-possession"));
-		a = parseInt(findVal(requestData, "stat-away-possession"));
-		hl = isNaN(h) ? 0 : (h>20||a>20 ? Math.round(h/(h+a)*10)*2 : h);
-		al = isNaN(a) ? 0 : (h>20||a>20 ? 20-hl : a);
-	stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Possession |["+a+"](#bar-"+al+"-"+ac+")  \n";
-		h = parseInt(findVal(requestData, "stat-home-corners"));
-		a = parseInt(findVal(requestData, "stat-away-corners"));
-		hl = isNaN(h) ? 0 : (h>20||a>20 ? Math.round(h/(h+a)*10)*2 : h);
-		al = isNaN(a) ? 0 : (h>20||a>20 ? 20-hl : a);
-	stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Corners |["+a+"](#bar-"+al+"-"+ac+")  \n";
-		h = parseInt(findVal(requestData, "stat-home-fouls"));
-		a = parseInt(findVal(requestData, "stat-away-fouls"));
-		hl = isNaN(h) ? 0 : (h>20||a>20 ? Math.round(h/(h+a)*10)*2 : h);
-		al = isNaN(a) ? 0 : (h>20||a>20 ? 20-hl : a);
-	stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Fouls |["+a+"](#bar-"+al+"-"+ac+")  \n";
-		h = parseInt(findVal(requestData, "stat-home-offsides"));
-		a = parseInt(findVal(requestData, "stat-away-offsides"));
-		hl = isNaN(h) ? 0 : (h>20||a>20 ? Math.round(h/(h+a)*10)*2 : h);
-		al = isNaN(a) ? 0 : (h>20||a>20 ? 20-hl : a);
-	stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Offsides |["+a+"](#bar-"+al+"-"+ac+")  \n";
-		h = parseInt(findVal(requestData, "stat-home-yellows"));
-		a = parseInt(findVal(requestData, "stat-away-yellows"));
-		hl = isNaN(h) ? 0 : (h>20||a>20 ? Math.round(h/(h+a)*10)*2 : h);
-		al = isNaN(a) ? 0 : (h>20||a>20 ? 20-hl : a);
-	stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Bookings |["+a+"](#bar-"+al+"-"+ac+")  \n";
-		h = parseInt(findVal(requestData, "stat-home-reds"));
-		a = parseInt(findVal(requestData, "stat-away-reds"));
-		hl = isNaN(h) ? 0 : (h>20||a>20 ? Math.round(h/(h+a)*10)*2 : h);
-		al = isNaN(a) ? 0 : (h>20||a>20 ? 20-hl : a);
-	stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Sending Offs |["+a+"](#bar-"+al+"-"+ac+")  \n";
+			h = parseInt(findVal(requestData, "stat-home-shotson"));
+			a = parseInt(findVal(requestData, "stat-away-shotson"));
+			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
+			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")|Shots (on target)|["+a+"](#bar-"+al+"-"+ac+")  \n";
+			h = parseInt(findVal(requestData, "stat-home-shotsoff"));
+			a = parseInt(findVal(requestData, "stat-away-shotsoff"));
+			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
+			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Shots (off target) |["+a+"](#bar-"+al+"-"+ac+")  \n";
+			h = parseInt(findVal(requestData, "stat-home-possession"));
+			a = parseInt(findVal(requestData, "stat-away-possession"));
+			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
+			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+		stats_full += " "+"["+h+"%](#bar-"+hl+"-"+hc+")| Possession |["+a+"%](#bar-"+al+"-"+ac+")  \n";
+			h = parseInt(findVal(requestData, "stat-home-corners"));
+			a = parseInt(findVal(requestData, "stat-away-corners"));
+			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
+			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Corners |["+a+"](#bar-"+al+"-"+ac+")  \n";
+			h = parseInt(findVal(requestData, "stat-home-fouls"));
+			a = parseInt(findVal(requestData, "stat-away-fouls"));
+			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
+			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Fouls |["+a+"](#bar-"+al+"-"+ac+")  \n";
+			h = parseInt(findVal(requestData, "stat-home-offsides"));
+			a = parseInt(findVal(requestData, "stat-away-offsides"));
+			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
+			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Offsides |["+a+"](#bar-"+al+"-"+ac+")  \n";
+			h = parseInt(findVal(requestData, "stat-home-yellows"));
+			a = parseInt(findVal(requestData, "stat-away-yellows"));
+			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
+			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Bookings |["+a+"](#bar-"+al+"-"+ac+")  \n";
+			h = parseInt(findVal(requestData, "stat-home-reds"));
+			a = parseInt(findVal(requestData, "stat-away-reds"));
+			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
+			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Sending Offs |["+a+"](#bar-"+al+"-"+ac+")  \n";
+
+	var stats_full_reverse = "";
+			h = parseInt(findVal(requestData, "stat-home-shotson"));
+			a = parseInt(findVal(requestData, "stat-away-shotson"));
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { a=10; h=10; }
+		stats_full_reverse += " Shots (on target)|"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
+			h = parseInt(findVal(requestData, "stat-home-shotsoff"));
+			a = parseInt(findVal(requestData, "stat-away-shotsoff"));
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { a=10; h=10; }
+		stats_full_reverse += " Shots (off target) |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
+			h = parseInt(findVal(requestData, "stat-home-possession"));
+			a = parseInt(findVal(requestData, "stat-away-possession"));
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { a=10; h=10; }
+		stats_full_reverse += " Possession |"+(hl>0?"["+h+"%](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"%](#bar-"+al+"-"+ac+")":"")+"  \n";
+			h = parseInt(findVal(requestData, "stat-home-corners"));
+			a = parseInt(findVal(requestData, "stat-away-corners"));
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { a=10; h=10; }
+		stats_full_reverse += " Corners |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
+			h = parseInt(findVal(requestData, "stat-home-fouls"));
+			a = parseInt(findVal(requestData, "stat-away-fouls"));
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { a=10; h=10; }
+		stats_full_reverse += " Fouls |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
+			h = parseInt(findVal(requestData, "stat-home-offsides"));
+			a = parseInt(findVal(requestData, "stat-away-offsides"));
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { a=10; h=10; }
+		stats_full_reverse += " Offsides |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
+			h = parseInt(findVal(requestData, "stat-home-yellows"));
+			a = parseInt(findVal(requestData, "stat-away-yellows"));
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { a=10; h=10; }
+		stats_full_reverse += " Bookings |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
+			h = parseInt(findVal(requestData, "stat-home-reds"));
+			a = parseInt(findVal(requestData, "stat-away-reds"));
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { a=10; h=10; }
+		stats_full_reverse += " Sending Offs |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
 
 	var ret = startVal.replace(/\{\{STATS_FULL\}\}/g, "[](#rmt-start-stats-full)"+stats_full+"[](#rmt-end-stats-full)");
+	ret = ret.replace(/\{\{STATS_FULL_REVERSE\}\}/g, "[](#rmt-start-stats-full-reverse)"+stats_full_reverse+"[](#rmt-end-stats-full-reverse)");
 	ret = ret.replace(/\[\]\(\#rmt\-start\-stats\-full\)[\s\S]*\[\]\(\#rmt\-end\-stats\-full\)/g, "[](#rmt-start-stats-full)"+stats_full+"[](#rmt-end-stats-full)");
+	ret = ret.replace(/\[\]\(\#rmt\-start\-stats\-full\-reverse\)[\s\S]*\[\]\(\#rmt\-end\-stats\-full\-reverse\)/g, "[](#rmt-start-stats-full-reverse)"+stats_full_reverse+"[](#rmt-end-stats-full-reverse)");
 
 	return ret;
 }

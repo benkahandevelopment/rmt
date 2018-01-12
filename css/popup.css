@@ -223,8 +223,8 @@ h3 {
     align-items: stretch;
 }
 
-.col-1 { flex-grow: 1; }
-.col-2 { flex-grow: 2; }
+.col-1 { flex-grow: 1; width:0;  }
+.col-2 { flex-grow: 2; width:0;  }
 
 .col.col-center {
     align-items: center !important;
@@ -244,6 +244,54 @@ ul.team-list li {
 }
 
 ul.team-list.bench {}
+
+.btn-plus {
+    margin: 0px;
+    padding: 2px 4px;
+    background: #2079a2;
+    border: none;
+    border-radius: 2px;
+    box-shadow: inset 0 -1px 0 #0f394d;
+    box-sizing: border-box;
+    color: white;
+    cursor: pointer;
+    display: block;
+    outline: none;
+    opacity: 0.5;
+    transition: opacity 0.25s;
+}
+
+.btn-plus:disabled {
+    background-color:#eee;
+    box-shadow: inset 0 -1px 0 #ccc;
+    cursor: disabled;
+}
+
+.btn-plus:not(:disabled):hover {
+    opacity: 1;
+    color: white;
+}
+
+.btn-plus:not(:disabled):active {
+    box-shadow:inset 0 1px 0 #fff;
+    padding-bottom: 0px;
+    padding-top: 4px;
+}
+
+
+.team-list div.span-cont {
+    border: 1px dashed rgba(0,0,0,0.2);
+    padding: 0 3px;
+    margin: 0 2px;
+    vertical-align: middle;
+    line-height: 22px;
+    max-height: 26px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.team-list div.span-cont span a {}
+
 
 /* Stats */
 .stats-value {}
@@ -297,6 +345,40 @@ ul.team-list.bench {}
     padding-top: 12px;
 }
 
+ul[data-output=commentary] {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul[data-output=commentary] li {
+    margin: 3px 0;
+    padding: 3px 5px;
+    line-height: 20px;
+    border-bottom: 1px dashed rgba(0,0,0,0.1);
+}
+
+ul[data-output=commentary] li:hover {
+    background: rgba(0,0,0,0.1);
+}
+
+ul[data-output=commentary] b {
+    font-weight: bold;
+}
+
+a.edit-commentary {
+    opacity: 0;
+}
+
+ul[data-output=commentary] li:hover a.edit-commentary {
+    opacity: 0.5;
+}
+
+a.edit-commentary:hover {
+    opacity: 1;
+}
+
+.icon-preview { display: inline-block; margin: 0 3px; vertical-align: middle; }
 
 /* Scrollbar */
 #navoutput {
@@ -347,6 +429,12 @@ ul.team-list.bench {}
 }
 
 .modal-close {
+    border-radius: 2px;
+    padding: 3px 5px;
+    border: 1px solid orange;
+}
+
+.modal-delete {
     border-radius: 2px;
     padding: 3px 5px;
     border: 1px solid red;

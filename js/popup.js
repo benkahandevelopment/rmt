@@ -26,6 +26,13 @@
         $(this).addClass("selected");
         $("#navoutput .page").hide();
         $("#navoutput .page[data-page='"+$(this).attr("data-nav")+"']").show();
+        chrome.storage.sync.set({"lastPage":$(this).attr("data-nav")});
+    });
+
+    //Open last tab
+    chrome.storage.sync.get({"lastPage":"meta"}, function(o){
+        l = o.lastPage || "meta";
+        $("#navigation li[data-nav="+l+"]").click();
     });
 
     //Check and load saved input data
@@ -37,10 +44,11 @@
     //Check and load saved commentary
     chrome.storage.sync.get({"savedCommentary":[]}, function(o){
         o.savedCommentary.forEach(function(v,i){
-            $("ul[data-output=commentary]").append("<li data-text='"+v+"'>"+unescape(v)+"</li>");
-            /*each(function(e){
-                ret+= unescape($(this).attr("data-text"))+"  \n";
-            });*/
+            var min = v[1]+"'";
+            var ico = v[2];
+            var com = $.trim((typeof unescape(v[0]).split("|")[2]!="undefined" ? unescape(v[0]).split("|")[2] : unescape(v[0])));
+            var dataOutput = " "+min+"|"+ico+"|"+com;
+            $("ul[data-output=commentary]").append("<li data-text='"+escape(dataOutput)+"' data-min=\""+v[1]+"'\" data-ico='"+v[2]+"'><a href='#' class='edit-commentary'>[Edit]</a>&nbsp;<span>"+v[1]+"' - "+com.replace(/\*\*([^\*]*)\*\*/g,"<b>$1</b>")+"</span></li>");
         });
     })
 
@@ -67,7 +75,7 @@
         $(".modal[data-modal=playerevent] ul.existing").html("");
         if(sprites.length>0){
             sprites.forEach(function(v,i){
-                if($.trim(v).length>0) $(".modal[data-modal=playerevent] ul.existing").append("<li><a href='#"+v+"' data-sprite='"+v+"'></a>&nbsp;<a href='#' class='removeSprite'>[REMOVE]</a></li>");
+                if($.trim(v).length>0) $(".modal[data-modal=playerevent] ul.existing").append("<li><a href='#"+v+"' data-sprite='"+v+"'></a>&nbsp;<a href='#' class='removeSprite'>[×]</a></li>");
             })
         }
 
@@ -75,68 +83,108 @@
         $(".modal[data-modal=playerevent]").fadeIn();
     });
 
-    //Player Event Modal - Confirm
+    //Commentary Modification - Launch
+    $(document).on('click',".edit-commentary", function(){
+        var $t = $(this).parent();
+        var n = $t.prevAll().length;
+
+        $(".modal[data-modal=editcommentary] select").val(unescape($t.attr("data-ico"))).change();
+        $(".modal[data-modal=editcommentary] input[type=hidden]").val(n);
+        $(".modal[data-modal=editcommentary] input[type=number]").val($t.attr("data-min").slice(0,-1));
+        $(".modal[data-modal=editcommentary] input[type=text]").val($.trim(unescape($t.attr("data-text")).split("|")[2]));
+
+        $(".modal-cont").fadeIn();
+        $(".modal[data-modal=editcommentary]").fadeIn();
+    });
+
+    //Commentary Modification - select change (for sprite icon display)
+    $(".modal[data-modal=editcommentary] select").change(function(e){
+        var n = $(this).find("option:selected:eq(0)").val();
+        $(".modal .icon-preview").html("<a href='#"+n.replace(/\[\]\(\#([^\)]*)\)/g,"$1")+"'></a>");
+    });
+
+    //Modal Confirm
     $(".modal-confirm").click(function(e){
         var m = $(this).closest(".modal").attr("data-modal");
         if(m=="playerevent"){
             var id = $(".modal[data-modal=playerevent] input[name=player-name]").attr("data-playerid");
             var sprite = $(".modal[data-modal=playerevent] select[name=player-sprite] option:selected").val();
-
-            //Add to hidden input
             var existing = [];
             $("ul.existing li").each(function(e){ existing.push($(this).find("a[data-sprite]:eq(0)").attr("data-sprite")); });
             if(sprite!="") existing.push(sprite);
             var newval = existing.toString();
             $("input[data-input="+id+"-sprites]").val(newval);
-
-            //Add sprites to span
             refreshSprites();
-
-            //Close modal
-            $(".modal-cont").fadeOut();
-            $(this).closest(".modal").fadeOut();
             saveInputs();
+        } else if(m=="editcommentary"){
+            var $c = $(".modal[data-modal=editcommentary]");
+            var l = parseInt($.trim($c.find("input[type=hidden]").val()));
+            console.log(escape($c.find("select option:selected").val()));
+            console.log($.trim($c.find("input[type=number]").val())+"'");
+            console.log(escape($.trim($c.find("input[type=text]").val())));
+            $p = $(".edit-commentary:eq("+l+")").parent();
+            $p.attr("data-ico", escape($c.find("select option:selected").val()));
+            $p.attr("data-min", $.trim($c.find("input[type=number]").val())+"'");
+            $p.attr("data-text", escape($.trim($c.find("input[type=text]").val())));
+            $p.find("span").html($.trim($c.find("input[type=number]").val())+"' - "+$.trim($c.find("input[type=text]").val().replace(/\*\*([^\*]*)\*\*/g,"<b>$1</b>")));
+            saveCommentary();
         }
+
+        //Close modal
+        $(".modal-cont").fadeOut();
+        $(this).closest(".modal").fadeOut();
     });
 
-    //Auto-save on unfocus/keyup
-    //$("input, textarea").keyup(saveInputs);
+    //Modal Delete
+    $(".modal-delete").click(function(e){
+        var m = $(this).closest(".modal").attr("data-modal");
+        if(m=="editcommentary"){
+            if(confirm("Are you sure you wish to delete this entry?")){
+                var n = $(this).closest(".modal").find("input[type=hidden]").val();
+                $("ul[data-output=commentary] li:eq("+n+")").remove();
+            }
+        }
+        saveCommentary();
+        $(".modal-cont").fadeOut();
+        $(this).closest(".modal").fadeOut();
+    });
+
+
+    //Auto-save on unfocus
     $("input, textarea, select").focusout(saveInputs);
 
 })();
 
 /* Functions ------------------------------------------------------------------0*/
+
+//Save all input data
 function saveInputs(){
-    $("select").each(function(){
+    $("select[data-input]").each(function(){
         var $t = $(this);
         if($t.attr("data-input").slice(0,7)=="sprite-"){
             var n = $t.attr("data-input").slice(7);
             $("[data-input=meta-"+n+"]").val($t.find("option:selected").text());
         }
     });
-
     var savedInputs = [];
-    $("input, textarea, select").not(".ignore").each(function(){
-        savedInputs.push([$(this).attr("data-input"), $(this).val()]);
-    });
-
+    $("input, textarea, select").not(".ignore").each(function(){ savedInputs.push([$(this).attr("data-input"), $(this).val()]); });
     chrome.storage.sync.set({"savedInputs":savedInputs});
     return savedInputs;
 }
 
+//Save commentary data to local storage
 function saveCommentary(){
     var savedCommentary = [];
-    $("ul[data-output=commentary] li").each(function(e){
-        savedCommentary.push($(this).attr("data-text"))+"  \n";
-    });
+    $("ul[data-output=commentary] li").each(function(e){ savedCommentary.push([$.trim($(this).attr("data-text")),$(this).attr("data-min").slice(0,-1),$(this).attr("data-ico")]); });
     chrome.storage.sync.set({"savedCommentary":savedCommentary});
     return savedCommentary;
 }
 
+//On submit button press
 function submit(){
     var data = saveInputs();
+    saveCommentary();
     var commentary = getCommentary();
-
     chrome.tabs.getSelected(null, function(tab){
         chrome.tabs.sendRequest(tab.id, { data : data, commentary : commentary }, function(response){
             //console.log(response);
@@ -144,12 +192,14 @@ function submit(){
     });
 }
 
+//Check if string is valid JSON
 function isJson(str) {
     try { JSON.parse(str); }
     catch (e) { return false; }
     return true;
 }
 
+//Refresh all the sprites on Team page
 function refreshSprites(){
     saveInputs();
     $("input.playersp").each(function(e){
@@ -168,22 +218,26 @@ function refreshSprites(){
     });
 }
 
+//Submit commentary and save to local storage
 function addCommentary(){
     var min = $("input[data-input=comm-minute]").val()+"'";
     var ico = $("select[data-input=comm-prepend]").find(":selected").val()=="" ? "" : "[](#"+$("select[data-input=comm-prepend]").find(":selected").val()+")";
     var com = $("input[data-input=comm-text]").val();
 
+    if(min.length<2) { $("input[data-input=comm-minute]").focus(); return false; }
+
     var dataOutput = " "+min+"|"+ico+"|"+com;
-    var actualOutput = "<li data-text='"+escape(dataOutput)+"'>"+dataOutput+"</li>";
+    var actualOutput = "<li data-text='"+escape(dataOutput)+"' data-min="+min+" data-ico="+ico+"><a href='#' class='edit-commentary'>[Edit]</a>&nbsp;<span>"+min+" - "+com+"</span></li>";
 
     $("ul[data-output=commentary]").prepend(actualOutput);
     saveCommentary();
 }
 
+//Retrieve commentary data in display string format
 function getCommentary(){
     var ret = "";
     $("ul[data-output=commentary] li").each(function(e){
-        ret = unescape($(this).attr("data-text"))+"  \n" + ret;
+        ret = $.trim(unescape($(this).attr("data-text")))+"  \n" + ret;
     });
     return ret;
 }
