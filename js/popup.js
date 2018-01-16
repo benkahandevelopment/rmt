@@ -109,11 +109,12 @@
             var $c = $(".modal[data-modal=editcommentary]");
             var l = parseInt($.trim($c.find("input[type=hidden]").val()));
             $p = $(".edit-commentary:eq("+l+")").parent().parent().parent();
-            $p.attr("data-ico", escape($c.find("select option:selected").val()));
+            $p.attr("data-ico", $c.find("select option:selected").val());
             $p.attr("data-min", $.trim($c.find("input[type=number]").val()));
             $p.attr("data-text", escape($.trim($c.find("input[type=text]").val())));
             $p.find("span").html($.trim($c.find("input[type=number]").val())+"' - "+$.trim($c.find("input[type=text]").val().replace(/\*\*([^\*]*)\*\*/g,"<b>$1</b>")));
             saveCommentary();
+            loadCommentary();
             $("#modal-editcommentary").modal('hide');
         }
 
@@ -132,6 +133,7 @@
             }
         }
         saveCommentary();
+        loadCommentary();
         $("#modal-editcommentary").modal('hide');
     });
 
@@ -172,7 +174,6 @@ function saveCommentary(){
         return parseInt(a[1]) < parseInt(b[1]) ? -1 : 1;
     });
     chrome.storage.sync.set({"savedCommentary":savedCommentary});
-    loadCommentary();
     return savedCommentary;
 }
 
@@ -226,6 +227,7 @@ function addCommentary(){
     $("input[data-input=comm-text]").val("");
     $("ul[data-output=commentary]").prepend(comString(min,ico,com));
     saveCommentary();
+    loadCommentary();
 }
 
 //Sort and load commentary
@@ -244,8 +246,9 @@ function loadCommentary(){
 //Retrieve commentary data in display string format
 function getCommentary(){
     var ret = "";
-    $("ul[data-output=commentary] div.commentary-card").each(function(e){
+    $("ul[data-output=commentary] .commentary-card").each(function(e){
         ret = $.trim(unescape($(this).attr("data-text")))+"  \n" + ret;
+        ret = ret.replace(/(\n{0,1})\s{0,3}(\d{1,3})\|/g,"$1$2'|");
     });
     return ret;
 }
