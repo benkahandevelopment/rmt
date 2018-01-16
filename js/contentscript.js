@@ -108,9 +108,8 @@ function replaceMeta(startVal, metaName, spriteName, requestData){
 }
 
 function replaceCommentary(startVal, requestData){
-	//console.log(1);
 	var r = startVal.replace("{{FULL_COMMENTARY}}", "[](#rmt-start-full-commentary)[](#rmt-end-full-commentary)");
-	console.log(sanitise("[](#rmt-start-full-commentary)")+".*"+sanitise("[](#rmt-end-full-commentary)"));
+	//console.log(sanitise("[](#rmt-start-full-commentary)")+".*"+sanitise("[](#rmt-end-full-commentary)"));
 	r = r.replace(/\[\]\(\#rmt\-start\-full\-commentary\)[\s\S]*\[\]\(\#rmt\-end\-full\-commentary\)/g, "[](#rmt-start-full-commentary)"+requestData+"[](#rmt-end-full-commentary)");
 	return r;
 }

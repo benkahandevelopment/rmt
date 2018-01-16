@@ -1,44 +1,67 @@
 <!doctype html>
 <html>
+<link rel="stylesheet" type="text/css" href="css/bootstrap-reboot.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap-grid.min.css">
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/superhero.theme.min.css">
+<link rel="stylesheet" type="text/css" href="css/fa.css">
 <link rel="stylesheet" type="text/css" href="css/popup.css">
+<link rel="stylesheet" type="text/css" href="css/sprites.css">
 <body>
-	<div id="container">
-		<div id="wrapper">
-			<div id="header">
-				<div id="close">&#215;</div>
-				<div id="title">reddit Match Threader</div>
-			</div>
-			<ul id="navigation">
-				<li class="selected" data-nav="meta">Meta</li>
-				<li data-nav="teams">Teams</li>
-				<li data-nav="stats">Stats</li>
-				<li data-nav="updates">Updates</li>
-			</ul>
-			<div id="navoutput">
-				<div class="page" data-page="meta">
-					<!--<h1>Meta</h1>-->
-					<div class="frm-group">
-						<input type="text" placeholder="Home Team" data-input="meta-home" />
-						<label>Home Team</label>
+	<div id="body">
+		<ul class="nav row text-center" id="navigation">
+			<li class="nav-item col col-3 active text-center" data-nav="meta">
+				<a class="nav-link" href="#"><i class="fas fa-info"></i><span class="badge">Meta</span></a>
+			</li>
+			<li class="nav-item col col-3 text-center" data-nav="teams">
+				<a class="nav-link" href="#"><i class="fas fa-list"></i><span class="badge">Teams</span></a>
+			</li>
+			<li class="nav-item col col-3 text-center" data-nav="stats">
+				<a class="nav-link" href="#"><i class="fas fa-chart-bar"></i><span class="badge">Stats</span></a>
+			</li>
+			<li class="nav-item col col-3 text-center" data-nav="updates">
+				<a class="nav-link" href="#"><i class="fas fa-comment-alt"></i><span class="badge">Updates</span></a>
+			</li>
+		</ul>
+
+		<div id="navoutput">
+			<!-- meta -->
+			<div class="container container-fluid page" data-page="meta">
+				<div class="form-group row">
+					<label class="col-3 col-form-label col-form-label-sm text-right">Home Team</label>
+					<div class="col-9">
+						<input class="form-control form-control-sm" type="text" placeholder="Home Team" data-input="meta-home" />
 					</div>
-					<div class="frm-group">
-						<input type="text" placeholder="Away Team" data-input="meta-away" />
-						<label>Away Team</label>
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label col-form-label-sm text-right">Away Team</label>
+					<div class="col-9">
+						<input class="form-control form-control-sm" type="text" placeholder="Away Team" data-input="meta-away" />
 					</div>
-					<div class="frm-group">
-						<input type="text" placeholder="Venue" data-input="meta-venue" />
-						<label>Venue</label>
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label col-form-label-sm text-right">Venue</label>
+					<div class="col-9">
+						<input class="form-control form-control-sm" type="text" placeholder="Venue" data-input="meta-venue" />
 					</div>
-					<div class="frm-group">
-						<input type="text" placeholder="Kick-Off" data-input="meta-kickoff" />
-						<label>Kick-Off</label>
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label col-form-label-sm text-right">Kick-Off</label>
+					<div class="col-9">
+						<input class="form-control form-control-sm" type="text" placeholder="Kick-Off" data-input="meta-kickoff" />
 					</div>
-					<div class="frm-group">
-						<input type="text" placeholder="Referee" data-input="meta-referee" />
-						<label>Referee</label>
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label col-form-label-sm text-right">Referee</label>
+					<div class="col-9">
+						<input class="form-control form-control-sm" type="text" placeholder="Referee" data-input="meta-referee" />
 					</div>
-					<div class="frm-group">
-						<select data-input="sprite-tournament">
+				</div>
+				<div class="form-group row">
+					<label class="col-3 col-form-label col-form-label-sm text-right">Tournament</label>
+					<div class="col-9">
+						<input type="hidden" data-input="meta-tournament" />
+						<select class="form-control form-control-sm" data-input="sprite-tournament">
 							<option value="[](#sprite7-p327)">England: Premier League</option>
 							<option value="[](#sprite8-p102)">England: Football League Championship</option>
 							<option value="[](#sprite8-p101)">England: Football League One</option>
@@ -52,163 +75,388 @@
 							<option value="[](#sprite7-p408)">Europe: UEFA Europa League</option>
 							<option value="[](#icon-ball)">Other</option>
 						</select>
-						<input type="hidden" data-input="meta-tournament" />
-						<label>Tournament</label>
 					</div>
 				</div>
-				<div class="page" data-page="teams">
-					<!--<h1>Teams</h1>-->
-					<div id="cont-teams" class="col">
-						<div class="col-1">
-							<h2>Home</h2>
-							<h3>Starting XI</h3>
-							<ul class="frm-group team-list" data-team="home" data-squad="xi">
-								<li class="col col-center"><div><input data-input="home-xi-0" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-1" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-2" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-3" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-4" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-5" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-6" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-7" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-8" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-9" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-xi-10" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-							</ul>
-							<h3>Bench</h3>
-							<ul class="frm-group team-list bench" data-team="home" data-squad="bench">
-								<li class="col col-center"><div><input data-input="home-bench-0" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-bench-1" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-bench-2" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-bench-3" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-bench-4" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-bench-5" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="home-bench-6" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-							</ul>
+			</div>
+			<!-- /meta -->
+
+			<!-- teams -->
+			<div class="container container-fluid page" data-page="teams" style="display:none;">
+				<div id="cont-teams" class="row">
+
+					<!-- home -->
+					<div class="col col-xs-6">
+						<h4>Home</h4>
+						<h5>Starting XI</h5>
+						<div data-squad="xi" data-team="home">
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-0" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-1" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-2" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-3" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-4" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-5" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-6" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-7" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-8" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-9" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-xi-10" />
+							</div>
 						</div>
-						<div class="col-1">
-							<h2>Away</h2>
-							<h3>Starting XI</h3>
-							<ul class="frm-group team-list" data-team="away" data-squad="xi">
-								<li class="col col-center"><div><input data-input="away-xi-0" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-1" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-2" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-3" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-4" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-5" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-7" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-6" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-8" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-9" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-xi-10" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-							</ul>
-							<h3>Bench</h3>
-							<ul class="frm-group team-list bench" data-team="away" data-squad="bench">
-								<li class="col col-center"><div><input data-input="away-bench-0" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-bench-1" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-bench-2" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-bench-3" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-bench-4" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-bench-5" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-								<li class="col col-center"><div><input data-input="away-bench-6" /></div><div class="span-cont"><span></span></div><div><a href="#" class="btn-plus">&#xff0b;</a></div></li>
-							</ul>
-						</div>
-						<div>
-							<input class="playersp" type="hidden" value="" data-input="home-xi-0-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-1-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-2-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-3-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-4-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-5-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-6-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-7-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-8-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-9-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-xi-10-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-bench-0-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-bench-1-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-bench-2-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-bench-3-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-bench-4-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-bench-5-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="home-bench-6-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-0-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-1-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-2-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-3-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-4-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-5-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-7-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-6-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-8-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-9-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-xi-10-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-bench-0-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-bench-1-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-bench-2-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-bench-3-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-bench-4-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-bench-5-sprites" />
-							<input class="playersp" type="hidden" value="" data-input="away-bench-6-sprites" />
+						<h5>Bench</h5>
+						<div data-squad="bench" data-team="home">
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-bench-0" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-bench-1" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-bench-2" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-bench-3" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-bench-4" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-bench-5" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="home-bench-6" />
+							</div>
 						</div>
 					</div>
+					<!-- /home -->
+
+					<!-- away -->
+					<div class="col col-xs-6">
+						<h4>Away</h4>
+						<h5>Starting XI</h5>
+						<div data-squad="xi" data-team="away">
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-0" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-1" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-2" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-3" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-4" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-5" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-6" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-7" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-8" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-9" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-xi-10" />
+							</div>
+						</div>
+						<h5>Bench</h5>
+						<div data-squad="bench" data-team="away">
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-bench-0" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-bench-1" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-bench-2" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-bench-3" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-bench-4" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-bench-5" />
+							</div>
+							<div class="input-group input-group-sm mb-1">
+								<div class="input-group-prepend">
+									<button class="btn btn-primary edit-playerevent" type="button"><i class="fas fa-plus"></i></button>
+									<span class="input-group-text sprite-cont"></span>
+								</div>
+								<input type="text" class="form-control form-control-sm player-cont" data-input="away-bench-6" />
+							</div>
+						</div>
+					</div>
+					<!-- /away -->
 				</div>
-				<div class="page" data-page="stats">
-					<!--<h1>Stats</h1>-->
-					<div class="col col-center frm-group">
-						<div class="stats-value"><h3>Home</h3></div>
-						<div class="stats-label"><h3>Stat</h3></div>
-						<div class="stats-value"><h3>Away</h3></div>
-					</div>
-					<div class="col col-center frm-group">
-						<div class="stats-value"><input data-input="stat-home-shotson" type="number" value="0" min="0" max="100" /></div>
-						<div class="stats-label">Shots (On Target)</div>
-						<div class="stats-value"><input data-input="stat-away-shotson" type="number" value="0" min="0" max="100" /></div>
-					</div>
-					<div class="col col-center frm-group">
-						<div class="stats-value"><input data-input="stat-home-shotsoff" type="number" value="0" min="0" max="100" /></div>
-						<div class="stats-label">Shots (Off Target)</div>
-						<div class="stats-value"><input data-input="stat-away-shotsoff" type="number" value="0" min="0" max="100" /></div>
-					</div>
-					<div class="col col-center frm-group">
-						<div class="stats-value"><input data-input="stat-home-possession" type="number" value="0" min="0" max="100" /></div>
-						<div class="stats-label">Possession (%)</div>
-						<div class="stats-value"><input data-input="stat-away-possession" type="number" value="0" min="0" max="100" /></div>
-					</div>
-					<div class="col col-center frm-group">
-						<div class="stats-value"><input data-input="stat-home-corners" type="number" value="0" min="0" max="100" /></div>
-						<div class="stats-label">Corners</div>
-						<div class="stats-value"><input data-input="stat-away-corners" type="number" value="0" min="0" max="100" /></div>
-					</div>
-					<div class="col col-center frm-group">
-						<div class="stats-value"><input data-input="stat-home-fouls" type="number" value="0" min="0" max="100" /></div>
-						<div class="stats-label">Fouls</div>
-						<div class="stats-value"><input data-input="stat-away-fouls" type="number" value="0" min="0" max="100" /></div>
-					</div>
-					<div class="col col-center frm-group">
-						<div class="stats-value"><input data-input="stat-home-offsides" type="number" value="0" min="0" max="100" /></div>
-						<div class="stats-label">Offsides</div>
-						<div class="stats-value"><input data-input="stat-away-offsides" type="number" value="0" min="0" max="100" /></div>
-					</div>
-					<div class="col col-center frm-group">
-						<div class="stats-value"><input data-input="stat-home-yellows" type="number" value="0" min="0" max="100" /></div>
-						<div class="stats-label">Bookings</div>
-						<div class="stats-value"><input data-input="stat-away-yellows" type="number" value="0" min="0" max="100" /></div>
-					</div>
-					<div class="col col-center frm-group">
-						<div class="stats-value"><input data-input="stat-home-reds" type="number" value="0" min="0" max="100" /></div>
-						<div class="stats-label">Sending-Offs</div>
-						<div class="stats-value"><input data-input="stat-away-reds" type="number" value="0" min="0" max="100" /></div>
-					</div>
+				<div>
+					<input class="playersp" type="hidden" value="" data-input="home-xi-0-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-1-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-2-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-3-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-4-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-5-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-6-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-7-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-8-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-9-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-xi-10-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-bench-0-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-bench-1-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-bench-2-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-bench-3-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-bench-4-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-bench-5-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="home-bench-6-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-0-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-1-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-2-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-3-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-4-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-5-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-7-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-6-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-8-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-9-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-xi-10-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-bench-0-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-bench-1-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-bench-2-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-bench-3-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-bench-4-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-bench-5-sprites" />
+					<input class="playersp" type="hidden" value="" data-input="away-bench-6-sprites" />
 				</div>
-				<div class="page" data-page="updates">
-					<!--<h1>Updates</h1>-->
-					<div class="updates-header">
-						<h3>Add Commentary</h3>
-						<div class="col">
-							<div class="frm-group col-1">
-								<select data-input="comm-prepend" class="ignore">
-									<option value="" data-prepend="" >No icon</option>
+			</div>
+			<!-- /teams -->
+
+			<!-- stats -->
+			<div class="container container-fluid page" data-page="stats" style="display:none;">
+				<div class="form-row form-group">
+					<div class="col-2 stats-value"><input type="number" class="form-control form-control-sm" data-input="stat-home-shotson" min=0 max=100 value=0 /></div>
+					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Shots (on target)</label></div>
+					<div class="col-2 stats-value"><input type="number" class="form-control form-control-sm" data-input="stat-away-shotson" min=0 max=100 value=0 /></div>
+				</div>
+
+				<div class="form-row form-group">
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-home-shotsoff" type="number" value="0" min="0" max="100" /></div>
+					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Shots (Off Target)</label></div>
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-away-shotsoff" type="number" value="0" min="0" max="100" /></div>
+				</div>
+				<div class="form-row form-group">
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-home-possession" type="number" value="0" min="0" max="100" /></div>
+					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Possession (%)</label></div>
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-away-possession" type="number" value="0" min="0" max="100" /></div>
+				</div>
+				<div class="form-row form-group">
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-home-corners" type="number" value="0" min="0" max="100" /></div>
+					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Corners</label></div>
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-away-corners" type="number" value="0" min="0" max="100" /></div>
+				</div>
+				<div class="form-row form-group">
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-home-fouls" type="number" value="0" min="0" max="100" /></div>
+					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Fouls</label></div>
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-away-fouls" type="number" value="0" min="0" max="100" /></div>
+				</div>
+				<div class="form-row form-group">
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-home-offsides" type="number" value="0" min="0" max="100" /></div>
+					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Offsides</label></div>
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-away-offsides" type="number" value="0" min="0" max="100" /></div>
+				</div>
+				<div class="form-row form-group">
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-home-yellows" type="number" value="0" min="0" max="100" /></div>
+					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Bookings</label></div>
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-away-yellows" type="number" value="0" min="0" max="100" /></div>
+				</div>
+				<div class="form-row form-group">
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-home-reds" type="number" value="0" min="0" max="100" /></div>
+					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Sending-Offs</label></div>
+					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-away-reds" type="number" value="0" min="0" max="100" /></div>
+				</div>
+			</div>
+			<!-- /stats -->
+
+			<!-- commentary -->
+			<div class="container container-fluid page" data-page="updates" style="display:none;">
+				<div class="updates-header">
+					<h4>Add Commentary <small id="cont-addcommentary-btn"><i class="fas fa-angle-double-down rotate-180"></i></small></h4>
+					<div id="cont-addcommentary" class="mb-2">
+						<div class="form-row form-group mb-0">
+							<div class="col-6">
+								<label class="col-form-label col-form-label-sm">Icon</label>
+								<select data-input="comm-prepend" class="form-control form-control-sm ignore">
+									<option value="" data-prepend="">No icon (default)</option>
 									<option value="icon-whistle" data-prepend="">Kickoff</option>
 									<option value="icon-ball" data-prepend="GOAL" >Goal</option>
 									<option value="icon-sub" data-prepend="SUB" >Substitution</option>
@@ -221,108 +469,133 @@
 									<option value="icon-discuss" data-prepend="">Match-thread comment</option>
 									<option value="icon-twitter" data-prepend="">Tweet</option>
 								</select>
-								<label>Icon</label>
 							</div>
-							<div class="frm-group col-1">
-								<input type="number" data-input="comm-minute" class="ignore" min="0" max="120" placeholder="Minute" />
-								<label>Minute (int. 0-120)</label>
+							<div class="col-6">
+								<label class="col-form-label col-form-label-sm">Min</label>
+								<input type="number" data-input="comm-minute" class="form-control form-control-sm ignore" min=0 max=120 placeholder="Minute" />
 							</div>
 						</div>
-						<div class="frm-group">
-							<input type="text" class="ignore" data-input="comm-text" placeholder="Commentary" />
-							<label>Commentary</label>
+						<div class="form-group">
+							<label class="col-form-label col-form-label-sm">Commentary</label>
+							<input type="text" class="form-control form-control-sm ignore" data-input="comm-text" placeholder="Commentary" />
 						</div>
-						<div class="frm-group saveCommentary-cont">
-							<button id="saveCommentary">Add</button>
+						<div class="form-group" id="saveCommentary-cont">
+							<button class="btn btn-primary btn-block" id="saveCommentary">Add Commentary Update</button>
 						</div>
 					</div>
-					<div class="updates-cont">
-						<h3>History</h3>
-						<ul data-output="commentary"></ul>
+
+					<hr>
+
+					<h4>History</h4>
+					<div id="cont-history" class="mb-2">
+						<ul class="list-group" data-output="commentary">
+						</ul>
 					</div>
 				</div>
 			</div>
-
-			<div id="confirmOutput">
-				<button data-action="submit">Update</button>
+			<!-- /commentary -->
+		</div>
+		<div class="container p-0">
+			<div class="form-group" id="confirmOutput">
+				<button class="btn btn-success btn-block" data-action="submit" type="button">Save &amp; Update Post</button>
 			</div>
-
 		</div>
 	</div>
 	
-	<!-- modals/popups -->
-	<div class="modal-cont">
-		<div class="modal" data-modal="playerevent">
-			<h1>Add Player Event</h1>
-			<div class="modal-body">
-				<div class="frm-group">
-					<label>Player</label>
-					<input data-input="player-name" class="ignore" name="player-name" value="" data-playerid="" disabled />
+	<!-- modals -->
+	<div class="modal fade" data-modal="playerevent" id="modal-playerevent" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="modal-title">Add/Edit Player Event</div>
+					<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
 				</div>
-				<div class="frm-group">
-					<label>Event</label>
-					<select data-input="player-sprite" name="player-sprite" class="ignore">
-						<option value="">No new icon</option>
-						<option value="icon-ball">Goal</option>
-						<option value="icon-red-ball">Own Goal</option>
-						<option value="icon-yellow">Booking</option>
-						<option value="icon-red">Sending Off</option>
-						<option value="icon-red-cross">Injury</option>
-						<option value="icon-down">Sub Off</option>
-						<option value="icon-up">Sub On</option>
-						<option value="icon-star">MoTM</option>
-					</select>
-				</div>
-				<div class="frm-group">
-					<label>Existing Info</label>
-					<ul class="existing"></ul>
+				<div class="modal-body">
+					<div class="form-group row">
+						<label class="col-3 col-form-label col-form-label-sm text-right">Player</label>
+						<div class="col-9">
+							<input class="form-control form-control-sm" data-input="player-name" class="ignore" name="player-name" data-playerid="" disabled />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-3 col-form-label col-form-label-sm text-right">New Event</label>
+						<div class="col-9">
+							<select class="form-control form-control-sm" data-input="player-sprite" name="player-sprite" class="ignore">
+								<option value="">No icon or new event</option>
+								<option value="icon-ball">Goal</option>
+								<option value="icon-red-ball">Own Goal</option>
+								<option value="icon-yellow">Booking</option>
+								<option value="icon-red">Sending Off</option>
+								<option value="icon-red-cross">Injury</option>
+								<option value="icon-down">Sub Off</option>
+								<option value="icon-up">Sub On</option>
+								<option value="icon-star">MoTM</option>
+							</select>
+						</div>
+					</div>
+					<ul class="list-group existing"></ul>
 				</div>
 				<div class="modal-footer">
-					<a href="#" class="modal-close">Cancel</a>
-					<a href="#" class="modal-confirm">Confirm Changes</a>
-				</div>
-			</div>
-		</div>
-
-		<div class="modal" data-modal="editcommentary">
-			<h1>Edit Commentary</h1>
-			<div class="modal-body">
-				<div class="frm-group">
-					<label>Icon</label>
-					<div class="icon-preview"></div>
-					<select>
-						<option value="">No icon</option>
-						<option value="[](#icon-whistle)">Kickoff</option>
-						<option value="[](#icon-ball)">Goal</option>
-						<option value="[](#icon-sub)">Substitution</option>
-						<option value="[](#icon-yellow)">Booking</option>
-						<option value="[](#icon-red)">Sending Off</option>
-						<option value="[](#icon-red-ball)">Own Goal</option>
-						<option value="[](#icon-red-cross)">Injury</option>
-						<option value="[](#icon-flag)">Offside</option>
-						<option value="[](#icon-star)">MoTM</option>
-						<option value="[](#icon-discuss)">Match-thread comment</option>
-						<option value="[](#icon-twitter)">Tweet</option>
-					</select>
-				</div>
-				<div class="frm-group">
-					<label>Minute (int. 0-120)</label>
-					<input type="number" min="0" max="120" placeholder="Minute" />
-				</div>
-				<div class="frm-group">
-					<label>Commentary</label>
-					<input type="text" placeholder="Commentary" />
-				</div>
-				<input type="hidden" />
-				<div class="modal-footer">
-					<a href="#" class="modal-close">Cancel</a>
-					<a href="#" class="modal-delete">Delete Entry</a>
-					<a href="#" class="modal-confirm">Confirm Changes</a>
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-primary modal-confirm">Confirm Changes</button>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<div class="modal fade" data-modal="editcommentary" id="modal-editcommentary" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="modal-title">Edit Commentary Entry</div>
+					<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group row">
+						<label class="col-3 col-form-label col-form-label-sm text-right">Icon</label>
+						<div class="col-7">
+							<select class="form-control form-control-sm player-sprite-select" data-input="player-sprite" name="player-sprite" class="ignore">
+								<option value="">No icon</option>
+								<option value="[](#icon-whistle)">Kickoff</option>
+								<option value="[](#icon-ball)">Goal</option>
+								<option value="[](#icon-sub)">Substitution</option>
+								<option value="[](#icon-yellow)">Booking</option>
+								<option value="[](#icon-red)">Sending Off</option>
+								<option value="[](#icon-red-ball)">Own Goal</option>
+								<option value="[](#icon-red-cross)">Injury</option>
+								<option value="[](#icon-flag)">Offside</option>
+								<option value="[](#icon-star)">MoTM</option>
+								<option value="[](#icon-discuss)">Match-thread comment</option>
+								<option value="[](#icon-twitter)">Tweet</option>
+							</select>
+						</div>
+						<div class="col-2 icon-preview"></div>
+					</div>
+					<div class="form-group row">
+						<label class="col-3 col-form-label col-form-label-sm text-right">Minute</label>
+						<div class="col-9">
+							<input class="form-control form-control-sm" type="number" min="0" max="120" placeholder="Minute" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-3 col-form-label col-form-label-sm text-right">Commentary</label>
+						<div class="col-9">
+							<input class="form-control form-control-sm" type="text" min="0" max="120" placeholder="Commentary" />
+						</div>
+					</div>
+					<input type="hidden" />
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+					<button type="button" class="btn btn-danger modal-delete">Delete Entry</button>
+					<button type="button" class="btn btn-primary modal-confirm">Confirm Changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /modals -->
 	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
 </body>
 </html>
