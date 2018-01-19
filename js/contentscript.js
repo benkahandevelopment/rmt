@@ -39,7 +39,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 				"META_KICKOFF",
 				"META_REFEREE",
 				"META_TOURNAMENT",
-				"SPRITE_TOURNAMENT"
+				"SPRITE_TOURNAMENT",
 			], [
 				"meta-home",
 				"meta-away",
@@ -59,13 +59,15 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 		//Commentary
 		c = replaceCommentary(c, u);
 
+		//Other
+		c = c.replace(/\{\{FOOTER\}\}/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
+			c = c.replace(/\[\]\(\#rmt\-start\-footer\).*\[\]\(\#rmt\-end\-footer\)/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
+
+		//Add to textarea and save post
 		$textarea.val(c);
-
-		$("#siteTable div.usertext-buttons button.save")[0].click();
-
-		/*setTimeout(function(){
+		//setTimeout(function(){
 			$("#siteTable div.usertext-buttons button.save")[0].click();
-		},100);*/
+		//},100);
 	}
 });
 
@@ -254,4 +256,68 @@ function replaceStats(startVal, requestData){
 
 function sanitise(i){
 	return i.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+}
+
+function dateTime(){
+	var now = new Date();
+	return now.getUTCDate() + " " + 
+			monthString((now.getUTCMonth() + 1)) + " " + 
+			now.getUTCFullYear().toString() + " at " + 
+			("0"+now.getUTCHours()).slice(-2) + ":" + 
+			("0"+now.getUTCMinutes()).slice(-2) + ":" + 
+			("0"+now.getUTCSeconds()).slice(-2) + " UTC";
+}
+
+function monthString(n){
+	var r;
+
+	switch(n){
+		case 1:
+			r = "Jan";
+			break;
+		case 2:
+			r = "Feb";
+			break;
+		case 3:
+			r = "Mar";
+			break;
+		case 4:
+			r = "Apr";
+			break;
+		case 5:
+			r = "May";
+			break;
+		case 6:
+			r = "Jun";
+			break;
+		case 7:
+			r = "Jul";
+			break;
+		case 8:
+			r = "Aug";
+			break;
+		case 9:
+			r = "Sep";
+			break;
+		case 10:
+			r = "Oct";
+			break;
+		case 11:
+			r = "Nov";
+			break;
+		case 12:
+			r = "Dec";
+			break;
+		default:
+			r = "?";
+			break;
+	}
+
+	return r;
+}
+
+function output(n){
+	if(n=="footer"){
+		return "  \n\n---\n\n^(Managed by the reddit Match Threader by /u/magicwings. Last updated on "+dateTime()+")";
+	}
 }

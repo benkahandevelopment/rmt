@@ -1,0 +1,67 @@
+/* Globals */
+
+.rmt-br {
+	/*border: 1px solid rgba(153,84,187,0.5);
+	border-radius: 2px;
+	padding: 2px 6px;*/
+	color: #9954BB;
+	font-size: 1.2em;
+	font-weight: bolder;
+	line-height: 1.2em;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.3);
+}
+
+.navbar .rmt-br { 
+	margin-right: 1rem;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3), 0 -1px 0 rgba(255,255,255,0.4), 0 2px 2px rgba(0,0,0,0.2);
+}
+
+.inset-box { box-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.3); }
+.inset-text { text-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.3); }
+
+.i-1 { padding-left: 2rem; }
+.i-2 { padding-left: 3rem; }
+.i-3 { padding-left: 4rem; }
+.i-4 { padding-left: 5rem; }
+
+.jumbotron {
+	position: relative;
+	background: rgba(255,255,255,0.5);
+
+	overflow: hidden;
+}
+
+.jumbotron .bg {
+	position: absolute;
+	top: -5px; left: -5px; right: -5px; bottom: -5px;
+	background-image: url(https://i.imgur.com/cWzLTIN.jpg);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-filter: blur(10px);
+	-moz-filter: blur(10px);
+	-o-filter: blur(10px);
+	-ms-filter: blur(10px);
+	filter: blur(10px);
+	z-index: -1;
+
+	background-attachment: fixed;
+}
+
+#loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: rgba(255,255,255,0.5);
+	z-index: 99999;
+}
+
+.loadimg {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}

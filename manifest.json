@@ -26,6 +26,7 @@
             "run_at": "document_end"
         }
     ],
+    "options_page": "index.html",
     "web_accessible_resources": [
         "js/jquery.min.js",
         "js/jqueryui.min.js"
