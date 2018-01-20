@@ -16,7 +16,7 @@ $(function(){
 			$("a[data-output="+window.location.hash.slice(1)+"]").click();
 		}, 100);
 	} else loader(0);
-	
+
 	$("a[data-output]:not(.disabled)").click(function(e){
 		//$("#mainoutput").parent().attr("id",$(this).attr("data-output"));
 		$("main[role=main]").attr("id",$(this).attr("data-output"));
@@ -34,7 +34,7 @@ function loadPage(a, $t){
 	loader(1);
 	$("a[data-output]").removeClass("active");
 	$("a[data-output="+a+"]").addClass("active"); //$t.addClass("active");
-	$o.attr("src","documentation/"+a+".html");
+	$o.attr("src","docs/"+a+".html");
 	setTimeout(adjustSize,100);
 }
 
@@ -50,5 +50,5 @@ function adjustSize(){
 function loader(o){
 	if(o==1) $("#loader").show();
 		else $("#loader").hide();
-	
+
 }
