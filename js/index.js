@@ -39,11 +39,17 @@ function loadPage(a, $t){
 
 function adjustSize(){
 	var iframeid = document.getElementById("mainoutput");
-	if(iframeid){
-		iframeid.height = "";
-		iframeid.height = iframeid.contentWindow.document.body.scrollHeight+"px";
-		loader(0);
-	} else { loader(0); }
+	var iframedoc = iframeid.contentDocument || iframe.contentWindow.document;
+
+	if(iframedoc.readyState =='complete'){
+		iframe.contentWindow.onload = function(){
+			iframeid.height = "";
+			iframeid.height = iframeid.contentWindow.document.body.scrollHeight+"px";
+			loader(0);
+		}
+	} else {
+		window.setTImeout(adjustSize,100);
+	}
 }
 
 function loader(o){
