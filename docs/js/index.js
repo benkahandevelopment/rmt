@@ -1,4 +1,5 @@
 var output = [];
+var n = 0;
 var interval = null;
 var iframeid = document.getElementById("mainoutput");
 var $o = $("#mainoutput");
@@ -28,29 +29,31 @@ $(function(){
 		e.preventDefault();
 		return false;
 	});
+
+	$o.on('load', adjustSize);
 });
 
 function loadPage(a, $t){
 	loader(1);
 	$("a[data-output]").removeClass("active");
 	$("a[data-output="+a+"]").addClass("active"); //$t.addClass("active");
-	$o.attr("src", "../docs/"+a+".html");
-	//$o.load("https://benkahandevelopment.github.io/rmt/docs/"+a+".html");
+	$o.attr("src", "/rmt/"+a+".html");
+	n = 0;
 	setTimeout(adjustSize,100);
 }
 
 function adjustSize(){
 	var iframeid = document.getElementById("mainoutput");
 	var iframedoc = iframeid.contentDocument || iframe.contentWindow.document;
-
+	n = n + 100;
 	if(iframedoc.readyState =='complete'){
-		iframe.contentWindow.onload = function(){
+		//iframeid.contentWindow.onload = function(){
 			iframeid.height = "";
 			iframeid.height = iframeid.contentWindow.document.body.scrollHeight+"px";
 			loader(0);
-		}
+		//}
 	} else {
-		window.setTImeout(adjustSize,100);
+		window.setTimeout(adjustSize,100);
 	}
 }
 
