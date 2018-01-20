@@ -1,4 +1,5 @@
 var output = [];
+var interval = null;
 var $o = $("#mainoutput");
 var css = [
 		"bootstrap.min.css",
@@ -32,18 +33,23 @@ function loadPage(a, $t){
 	loader(1);
 	$("a[data-output]").removeClass("active");
 	$("a[data-output="+a+"]").addClass("active"); //$t.addClass("active");
-	$o.attr("src", ""+a+".html");
+	$o.attr("src", a+".html");
 	//$o.load("https://benkahandevelopment.github.io/rmt/docs/"+a+".html");
-	setTimeout(adjustSize,100);
+	adjustSize();
 }
 
 function adjustSize(){
-	var iframeid = document.getElementById("mainoutput");
-	if(iframeid){
-		iframeid.height = "";
-		iframeid.height = iframeid.contentWindow.document.body.scrollHeight+"px";
-		loader(0);
-	} else { loader(0); }
+	if(iframeid.contentWindow.document.body){
+		interval = null;
+		var iframeid = document.getElementById("mainoutput");
+		if(iframeid){
+			iframeid.height = "";
+			iframeid.height = iframeid.contentWindow.document.body.scrollHeight+"px";
+			loader(0);
+		} else { loader(0); }
+	} else {
+		interval = setInterval(adjustSize,50);
+	}
 }
 
 function loader(o){
