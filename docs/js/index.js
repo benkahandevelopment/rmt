@@ -1,5 +1,6 @@
 var output = [];
 var interval = null;
+var iframeid = document.getElementById("mainoutput");
 var $o = $("#mainoutput");
 var css = [
 		"bootstrap.min.css",
@@ -41,7 +42,6 @@ function loadPage(a, $t){
 function adjustSize(){
 	if(iframeid.contentWindow.document.body){
 		interval = null;
-		var iframeid = document.getElementById("mainoutput");
 		if(iframeid){
 			iframeid.height = "";
 			iframeid.height = iframeid.contentWindow.document.body.scrollHeight+"px";
