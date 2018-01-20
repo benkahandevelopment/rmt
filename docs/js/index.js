@@ -34,21 +34,23 @@ function loadPage(a, $t){
 	loader(1);
 	$("a[data-output]").removeClass("active");
 	$("a[data-output="+a+"]").addClass("active"); //$t.addClass("active");
-	$o.attr("src", a+".html");
+	$o.attr("src", "../docs/"+a+".html");
 	//$o.load("https://benkahandevelopment.github.io/rmt/docs/"+a+".html");
-	adjustSize();
+	setTimeout(adjustSize,100);
 }
 
 function adjustSize(){
-	if(iframeid.contentWindow.document.body){
-		interval = null;
-		if(iframeid){
+	var iframeid = document.getElementById("mainoutput");
+	var iframedoc = iframeid.contentDocument || iframe.contentWindow.document;
+
+	if(iframedoc.readyState =='complete'){
+		iframe.contentWindow.onload = function(){
 			iframeid.height = "";
 			iframeid.height = iframeid.contentWindow.document.body.scrollHeight+"px";
 			loader(0);
-		} else { loader(0); }
+		}
 	} else {
-		interval = setInterval(adjustSize,50);
+		window.setTImeout(adjustSize,100);
 	}
 }
 
