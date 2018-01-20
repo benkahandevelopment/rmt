@@ -1,53 +1,22 @@
-var output = [];
-var $o = $("#mainoutput");
-var css = [
-		"bootstrap.min.css",
-		"superhero.theme.min.css",
-		"options.css",
-		"fa.css",
-		"sprites.css",
-	];
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="css/superhero.theme.min.css">
+<link rel="stylesheet" type="text/css" href="css/options.css">
+<link rel="stylesheet" type="text/css" href="css/fa.css">
+<link rel="stylesheet" type="text/css" href="css/sprites.css">
+</head>
+<body>
+	<h1>Installation</h1>
 
+	<div class='alert alert-primary'>Please note that as of January 2018 you can only install this package manually - the packaged Chrome extension will be uploaded to the Web Store soon.</div>
 
-$(function(){
-	//Check to see if page already specified
-	if(window.location.hash){
-		setTimeout(function(){
-			$("a[data-output="+window.location.hash.slice(1)+"]").click();
-		}, 100);
-	} else loader(0);
+	<h2>Manual Installation</h2>
 
-	$("a[data-output]:not(.disabled)").click(function(e){
-		$("main[role=main]").attr("id",$(this).attr("data-output"));
-		loadPage($(this).attr("data-output"),$(this));
-	});
-
-	$("a[data-output].disabled").click(function(e){
-		e.preventDefault();
-		return false;
-	});
-});
-
-function loadPage(a, $t){
-	loader(1);
-	$("a[data-output]").removeClass("active");
-	$("a[data-output="+a+"]").addClass("active"); //$t.addClass("active");
-	$o.attr("src", a+".html");
-	//$o.load("https://benkahandevelopment.github.io/rmt/docs/"+a+".html");
-	setTimeout(adjustSize,300);
-}
-
-function adjustSize(){
-	var iframeid = document.getElementById("mainoutput");
-	if(iframeid){
-		iframeid.height = "";
-		iframeid.height = iframeid.contentWindow.document.body.scrollHeight+"px";
-		loader(0);
-	} else { loader(0); }
-}
-
-function loader(o){
-	if(o==1) $("#loader").show();
-		else $("#loader").hide();
-
-}
+	<ol>
+		<li><a href='https://github.com/benkahandevelopment/rmt' target='_blank'>Download the full package from GitHub</a></li>
+		<li>Add the download folder as an unpacked extension in Developer Mode on the Chrome Extensions page by visiting <code>chrome://extensions</code></li>
+	</ol>
+	<p>You will know the installation is successful because you'll see the extension at the top of the extensions list, as well as a new icon to the right of the URL bar.</p>
+</body>
+</html>
