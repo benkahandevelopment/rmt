@@ -32,7 +32,8 @@ function loadPage(a, $t){
 	loader(1);
 	$("a[data-output]").removeClass("active");
 	$("a[data-output="+a+"]").addClass("active"); //$t.addClass("active");
-	$o.attr("src",a+".html");
+	$o.attr("src", "../documentation/"+a+".html");
+	//$o.load("https://benkahandevelopment.github.io/rmt/documentation/"+a+".html");
 	setTimeout(adjustSize,100);
 }
 
