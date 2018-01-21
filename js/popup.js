@@ -44,6 +44,20 @@
     //Check and load saved commentary
     loadCommentary();
 
+    //Reset data on tab
+    $("button.reset").click(function(e){
+        var $t = $(this);
+        var n = $t.attr("data-reset-page");
+        var $p = $(".page[data-page='"+n+"']");
+        if(n=="stats"){
+            $p.find("input, select, textarea").val(0);
+            $p.find("input[data-input='stat-home-possession']").parent().parent().find("input").val(50);
+        }
+
+        saveInputs();
+        return true;
+    });
+
     //Paste Data Modal - Launch
     $(".paste").click(function(e){
         var $t = $(this);
