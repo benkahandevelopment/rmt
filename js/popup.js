@@ -45,21 +45,35 @@
     loadCommentary();
 
     //Reset data on tab
-    $("button.reset").click(function(e){
-        var $t = $(this);
-        var n = $t.attr("data-reset-page");
-        var $p = $(".page[data-page='"+n+"']");
-        if(n=="stats"){
-            $p.find("input, select, textarea").val(0);
-            $p.find("input[data-input='stat-home-possession']").parent().parent().find("input").val(50);
-        }
+    $("button.reset:not(.disabled)").click(function(e){
+        if(confirm("Are you sure you wish to reset data on this tab?")){
+            var $t = $(this);
+            var n = $t.attr("data-reset-page");
+            var $p = $(".page[data-page='"+n+"']");
+            if(n=="stats"){
+                $p.find("input, textarea").val(0);
+                $p.find("select").each(function(){
+                    $(this)[0].selectedIndex = 0;
+                });
+                $p.find("input[data-input='stat-home-possession']").parent().parent().find("input").val(50);
+            } else if(n=="meta"){
+                $p.find("input, textarea").val("");
+                $p.find("select").each(function(){
+                    $(this)[0].selectedIndex = 0;
+                });
+                $p.find("select[data-input=meta-away-colour]")[0].selectedIndex = 5;
+            } else if(n=="teams"){
+                $p.find("input").val("");
+            } else if(n=="updates"){
 
-        saveInputs();
-        return true;
+            } else return false;
+            saveInputs();
+            return true;
+        } else return false;
     });
 
     //Paste Data Modal - Launch
-    $(".paste").click(function(e){
+    $(".paste:not(.disabled)").click(function(e){
         var $t = $(this);
         var type = $t.attr("data-paste-type");
         $(".modal[data-modal=paste] select[data-input=paste-type]").val(type);
@@ -138,15 +152,54 @@
             $("#modal-editcommentary").modal('hide');
         } else if(m=="paste"){
             var $m = $(".modal[data-modal=paste]");
+            var p = $m.find("select[data-input='paste-type']").val();
             var $c = $m.find("textarea[data-input='paste-data']");
             var v = $c.val();
 
             if($("select[data-input='paste-source'] option:selected").val()=="livescore"){
-                var regex = /(.*)\n(\d{1,3})\n(\d{1,3})\n/g;
-                var matches;
-                while((matches = regex.exec(v)) !== null){
-                    $("div[data-paste-livescore='"+matches[1]+"'] input:eq(0)").val(matches[2]);
-                    $("div[data-paste-livescore='"+matches[1]+"'] input:eq(1)").val(matches[3]);
+                if(p=="stats"){
+                    var regex = /(.*)\n(\d{1,3})\n(\d{1,3})\n/g;
+                    var matches;
+                    while((matches = regex.exec(v)) !== null){
+                        $("div[data-paste-livescore='"+matches[1]+"'] input:eq(0)").val(matches[2]);
+                        $("div[data-paste-livescore='"+matches[1]+"'] input:eq(1)").val(matches[3]);
+                    }
+                } else if(p=="teams"){
+                    $(".page[data-page=teams] input:visible").val("");
+
+                    //First team
+                    var s = v.split("substitutions")[0];
+                    //var regex = /\d+\s?(\d*)\n([^\s]*\s){0,1}(\D[^\n\:]*)/g;
+                    var regex = /\d+\s?(\d*)\n([^\d\s]*){0,1}\s([^\d\n\:]*)/g;
+                    var matches; var n = 0;
+                    var homenames = []; var awaynames = [];
+                    while((matches = regex.exec(s)) !== null){
+                        //matches[0] = full matche
+                        //matches[1] = goals
+                        //matches[2] = first/mid name
+                        //matches[3] = lastname
+                        if(n<=10) homenames.push(matches[3]);
+                            else awaynames.unshift(matches[3]);
+                        n++;
+                        if(n>21) break;
+                    }
+
+                    homenames.forEach(function(v,i){ $("div[data-squad=xi][data-team=home] input:visible:eq("+i+")").val(v); });
+                    awaynames.forEach(function(v,i){ $("div[data-squad=xi][data-team=away] input:visible:eq("+i+")").val(v); });
+
+                    //Subs
+                    if(typeof (v.split("substitute players")[1]) != "undefined"){
+                        var s = v.split("substitute players")[1].split("\ncoach\:")[0];
+                        //var regex = /\n(^[\n]*)/g;
+                        //var regex = /\n\w*\s?([A-Z][a-z]*[^[A-Z]]*)[^\s]*\s([^\n]*)\n/g;
+                        const regex = /\n[A-Z]*[a-z]*\s?([A-Za-z\'\-]*)[A-Z]\w*\s+([^\n]*)/g;
+                        var matches; var n = 0;
+                        while((matches = regex.exec(s)) !== null){
+                            $("div[data-squad=bench][data-team=home] input:visible:eq("+n+")").val(matches[1]);
+                            $("div[data-squad=bench][data-team=away] input:visible:eq("+n+")").val(matches[2]);
+                            n++;
+                        }
+                    }
                 }
             }
 

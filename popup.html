@@ -123,6 +123,15 @@
 						</select>
 					</div>
 				</div>
+				<hr />
+				<div class="row mt-2">
+					<div class="col-6">
+						<button class="btn btn-outline-secondary btn-block btn-sm paste disabled" data-paste-type="meta">Paste Data</button>
+					</div>
+					<div class="col-6">
+						<button class="btn btn-outline-danger btn-block btn-sm reset" data-reset-page="meta">Reset Data (Meta)</button>
+					</div>
+				</div>
 			</div>
 			<!-- /meta -->
 
@@ -444,6 +453,15 @@
 					<input class="playersp" type="hidden" value="" data-input="away-bench-5-sprites" />
 					<input class="playersp" type="hidden" value="" data-input="away-bench-6-sprites" />
 				</div>
+				<hr />
+				<div class="row mt-2">
+					<div class="col-6">
+						<button class="btn btn-outline-secondary btn-block btn-sm paste" data-paste-type="teams">Paste Data</button>
+					</div>
+					<div class="col-6">
+						<button class="btn btn-outline-danger btn-block btn-sm reset" data-reset-page="teams">Reset Data (Teams)</button>
+					</div>
+				</div>
 			</div>
 			<!-- /teams -->
 
@@ -496,7 +514,7 @@
 						<button class="btn btn-outline-secondary btn-block btn-sm paste" data-paste-type="stats">Paste Data</button>
 					</div>
 					<div class="col-6">
-						<button class="btn btn-outline-danger btn-block btn-sm reset" data-reset-page="stats">Reset Data</button>
+						<button class="btn btn-outline-danger btn-block btn-sm reset" data-reset-page="stats">Reset Data (Stats)</button>
 					</div>
 				</div>
 			</div>
@@ -545,6 +563,16 @@
 					<div id="cont-history" class="mb-2">
 						<ul class="list-group" data-output="commentary">
 						</ul>
+					</div>
+				</div>
+
+				<hr />
+				<div class="row mt-2">
+					<div class="col-6">
+						<button class="btn btn-outline-secondary btn-block btn-sm paste disabled" data-paste-type="teams">Paste Data</button>
+					</div>
+					<div class="col-6">
+						<button class="btn btn-outline-danger btn-block btn-sm reset disabled" data-reset-page="teams">Reset Data (Commentary)</button>
 					</div>
 				</div>
 			</div>
@@ -662,6 +690,7 @@
 						<div class="col-9">
 							<select class="form-control form-control-sm" data-input="paste-type" name="paste-type" class="ignore">
 								<option value="stats" selected>Statistics</option>
+								<option value="teams">Teams</option>
 							</select>
 						</div>
 					</div>
