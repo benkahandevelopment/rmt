@@ -449,7 +449,6 @@
 
 			<!-- stats -->
 			<div class="container container-fluid page" data-page="stats" style="display:none;">
-				<button class="btn btn-outline-secondary btn-block btn-sm mb-2 paste" data-paste-type="stats">Paste Data</button>
 				<div class="form-row form-group" data-paste-livescore="shots on target">
 					<div class="col-2 stats-value"><input type="number" class="form-control form-control-sm" data-input="stat-home-shotson" min=0 max=100 value=0 /></div>
 					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Shots (on target)</label></div>
@@ -489,6 +488,16 @@
 					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-home-reds" type="number" value="0" min="0" max="100" /></div>
 					<div class="col-8 text-center stats-label"><label class="col-form-label col-form-label-sm">Sending-Offs</label></div>
 					<div class="col-2 stats-value"><input class="form-control form-control-sm" data-input="stat-away-reds" type="number" value="0" min="0" max="100" /></div>
+				</div>
+
+				<hr />
+				<div class="row mt-2">
+					<div class="col-6">
+						<button class="btn btn-outline-secondary btn-block btn-sm paste" data-paste-type="stats">Paste Data</button>
+					</div>
+					<div class="col-6">
+						<button class="btn btn-outline-danger btn-block btn-sm reset" data-reset-page="stats">Reset Data</button>
+					</div>
 				</div>
 			</div>
 			<!-- /stats -->
