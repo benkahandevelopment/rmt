@@ -64,6 +64,8 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 			c = c.replace(/\[\]\(\#rmt\-start\-footer\)[\s\S]*\[\]\(\#rmt\-end\-footer\)/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
 		c = c.replace(/\{\{TIMESTAMP\}\}/g, "[](#rmt-start-timestamp)"+output("timestamp")+"[](#rmt-end-timestamp)");
 			c = c.replace(/\[\]\(\#rmt\-start\-timestamp\).*\[\]\(\#rmt\-end\-timestamp\)/g, "[](#rmt-start-timestamp)"+output("timestamp")+"[](#rmt-end-timestamp)");
+		c = c.replace(/\{\{RSTREAM\}\}/g, "[](#rmt-start-rstream)"+output("rstream")+"[](#rmt-end-rstream)");
+			c = c.replace(/\[\]\(\#rmt\-start\-rstream\).*\[\]\(\#rmt\-end\-rstream\)/g, "[](#rmt-start-rstream)"+output("rstream")+"[](#rmt-end-rstream)");
 
 		//Add to textarea and save post
 		$textarea.val(c);
@@ -329,5 +331,8 @@ function output(n){
                 + currentdate.getHours() + ":"
                 + currentdate.getMinutes() + ":"
                 + currentdate.getSeconds();
+	} else if(n=="rstream"){
+		var l = "https://reddit-stream.com"+window.location.href.split("reddit.com")[1];
+		return "[reddit Stream]("+l+")";
 	}
 }
