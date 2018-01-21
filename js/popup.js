@@ -44,6 +44,14 @@
     //Check and load saved commentary
     loadCommentary();
 
+    //Paste Data Modal - Launch
+    $(".paste").click(function(e){
+        var $t = $(this);
+        var type = $t.attr("data-paste-type");
+        $(".modal[data-modal=paste] select[data-input=paste-type]").val(type);
+        $("#modal-paste").modal();
+    });
+
     //Player Event Modal - Launch
     $(document).on('click',".removeSprite", function(){ $(this).parent().parent().remove(); });
     $(".edit-playerevent").click(function(e){
@@ -59,8 +67,6 @@
             })
         }
 
-        //$(".modal-cont").fadeIn();
-        //$(".modal[data-modal=playerevent]").fadeIn();
         $("#modal-playerevent").modal();
     });
 
@@ -116,11 +122,24 @@
             saveCommentary();
             loadCommentary();
             $("#modal-editcommentary").modal('hide');
-        }
+        } else if(m=="paste"){
+            var $m = $(".modal[data-modal=paste]");
+            var $c = $m.find("textarea[data-input='paste-data']");
+            var v = $c.val();
 
-        //Close modal
-        //$(".modal-cont").fadeOut();
-        //$(this).closest(".modal").fadeOut();
+            if($("select[data-input='paste-source'] option:selected").val()=="livescore"){
+                var regex = /(.*)\n(\d{1,3})\n(\d{1,3})\n/g;
+                var matches;
+                while((matches = regex.exec(v)) !== null){
+                    $("div[data-paste-livescore='"+matches[1]+"'] input:eq(0)").val(matches[2]);
+                    $("div[data-paste-livescore='"+matches[1]+"'] input:eq(1)").val(matches[3]);
+                }
+            }
+
+            $m.find("textarea[data-input='paste-data']").val("");
+            saveInputs();
+            $("#modal-paste").modal("hide");
+        }
     });
 
     //Modal Delete
