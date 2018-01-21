@@ -4,10 +4,10 @@
  *
  **/
 
-var presets = {
+/*var presets = {
 	home_color : "red",
 	away_color : "white"
-};
+};*/
 
 (function(){
 	//On page load - add any indicators here?
@@ -61,7 +61,9 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 
 		//Other
 		c = c.replace(/\{\{FOOTER\}\}/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
-			c = c.replace(/\[\]\(\#rmt\-start\-footer\).*\[\]\(\#rmt\-end\-footer\)/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
+			c = c.replace(/\[\]\(\#rmt\-start\-footer\)[\s\S]*\[\]\(\#rmt\-end\-footer\)/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
+		c = c.replace(/\{\{TIMESTAMP\}\}/g, "[](#rmt-start-timestamp)"+output("timestamp")+"[](#rmt-end-timestamp)");
+			c = c.replace(/\[\]\(\#rmt\-start\-timestamp\).*\[\]\(\#rmt\-end\-timestamp\)/g, "[](#rmt-start-timestamp)"+output("timestamp")+"[](#rmt-end-timestamp)");
 
 		//Add to textarea and save post
 		$textarea.val(c);
@@ -91,7 +93,7 @@ function findSprites(a,s){
 	var ret = "";
 	var val = findVal(a,s);
 	var arr = val.split(",");
-	
+
 	arr.forEach(function(v,i){
 		if(v.length>0) ret += "[](#"+v+")";
 	});
@@ -117,7 +119,7 @@ function replaceCommentary(startVal, requestData){
 }
 
 function replaceTeams(startVal, requestData){
-	var lineups_full = 
+	var lineups_full =
 	" "+findSprites(requestData,"home-xi-0-sprites")+"|"+findVal(requestData,"home-xi-0")+"|"+findVal(requestData,"away-xi-0")+"|"+findSprites(requestData,"away-xi-0-sprites")+"  \n" +
 	" "+findSprites(requestData,"home-xi-1-sprites")+"|"+findVal(requestData,"home-xi-1")+"|"+findVal(requestData,"away-xi-1")+"|"+findSprites(requestData,"away-xi-1-sprites")+"  \n" +
 	" "+findSprites(requestData,"home-xi-2-sprites")+"|"+findVal(requestData,"home-xi-2")+"|"+findVal(requestData,"away-xi-2")+"|"+findSprites(requestData,"away-xi-2-sprites")+"  \n" +
@@ -151,8 +153,8 @@ function replaceStats(startVal, requestData){
 	var hl = "";
 	var al = "";
 
-	var hc = presets.home_color;
-	var ac = presets.away_color;
+	var hc = findVal(requestData, "meta-home-colour"); //presets.home_color;
+	var ac = findVal(requestData, "meta-away-colour"); //presets.away_color;
 
 	var stats_full = "";
 			h = parseInt(findVal(requestData, "stat-home-shotson"));
@@ -201,49 +203,49 @@ function replaceStats(startVal, requestData){
 			a = parseInt(findVal(requestData, "stat-away-shotson"));
 			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
 			al = isNaN(a) ? 0 : 16-hl;
-			if(a==0&&h==0) { a=10; h=10; }
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full_reverse += " Shots (on target)|"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
 			h = parseInt(findVal(requestData, "stat-home-shotsoff"));
 			a = parseInt(findVal(requestData, "stat-away-shotsoff"));
 			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
 			al = isNaN(a) ? 0 : 16-hl;
-			if(a==0&&h==0) { a=10; h=10; }
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full_reverse += " Shots (off target) |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
 			h = parseInt(findVal(requestData, "stat-home-possession"));
 			a = parseInt(findVal(requestData, "stat-away-possession"));
 			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
 			al = isNaN(a) ? 0 : 16-hl;
-			if(a==0&&h==0) { a=10; h=10; }
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full_reverse += " Possession |"+(hl>0?"["+h+"%](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"%](#bar-"+al+"-"+ac+")":"")+"  \n";
 			h = parseInt(findVal(requestData, "stat-home-corners"));
 			a = parseInt(findVal(requestData, "stat-away-corners"));
 			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
 			al = isNaN(a) ? 0 : 16-hl;
-			if(a==0&&h==0) { a=10; h=10; }
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full_reverse += " Corners |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
 			h = parseInt(findVal(requestData, "stat-home-fouls"));
 			a = parseInt(findVal(requestData, "stat-away-fouls"));
 			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
 			al = isNaN(a) ? 0 : 16-hl;
-			if(a==0&&h==0) { a=10; h=10; }
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full_reverse += " Fouls |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
 			h = parseInt(findVal(requestData, "stat-home-offsides"));
 			a = parseInt(findVal(requestData, "stat-away-offsides"));
 			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
 			al = isNaN(a) ? 0 : 16-hl;
-			if(a==0&&h==0) { a=10; h=10; }
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full_reverse += " Offsides |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
 			h = parseInt(findVal(requestData, "stat-home-yellows"));
 			a = parseInt(findVal(requestData, "stat-away-yellows"));
 			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
 			al = isNaN(a) ? 0 : 16-hl;
-			if(a==0&&h==0) { a=10; h=10; }
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full_reverse += " Bookings |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
 			h = parseInt(findVal(requestData, "stat-home-reds"));
 			a = parseInt(findVal(requestData, "stat-away-reds"));
 			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
 			al = isNaN(a) ? 0 : 16-hl;
-			if(a==0&&h==0) { a=10; h=10; }
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full_reverse += " Sending Offs |"+(hl>0?"["+h+"](#bar-"+hl+"-"+hc+")":"")+(al>0?"["+a+"](#bar-"+al+"-"+ac+")":"")+"  \n";
 
 	var ret = startVal.replace(/\{\{STATS_FULL\}\}/g, "[](#rmt-start-stats-full)"+stats_full+"[](#rmt-end-stats-full)");
@@ -260,11 +262,11 @@ function sanitise(i){
 
 function dateTime(){
 	var now = new Date();
-	return now.getUTCDate() + " " + 
-			monthString((now.getUTCMonth() + 1)) + " " + 
-			now.getUTCFullYear().toString() + " at " + 
-			("0"+now.getUTCHours()).slice(-2) + ":" + 
-			("0"+now.getUTCMinutes()).slice(-2) + ":" + 
+	return now.getUTCDate() + " " +
+			monthString((now.getUTCMonth() + 1)) + " " +
+			now.getUTCFullYear().toString() + " at " +
+			("0"+now.getUTCHours()).slice(-2) + ":" +
+			("0"+now.getUTCMinutes()).slice(-2) + ":" +
 			("0"+now.getUTCSeconds()).slice(-2) + " UTC";
 }
 
@@ -318,6 +320,14 @@ function monthString(n){
 
 function output(n){
 	if(n=="footer"){
-		return "  \n\n---\n\n^(Managed by the reddit Match Threader by /u/magicwings. Last updated on "+dateTime()+")";
+		return "  \n\n---\n\n^(Managed by the **reddit Match Threader** by /u/magicwings. Last updated on "+dateTime()+")";
+	} else if(n=="timestamp"){
+		var currentdate = new Date();
+		return currentdate.getDate() + "/"
+                + (currentdate.getMonth()+1)  + "/"
+                + currentdate.getFullYear() + " @ "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
 	}
 }
