@@ -1,0 +1,24 @@
+#{{SPRITE_TOURNAMENT}} {{META_HOMETEAM}} vs {{META_AWAYTEAM}}
+
+*Venue:* {{META_VENUE}}
+*Kickoff:* {{META_KICKOFF}}
+*Venue:* {{META_REFEREE}}
+
+###[](#icon-notes) Teams
+
+[](#icon-spacer)[](#icon-spacer)[](#icon-spacer)|{{META_HOMETEAM}}|{{META_AWAYTEAM}}|[](#icon-spacer)[](#icon-spacer)[](#icon-spacer)
+:-:|-:|:-|:-:
+{{LINEUPS_FULL}}
+
+###[](#icon-info) Match Stats
+ |{{META_HOMETEAM}}{{META_AWAYTEAM}}
+-:|:-:
+{{STATS_FULL_REVERSE}}
+
+###[](#icon-ball) Live Updates
+
+[](#icon-clock)|||
+-:|:-:|:-
+{{FULL_COMMENTARY}}
+
+^(Managed by the reddit Match Threader tool by /u/magicwings. Last updated at {{TIMESTAMP}})
