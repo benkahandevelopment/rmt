@@ -349,7 +349,7 @@ function comString(min,ico,com){
                 "<p class='com-sprite-cont'>"+
                     "<small class='com-meta d-block'>"+min+"'</small>"+
                     (ico != "" ? "<a href='#"+icoOutput+"'></a>" : "")+
-                "</p><p class='mb-1 ml-3'>"+com.replace(/\*\*([^\*]*)\*\*/g,"<b>$1</b>")+"</p>"+
+                "</p><p class='mb-1 ml-3'>"+com.replace(/\*\*([^\*]*)\*\*/g,"<b>$1</b>").replace(/\[([^\]]*)]\(([^)]*)\)/g,"<a href='$2'>$1</a>")+"</p>"+
                 "<small class='ml-auto'><i class='fas fa-edit edit-commentary'></i></small>"+
             "</div>"+
         "</div>";
