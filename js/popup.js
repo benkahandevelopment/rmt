@@ -263,7 +263,8 @@ function saveCommentary(){
     savedCommentary = savedCommentary.sort(function(a,b){
         return parseInt(a[1]) < parseInt(b[1]) ? -1 : 1;
     });
-    chrome.storage.sync.set({"savedCommentary":savedCommentary});
+    //chrome.storage.sync.set({"savedCommentary":savedCommentary});
+    chrome.storage.local.set({"savedCommentary":savedCommentary});
     return savedCommentary;
 }
 
@@ -323,7 +324,8 @@ function addCommentary(){
 //Sort and load commentary
 function loadCommentary(){
     $("ul[data-output=commentary]").html("");
-    chrome.storage.sync.get({"savedCommentary":[]}, function(o){
+    //chrome.storage.sync.get({"savedCommentary":[]}, function(o){
+    chrome.storage.local.get({"savedCommentary":[]}, function(o){
         o.savedCommentary.forEach(function(v,i){
             var min = v[1];
             var ico = v[2];
