@@ -157,7 +157,17 @@
             var v = $c.val();
 
             if($("select[data-input='paste-source'] option:selected").val()=="livescore"){
-                if(p=="stats"){
+                if(p=="meta"){
+                    var res = /\n[\d\D]{2}\s([\w\s\.\-]*)[\d|\?]\s\-\s[\d|\?]*([^\n]*)\n/g.exec(v);
+                    $(".page[data-page='meta'] input[data-input='meta-home']").val(res[1]);
+                    $(".page[data-page='meta'] input[data-input='meta-away']").val(res[2]);
+
+                    res = /venue\:.*\n([^\n|\d]*)\d{0,}\n/g.exec(v);
+                    $(".page[data-page='meta'] input[data-input='meta-venue']").val(res[1]);
+
+                    res = /referee\:.*\n([^\n|\d]*)/g.exec(v);
+                    $(".page[data-page='meta'] input[data-input='meta-referee']").val(res[1]);
+                } else if(p=="stats"){
                     var regex = /(.*)\n(\d{1,3})\n(\d{1,3})\n/g;
                     var matches;
                     while((matches = regex.exec(v)) !== null){
@@ -169,15 +179,11 @@
 
                     //First team
                     var s = v.split("substitutions")[0];
-                    //var regex = /\d+\s?(\d*)\n([^\s]*\s){0,1}(\D[^\n\:]*)/g;
                     var regex = /\d+\s?(\d*)\n([^\d\s]*){0,1}\s([^\d\n\:]*)/g;
                     var matches; var n = 0;
                     var homenames = []; var awaynames = [];
                     while((matches = regex.exec(s)) !== null){
-                        //matches[0] = full matche
-                        //matches[1] = goals
-                        //matches[2] = first/mid name
-                        //matches[3] = lastname
+                        //matches[goals, first-mid name, lastname]
                         if(n<=10) homenames.push(matches[3]);
                             else awaynames.unshift(matches[3]);
                         n++;
@@ -190,8 +196,6 @@
                     //Subs
                     if(typeof (v.split("substitute players")[1]) != "undefined"){
                         var s = v.split("substitute players")[1].split("\ncoach\:")[0];
-                        //var regex = /\n(^[\n]*)/g;
-                        //var regex = /\n\w*\s?([A-Z][a-z]*[^[A-Z]]*)[^\s]*\s([^\n]*)\n/g;
                         const regex = /\n[A-Z]*[a-z]*\s?([A-Za-z\'\-]*)[A-Z]\w*\s+([^\n]*)/g;
                         var matches; var n = 0;
                         while((matches = regex.exec(s)) !== null){

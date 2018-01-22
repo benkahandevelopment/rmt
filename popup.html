@@ -126,7 +126,7 @@
 				<hr />
 				<div class="row mt-2">
 					<div class="col-6">
-						<button class="btn btn-outline-secondary btn-block btn-sm paste disabled" data-paste-type="meta">Paste Data</button>
+						<button class="btn btn-outline-secondary btn-block btn-sm paste" data-paste-type="meta">Paste Data</button>
 					</div>
 					<div class="col-6">
 						<button class="btn btn-outline-danger btn-block btn-sm reset" data-reset-page="meta">Reset Data (Meta)</button>
@@ -689,7 +689,8 @@
 						<label class="col-3 col-form-label col-form-label-sm text-right">Data Type</label>
 						<div class="col-9">
 							<select class="form-control form-control-sm" data-input="paste-type" name="paste-type" class="ignore">
-								<option value="stats" selected>Statistics</option>
+								<option value="meta" selected>Meta</option>
+								<option value="stats">Statistics</option>
 								<option value="teams">Teams</option>
 							</select>
 						</div>
