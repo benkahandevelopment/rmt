@@ -569,10 +569,10 @@
 				<hr />
 				<div class="row mt-2">
 					<div class="col-6">
-						<button class="btn btn-outline-secondary btn-block btn-sm paste disabled" data-paste-type="teams">Paste Data</button>
+						<button class="btn btn-outline-secondary btn-block btn-sm paste" data-paste-type="commentary">Paste Data</button>
 					</div>
 					<div class="col-6">
-						<button class="btn btn-outline-danger btn-block btn-sm reset disabled" data-reset-page="teams">Reset Data (Commentary)</button>
+						<button class="btn btn-outline-danger btn-block btn-sm reset" data-reset-page="commentary">Reset Data (Commentary)</button>
 					</div>
 				</div>
 			</div>
@@ -692,6 +692,7 @@
 								<option value="meta" selected>Meta</option>
 								<option value="stats">Statistics</option>
 								<option value="teams">Teams</option>
+								<option value="commentary">Commentary</option>
 							</select>
 						</div>
 					</div>
@@ -706,7 +707,7 @@
 					<div class="form-group row">
 						<label class="col-3 col-form-label col-form-label-sm text-right">Data</label>
 						<div class="col-9">
-							<textarea class="form-control form-control-sm" data-input="paste-data" name="paste-data" class="ignore"></textarea>
+							<textarea class="form-control form-control-sm ignore" data-input="paste-data" name="paste-data"></textarea>
 						</div>
 					</div>
 				</div>
