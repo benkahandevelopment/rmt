@@ -1,0 +1,18 @@
+#exclude directories
+/octicons*
+/webfonts
+/docs/webfonts
+/templates
+
+#exclude jquery, bootstrap js/css
+/js/bootstrap*
+/js/jquery*
+/css/bootstrap*
+/docs/js/bootstrap*
+/docs/js/jquery*
+/docs/css/bootstrap*
+
+#exclude icons/older files
+icon*.png
+*.psd
+*.old.*
