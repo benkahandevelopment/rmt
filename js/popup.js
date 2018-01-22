@@ -64,8 +64,13 @@
                 $p.find("select[data-input=meta-away-colour]")[0].selectedIndex = 5;
             } else if(n=="teams"){
                 $p.find("input").val("");
-            } else if(n=="updates"){
-
+            } else if(n=="commentary"){
+                $p = $(".page[data-page='updates']");
+                $p.find("ul[data-output=commentary]").html("");
+                $p.find("input, textarea").val("");
+                $p.find("select").each(function(){
+                    $(this)[0].selectedIndex = 0;
+                })
             } else return false;
             saveInputs();
             return true;
@@ -204,6 +209,22 @@
                             n++;
                         }
                     }
+                } else if(p=="commentary"){
+                    const regex = /(\d{0,3})\+?(\d{0,2})\'\s([^\n]*)/g;
+                    var matches;
+                    $("ul[data-output='commentary']").html("");
+                    while((matches = regex.exec(v)) !== null){
+                        var min = matches[1];
+                        if(matches[2]!="") min = min + "\+"+matches[2];
+                        var ico = "";
+                        var com = matches[3];
+
+                        console.log(`min: ${min} ico: ${ico} com: ${com}`);
+
+                        $("ul[data-output=commentary]").prepend(comString(min,ico,com));
+                    }
+                    saveCommentary();
+                    loadCommentary();
                 }
             }
 
@@ -261,7 +282,10 @@ function saveCommentary(){
         ]);
     });
     savedCommentary = savedCommentary.sort(function(a,b){
-        return parseInt(a[1]) < parseInt(b[1]) ? -1 : 1;
+       var a2 = a[1].split("+")[0] + "." + (a[1].split("+")[1] ? a[1].split("+")[1] : "0");
+       var b2 = b[1].split("+")[0] + "." + (b[1].split("+")[1] ? b[1].split("+")[1] : "0");
+       return a2 - b2;
+
     });
     //chrome.storage.sync.set({"savedCommentary":savedCommentary});
     chrome.storage.local.set({"savedCommentary":savedCommentary});
