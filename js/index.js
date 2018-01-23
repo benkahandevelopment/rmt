@@ -48,7 +48,7 @@ function adjustSize(){
 			loader(0);
 		}
 	} else {
-		window.setTImeout(adjustSize,100);
+		window.setTimeout(adjustSize,100);
 	}
 }
 
