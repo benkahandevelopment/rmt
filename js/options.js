@@ -18,9 +18,10 @@ $(function(){
 	} else loader(0);
 
 	$("a[data-output]:not(.disabled)").click(function(e){
-		//$("#mainoutput").parent().attr("id",$(this).attr("data-output"));
-		$("main[role=main]").attr("id",$(this).attr("data-output"));
-		loadPage($(this).attr("data-output"),$(this));
+		var d = $(this).attr("data-output");
+		s = d.substr(0,8)=="settings" ? true : false;
+		$("main[role=main]").attr("id",d);
+		loadPage(d,$(this),s);
 		//e.preventDefault();
 	});
 
@@ -30,12 +31,19 @@ $(function(){
 	});
 });
 
-function loadPage(a, $t){
+function loadPage(pageName, $this, isSettings){
 	loader(1);
 	$("a[data-output]").removeClass("active");
-	$("a[data-output="+a+"]").addClass("active"); //$t.addClass("active");
-	$o.attr("src","docs/"+a+".html");
-	setTimeout(adjustSize,100);
+	$("a[data-output="+pageName+"]").addClass("active"); //$t.addClass("active");
+	if(s){
+		$("[data-output-cont=settings]").show();
+		$("[data-output-cont=documentation]").hide();
+		loader(0);
+	} else {
+		$("[data-output-cont=settings]").hide();
+		$("[data-output-cont=documentation]").show().find("iframe:eq(0)").attr("src","docs/"+pageName+".html");
+		setTimeout(adjustSize,100);
+	}
 }
 
 function adjustSize(){
@@ -50,5 +58,4 @@ function adjustSize(){
 function loader(o){
 	if(o==1) $("#loader").show();
 		else $("#loader").hide();
-
 }
