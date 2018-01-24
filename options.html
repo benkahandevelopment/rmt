@@ -19,7 +19,7 @@
 	<main role="main">
 		<div class="container-fluid">
 			<div class="row">
-				<nav class="col-sm-12 col-md-3 d-none d-sm-block bg-light sidebar">
+				<nav class="col-md-3 d-none d-sm-block bg-light sidebar pb-2">
 					<h5 class="mb-1 mt-2">Documentation</h5>
 					<ul class="nav nav-pills flex-column">
 						<li class="nav-item"><a class="nav-link" href="#getting_started" data-output="getting_started"><i class="fas fa-fw fa-star"></i>&nbsp;Getting Started</a></li>
@@ -38,17 +38,17 @@
 					<hr>
 					<h5 class="mb-1 mt-2">Settings</h5>
 					<ul class="nav nav-pills flex-column">
-						<li class="nav-item"><a class="nav-link" data-output="settings" href="#settings"><i class="fas fa-cog fa-fw"></i>&nbsp;Settings</a></li>
+						<li class="nav-item"><a class="nav-link" data-output="settings" href="#settings"><i class="fas fa-cogs fa-fw"></i>&nbsp;Settings</a></li>
 					</ul>
 				</nav>
-				<div class="col-sm-12 col-md-9 p-0">
+				<div class="col-md-9 p-0">
 					<div class="jumbotron jumbotron-fluid">
 						<div class="bg"></div>
 						<div class="container text-center">
 							<h1 class="display-3">reddit Match Threader</h1>
 							<p>Use these tools to make your experience with <span class="rmt-br">rMT</span> a breeze</p>
 							<p>
-								<a class="btn btn-info btn-lg" href="#settings" role="button" data-output="settings"><i class="fas fa-cog"></i> Settings</a>
+								<a class="btn btn-info btn-lg" href="#settings" role="button" data-output="settings"><i class="fas fa-cogs"></i> Settings</a>
 								<a class="btn btn-primary btn-lg" href="#getting_started" role="button" data-output="getting_started">Getting Started &raquo;</a>
 							</p>
 						</div>
@@ -56,8 +56,30 @@
 					<div class="row m-2" id="" data-output-cont="documentation">
 						<iframe id="mainoutput" class="container-fluid" frameborder="0" border="0" spacing="0"></iframe>
 					</div>
-					<div class="row m-2" id="settings" data-output-cont="settings">
+					<div class="m-2" id="settings" data-output-cont="settings">
 						<h1>Settings</h1>
+						<div class="container-fluid">
+							<div class="card w-100">
+								<div class="card-block">
+									<div class="card-header">
+										<ul class="nav nav-tabs card-header-tabs" role="tablist">
+											<!--<li class="nav-item"><a href="#settings-general" data-toggle="tab" role="tab" class="nav-link active">General</a></li>-->
+											<li class="nav-item"><a href="#settings-advanced" data-toggle="tab" role="tab" class="nav-link active">Advanced</a></li>
+											<!--<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>-->
+										</ul>
+									</div>
+									<div class="tab-content card-body">
+										<div class="tab-pane /*show active*/" role="tabpanel" id="settings-general">
+										</div>
+
+										<div class="tab-pane active" role="tabpanel" id="settings-advanced">
+											<label class="pl-4 form-check-label"><input type="checkbox" class="form-check-input" data-input-settings="adv_debug">Enable debug mode</label>
+										</div>
+									</div>
+									<div class="card-footer text-muted"><button type="submit" id="saveBtn" class="btn btn-success">Save All</button></div>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="col-9 p-0" data-output="settings"></div>
