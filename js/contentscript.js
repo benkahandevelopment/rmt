@@ -9,21 +9,32 @@
 	away_color : "white"
 };*/
 
+var $settings;
+var $log = {};
+chrome.storage.sync.get("settings", function(o){
+	$settings = o.settings;
+});
+
+
 (function(){
 	//On page load - add any indicators here?
 })();
 
 //On receiving data
 chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+	debug("Received data from popup on "+dateTime()+"...");
+	$log.time_start = new Date().getTime();
+
 	//Update current post - received "data"
 	if(request.data){
 		//Get access
 		var $editBtn = $("#siteTable a.edit-usertext");
 		if($editBtn.length<1) {
-			error("Invalid editing permissions for this post");
+			debug("Invalid editing permissions for this post",1);
 			return false;
 		}
 		$("#siteTable a.edit-usertext")[0].click();
+		debug("Post edit process started");
 
 		//Start data handling
 		var d = request.data;
@@ -60,28 +71,32 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 		c = replaceCommentary(c, u);
 
 		//Other
+		debug("Generating 'footer'",2);
 		c = c.replace(/\{\{FOOTER\}\}/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
 			c = c.replace(/\[\]\(\#rmt\-start\-footer\)[\s\S]*\[\]\(\#rmt\-end\-footer\)/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
+
+		debug("Generating 'timestamp'",2);
 		c = c.replace(/\{\{TIMESTAMP\}\}/g, "[](#rmt-start-timestamp)"+output("timestamp")+"[](#rmt-end-timestamp)");
 			c = c.replace(/\[\]\(\#rmt\-start\-timestamp\).*\[\]\(\#rmt\-end\-timestamp\)/g, "[](#rmt-start-timestamp)"+output("timestamp")+"[](#rmt-end-timestamp)");
+
+		debug("Generating 'reddit stream link'",2);
 		c = c.replace(/\{\{RSTREAM\}\}/g, "[](#rmt-start-rstream)"+output("rstream")+"[](#rmt-end-rstream)");
 			c = c.replace(/\[\]\(\#rmt\-start\-rstream\).*\[\]\(\#rmt\-end\-rstream\)/g, "[](#rmt-start-rstream)"+output("rstream")+"[](#rmt-end-rstream)");
 
 		//Add to textarea and save post
 		$textarea.val(c);
 		//setTimeout(function(){
+			$log.time_end = new Date().getTime();
+			debug("Process completed in "+($log.time_end-$log.time_start)+"ms");
 			$("#siteTable div.usertext-buttons button.save")[0].click();
 		//},100);
 	}
 });
 
-//Error logging
-function error(m){
-	console.log("rMT: "+m);
-}
-
 
 /* Functions ------------------------------------------------------------------*/
+
+//Value finder
 function findVal(a,s){
     //a is array, s is key for value
     var ret = "";
@@ -91,6 +106,7 @@ function findVal(a,s){
 	return ret;
 }
 
+//Sprites generator
 function findSprites(a,s){
 	var ret = "";
 	var val = findVal(a,s);
@@ -103,6 +119,7 @@ function findSprites(a,s){
 	return ret;
 }
 
+//Meta generator
 function replaceMeta(startVal, metaName, spriteName, requestData){
 	var ret = startVal;
 	metaName.forEach(function(v,i){
@@ -110,16 +127,20 @@ function replaceMeta(startVal, metaName, spriteName, requestData){
 		var withMeta = ret.replace(new RegExp(sanitise("{{"+v+"}}"),"g"), "[](#rmt-start-"+spriteName[i]+")[](#rmt-end-"+spriteName[i]+")");
 		ret = withMeta.replace(new RegExp(sanitise("[](#rmt-start-"+spriteName[i]+")")+".*"+sanitise("[](#rmt-end-"+spriteName[i]+")"),"g"), "[](#rmt-start-"+spriteName[i]+")"+val+"[](#rmt-end-"+spriteName[i]+")");
 	});
+	debug("Meta",2);
 	return ret;
 }
 
+//Commentary generator
 function replaceCommentary(startVal, requestData){
 	var r = startVal.replace("{{FULL_COMMENTARY}}", "[](#rmt-start-full-commentary)[](#rmt-end-full-commentary)");
 	//console.log(sanitise("[](#rmt-start-full-commentary)")+".*"+sanitise("[](#rmt-end-full-commentary)"));
 	r = r.replace(/\[\]\(\#rmt\-start\-full\-commentary\)[\s\S]*\[\]\(\#rmt\-end\-full\-commentary\)/g, "[](#rmt-start-full-commentary)"+requestData+"[](#rmt-end-full-commentary)");
+	debug("Commentary",2);
 	return r;
 }
 
+//Lineups generator
 function replaceTeams(startVal, requestData){
 	var lineups_full =
 	" "+findSprites(requestData,"home-xi-0-sprites")+"|"+findVal(requestData,"home-xi-0")+"|"+findVal(requestData,"away-xi-0")+"|"+findSprites(requestData,"away-xi-0-sprites")+"  \n" +
@@ -146,9 +167,11 @@ function replaceTeams(startVal, requestData){
 	var ret = startVal.replace(/\{\{LINEUPS_FULL\}\}/g, "[](#rmt-start-lineups-full)"+lineups_full+"[](#rmt-end-lineups-full)");
 	ret = ret.replace(/\[\]\(\#rmt\-start\-lineups\-full\)[\s\S]*\[\]\(\#rmt\-end\-lineups\-full\)/g, "[](#rmt-start-lineups-full)"+lineups_full+"[](#rmt-end-lineups-full)");
 
+	debug("Teams",2);
 	return ret;
 }
 
+//Statistics generator
 function replaceStats(startVal, requestData){
 	var h = "";
 	var a = "";
@@ -255,13 +278,16 @@ function replaceStats(startVal, requestData){
 	ret = ret.replace(/\[\]\(\#rmt\-start\-stats\-full\)[\s\S]*\[\]\(\#rmt\-end\-stats\-full\)/g, "[](#rmt-start-stats-full)"+stats_full+"[](#rmt-end-stats-full)");
 	ret = ret.replace(/\[\]\(\#rmt\-start\-stats\-full\-reverse\)[\s\S]*\[\]\(\#rmt\-end\-stats\-full\-reverse\)/g, "[](#rmt-start-stats-full-reverse)"+stats_full_reverse+"[](#rmt-end-stats-full-reverse)");
 
+	debug("Statistics",2);
 	return ret;
 }
 
+//Sanitise string
 function sanitise(i){
 	return i.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }
 
+//Create new datetime string
 function dateTime(){
 	var now = new Date();
 	return now.getUTCDate() + " " +
@@ -272,9 +298,10 @@ function dateTime(){
 			("0"+now.getUTCSeconds()).slice(-2) + " UTC";
 }
 
+
+//Convert month int to 3-letter month string
 function monthString(n){
 	var r;
-
 	switch(n){
 		case 1:
 			r = "Jan";
@@ -316,10 +343,10 @@ function monthString(n){
 			r = "?";
 			break;
 	}
-
 	return r;
 }
 
+//Return specific outputs
 function output(n){
 	if(n=="footer"){
 		return "  \n\n---\n\n^(Managed by the **reddit Match Threader** by /u/magicwings. Last updated on "+dateTime()+")";
@@ -334,5 +361,28 @@ function output(n){
 	} else if(n=="rstream"){
 		var l = "https://reddit-stream.com"+window.location.href.split("reddit.com")[1];
 		return "[reddit Stream]("+l+")";
+	}
+}
+
+//Debug messages
+function debug(message,mode){
+	if($settings.adv_debug){
+		var mode = mode || 0;
+		var css = {
+			br: "color:#9954BB;font-weight:900;text-shadow:0 1px 0 rgba(255,255,255,0.4),0 -1px 0 rgba(0,0,0,0.3)",
+			standard: "color:inherit;font-weight:normal",
+			error: "color:red;font-weight:bold",
+			errormsg: "color:red;font-weight:normal",
+			process: "color:#9954BB;font-weight:bold",
+			processmsg: "color:#9954BB;font-weight:normal"
+		}
+		var prefix = "%crMT > "
+		if(mode==0){
+			console.log(prefix+"%c"+message,css.br,css.standard);
+		} else if(mode==1){
+			console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg);
+		} else if(mode==2){
+			console.log(prefix+"%cUpdating: %c"+message,css.br,css.process,css.processmsg);
+		}
 	}
 }
