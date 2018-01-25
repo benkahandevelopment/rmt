@@ -39,19 +39,43 @@ img.ico { border: 1px solid rgba(0,0,0,0.2); background: rgba(0,0,0,0.1); border
 .i-3 { padding-left: 4rem; }
 .i-4 { padding-left: 5rem; }
 
-/*a[target=_blank]:not(.ignore)::after {
-    content: "\f35d";
-    font-family: "Font Awesome 5 Free";
-	font-style: normal !important;
-    padding-left: 0.5em;
-    font-size: 0.8em;
-    opacity: 0.3;
-}*/
+/* For sticky footer */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 65px; /* Margin bottom by footer height */
+}
+#logoutput-cont {
+	background: white;
+	padding: 5px;
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 2px;
+	font-size: small;
+	height: 60px;
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#logoutput {
+	height: 50px;
+	line-height: 20px;
+	margin: 0; padding: 0;
+	overflow-x: auto;
+	overflow-y: visible;
+	color: #868e96;
+	background-color: rgba(0,0,0,0.03);
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 2px;
+	padding: 0 5px;
+}
+
 
 .jumbotron {
 	position: relative;
 	background: rgba(255,255,255,0.5);
-
 	overflow: hidden;
 }
 
@@ -88,25 +112,4 @@ img.ico { border: 1px solid rgba(0,0,0,0.2); background: rgba(0,0,0,0.1); border
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
-}
-
-#logoutput-cont {
-	padding: 5px;
-	margin: 5px;
-	border: 1px solid rgba(0,0,0,0.1);
-	border-radius: 2px;
-	font-size: small;
-	display: none;
-}
-#logoutput {
-	height: 60px;
-	line-height: 20px;
-	margin: 0; padding: 0;
-	overflow-x: auto;
-	overflow-y: visible;
-	color: #868e96;
-	background-color: rgba(0,0,0,0.03);
-	border: 1px solid rgba(0,0,0,0.1);
-	border-radius: 2px;
-	padding: 0 5px;
 }
