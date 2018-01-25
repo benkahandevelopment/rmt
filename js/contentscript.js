@@ -85,11 +85,9 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 
 		//Add to textarea and save post
 		$textarea.val(c);
-		//setTimeout(function(){
-			$log.time_end = new Date().getTime();
-			debug("Process completed in "+($log.time_end-$log.time_start)+"ms");
-			$("#siteTable div.usertext-buttons button.save")[0].click();
-		//},100);
+		$log.time_end = new Date().getTime();
+		debug("Process completed in "+($log.time_end-$log.time_start)+"ms");
+		$("#siteTable div.usertext-buttons button.save")[0].click();		
 	}
 });
 
