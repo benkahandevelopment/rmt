@@ -1,6 +1,8 @@
 /* Settings variables */
 var $settings;
-chrome.storage.sync.get("settings", function(o){ $settings = o.settings; });
+chrome.storage.sync.get({"settings" : {
+        adv_debug : false
+    }}, function(o){ $settings = o.settings; });
 var $o = $("#mainoutput");
 var $l = $("#logoutput");
 
