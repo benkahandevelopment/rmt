@@ -1,7 +1,19 @@
 /* Globals */
 
+/*@font-face {
+	font-family: "Font Awesome 5 Free";
+	src: url("/webfonts/fa-regular-400.eot");
+	src: url("/webfonts/fa-regular-400.eot#iefix") format("embedded-opentype"),
+		 url("/webfonts/fa-regular-400.svg") format("svg"),
+		 url("/webfonts/fa-regular-400.ttf") format("truetype"),
+		 url("/webfonts/fa-regular-400.woff") format("woff"),
+		 url("/webfonts/fa-regular-400.woff2") format("woff2");
+}
+@import "fa.css";*/
+
+
 img.inline { display: inline; }
-img.ico { border: 1px solid rgba(0,0,0,0.2); background: rgba(0,0,0,0.1); border-radius: 2px; margin: 3px; padding: 3px; }
+img.ico { border: 1px solid rgba(0,0,0,0.2); background: rgba(0,0,0,0.1); border-radius: 2px; margin: 3px; padding: 2px }
 
 .rmt-br {
 	/*border: 1px solid rgba(153,84,187,0.5);
@@ -26,6 +38,15 @@ img.ico { border: 1px solid rgba(0,0,0,0.2); background: rgba(0,0,0,0.1); border
 .i-2 { padding-left: 3rem; }
 .i-3 { padding-left: 4rem; }
 .i-4 { padding-left: 5rem; }
+
+/*a[target=_blank]:not(.ignore)::after {
+    content: "\f35d";
+    font-family: "Font Awesome 5 Free";
+	font-style: normal !important;
+    padding-left: 0.5em;
+    font-size: 0.8em;
+    opacity: 0.3;
+}*/
 
 .jumbotron {
 	position: relative;

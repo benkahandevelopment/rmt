@@ -12,7 +12,11 @@ $(function(){
 		setTimeout(function(){
 			$("a[data-output="+window.location.hash.slice(1)+"]").click();
 		}, 100);
-	} else loader(0);
+	} else {
+		setTimeout(function(){
+			$("a[data-output=getting_started]").click();
+		}, 100);
+	}
 
 	//On save button click (settings)
 	$("#saveBtn").click(saveAll);
