@@ -38,10 +38,7 @@ function loadPage(pageName, $this, isSettings){
 	$("a[data-output]").removeClass("active");
 	$("a[data-output="+pageName+"]").addClass("active"); //$t.addClass("active");
 	if(s){
-<<<<<<< HEAD
 		debug("Loading settings page");
-=======
->>>>>>> 08c9e74ba001fea1452b2fd65ebe13893a55d973
 		retrieveAll();
 		$("[data-output-cont=settings]").show();
 		$("[data-output-cont=documentation]").hide();
@@ -69,10 +66,7 @@ function loader(o){
 
 //Retrieve all settings saved data
 function retrieveAll(){
-<<<<<<< HEAD
 	debug("Retrieving settings and saved data");
-=======
->>>>>>> 08c9e74ba001fea1452b2fd65ebe13893a55d973
 	chrome.storage.sync.get("settings", function(o){
 		var s = o.settings;
 		var a = $.map(s, function(n,i){
@@ -90,10 +84,7 @@ function retrieveAll(){
 //Save all settings data to local storage
 function saveAll(){
 	loader(1);
-<<<<<<< HEAD
 	debug("Saving all settings data");
-=======
->>>>>>> 08c9e74ba001fea1452b2fd65ebe13893a55d973
 	var settings = {};
 	$("[data-input-settings]:not(.ignore)").each(function(e){
 		var $t = $(this);
@@ -102,10 +93,7 @@ function saveAll(){
 	});
 	chrome.storage.sync.set({"settings":settings});
 	retrieveAll();
-<<<<<<< HEAD
 	$settings = settings;
-=======
->>>>>>> 08c9e74ba001fea1452b2fd65ebe13893a55d973
 	return settings;
 }
 
@@ -113,7 +101,6 @@ function saveAll(){
 function getVal(field){
 	var $f = $("[data-input-settings='"+field+"']");
 	return $f.attr("type")=="checkbox" ? $f.prop("checked") : $f.val();
-<<<<<<< HEAD
 }
 
 //Debug messages
@@ -138,6 +125,4 @@ function debug(message,mode){
 			console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg);
 		}
 	}
-=======
->>>>>>> 08c9e74ba001fea1452b2fd65ebe13893a55d973
 }
