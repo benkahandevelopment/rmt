@@ -63,14 +63,32 @@
 								<div class="card-block">
 									<div class="card-header">
 										<ul class="nav nav-tabs card-header-tabs" role="tablist">
-											<li class="nav-item"><a href="#settings-general" data-toggle="tab" role="tab" class="nav-link active">General</a></li>
+											<li class="nav-item"><a href="#settings-general" data-toggle="tab" role="tab" class="nav-link active">Match Threads</a></li>
 											<li class="nav-item"><a href="#settings-advanced" data-toggle="tab" role="tab" class="nav-link">Advanced</a></li>
 											<!--<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>-->
 										</ul>
 									</div>
 									<div class="tab-content card-body">
 										<div class="tab-pane show active" role="tabpanel" id="settings-general">
-											<label class="pl-4 form-check-label"><input type="checkbox" class="form-check-input" data-input-settings="gen_submit">Auto submit post on save</label>
+											<div class="form-group d-flex align-items-center">
+												<div class="col-6">
+													<label class="form-check-label">Auto submit post on save</label>
+													<small class="text-muted d-block">When checked, clicking "save" will submit the post and your changes will be visible</small>
+												</div>
+												<div class="col-6">
+													<input type="checkbox" class="form-check-input ml-1" data-input-settings="gen_submit">
+												</div>
+											</div>
+											<hr>
+											<div class="form-group d-flex align-items-center">
+												<div class="col-6">
+													<label class="form-group-label mb-0">Default post template (Match Threads)</label>
+													<small class="text-muted d-block">Placeholder for future use (changing this does not affect anything as of v1.0.0)</small>
+												</div>
+												<div class="col-6">
+													<textarea class="form-control form-control-sm" data-input-settings="gen_template_default"></textarea>
+												</div>
+											</div>
 										</div>
 
 										<div class="tab-pane" role="tabpanel" id="settings-advanced">
@@ -96,6 +114,7 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jqueryui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="mainfest.json"></script>
 	<script type="text/javascript" src="js/settings.js"></script>
 	<script type="text/javascript" src="js/options.js"></script>
   </body>
