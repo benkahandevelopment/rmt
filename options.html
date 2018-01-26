@@ -63,16 +63,17 @@
 								<div class="card-block">
 									<div class="card-header">
 										<ul class="nav nav-tabs card-header-tabs" role="tablist">
-											<!--<li class="nav-item"><a href="#settings-general" data-toggle="tab" role="tab" class="nav-link active">General</a></li>-->
-											<li class="nav-item"><a href="#settings-advanced" data-toggle="tab" role="tab" class="nav-link active">Advanced</a></li>
+											<li class="nav-item"><a href="#settings-general" data-toggle="tab" role="tab" class="nav-link active">General</a></li>
+											<li class="nav-item"><a href="#settings-advanced" data-toggle="tab" role="tab" class="nav-link">Advanced</a></li>
 											<!--<li class="nav-item"><a class="nav-link disabled" href="#">Disabled</a></li>-->
 										</ul>
 									</div>
 									<div class="tab-content card-body">
-										<div class="tab-pane /*show active*/" role="tabpanel" id="settings-general">
+										<div class="tab-pane show active" role="tabpanel" id="settings-general">
+											<label class="pl-4 form-check-label"><input type="checkbox" class="form-check-input" data-input-settings="gen_submit">Auto submit post on save</label>
 										</div>
 
-										<div class="tab-pane active" role="tabpanel" id="settings-advanced">
+										<div class="tab-pane" role="tabpanel" id="settings-advanced">
 											<label class="pl-4 form-check-label"><input type="checkbox" class="form-check-input" data-input-settings="adv_debug">Enable debug mode</label>
 										</div>
 									</div>
@@ -92,9 +93,10 @@
 		<p>&copy; 2018 <a href="//bkdev.co.uk/" target="_blank">BKDev</a>/<a href="//reddit.com/u/magicwings" target="_blank">/u/magicwings</a>. All rights reserved. <a href="//github.com/benkahandevelopment/rmt" target="_blank">Fork me on GitHub &raquo;</a></p>
 	</footer>
 	<div id="logoutput-cont"><ul id="logoutput"></ul></div>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jqueryui.min.js"></script>
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/options.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jqueryui.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/settings.js"></script>
+	<script type="text/javascript" src="js/options.js"></script>
   </body>
 </html>

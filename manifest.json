@@ -29,7 +29,8 @@
     "options_page": "options.html",
     "web_accessible_resources": [
         "js/jquery.min.js",
-        "js/jqueryui.min.js"
+        "js/jqueryui.min.js",
+        "js/settings.js"
     ],
     "icons": {
         "16":"icon16.png",

@@ -4,20 +4,14 @@
  *
  **/
 
-/*var presets = {
-	home_color : "red",
-	away_color : "white"
-};*/
 
-var $settings;
 var $log = {};
-chrome.storage.sync.get("settings", function(o){
-	$settings = o.settings;
-});
+var $settings;
 
 
 (function(){
-	//On page load - add any indicators here?
+	//On page load
+	chrome.storage.sync.get({"settings" : def_settings}, function(o){ $settings = o.settings; });
 })();
 
 //On receiving data
@@ -87,7 +81,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 		$textarea.val(c);
 		$log.time_end = new Date().getTime();
 		debug("Process completed in "+($log.time_end-$log.time_start)+"ms");
-		$("#siteTable div.usertext-buttons button.save")[0].click();		
+		if($settings.gen_submit) $("#siteTable div.usertext-buttons button.save")[0].click();
 	}
 });
 
@@ -176,8 +170,8 @@ function replaceStats(startVal, requestData){
 	var hl = "";
 	var al = "";
 
-	var hc = findVal(requestData, "meta-home-colour"); //presets.home_color;
-	var ac = findVal(requestData, "meta-away-colour"); //presets.away_color;
+	var hc = findVal(requestData, "meta-home-colour");
+	var ac = findVal(requestData, "meta-away-colour");
 
 	var stats_full = "";
 			h = parseInt(findVal(requestData, "stat-home-shotson"));

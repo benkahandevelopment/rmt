@@ -1,6 +1,3 @@
-//var match = {};
-//var settings = {};
-
 /* On document load -----------------------------------------------------------0*/
 (function(){
 
@@ -27,6 +24,12 @@
         $(".page").hide();
         $(".page[data-page='"+$(this).parent().attr("data-nav")+"']").show();
         chrome.storage.sync.set({"lastPage":$(this).parent().attr("data-nav")});
+    });
+
+    //Check settings
+    chrome.storage.sync.get({"settings" : def_settings}, function(o){
+            $settings = o.settings;
+            $("button[data-action=submit]").html($settings.gen_submit ? "Save, Update &amp; Submit" : "Save &amp; Update");
     });
 
     //Open last tab
