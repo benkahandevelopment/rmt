@@ -147,6 +147,11 @@ function debug(message,mode){
 function executeSettings(){
 	if($settings.adv_debug) $("#logoutput-cont").show();
 		else $("#logoutput-cont").hide();
+
+    $("[data-manifest-meta]").each(function(){
+        var $t = $(this);
+        $t.html($settings.manifest[$t.data("manifest-meta")]);
+    });
 }
 
 /*

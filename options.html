@@ -13,13 +13,13 @@
 </head>
 <body>
 	<div id="loader"><div class="loadimg"><i class="fas fa-spinner fa-lg fa-spin"></i></div></div>
-	<nav class="navbar /*navbar-dark bg-dark*/ navbar-dark bg-dark">
-		<span class="navbar-brand"><span class="rmt-br">rMT</span> reddit Match Threader</span>
+	<nav class="navbar /*navbar-dark bg-dark*/ navbar-light bg-light">
+		<span class="navbar-brand"><img src="icon32.png"><span class="rmt-br">rMT</span> reddit Match Threader</span>
 	</nav>
 	<main role="main">
-		<div class="container-fluid">
-			<div class="row">
-				<nav class="col-md-3 d-none d-sm-block bg-light sidebar pb-2">
+		<div class="container-fluid h-100">
+			<div class="row h-100">
+				<nav class="col-md-3 d-none d-sm-block bg-light pb-2">
 					<h5 class="mb-1 mt-2">Documentation</h5>
 					<ul class="nav nav-pills flex-column">
 						<li class="nav-item"><a class="nav-link" href="#getting_started" data-output="getting_started"><i class="fas fa-fw fa-star"></i>&nbsp;Getting Started</a></li>
@@ -53,7 +53,7 @@
 							</p>
 						</div>
 					</div>
-					<div class="row m-2" id="" data-output-cont="documentation">
+					<div class="m-2" id="documentation" data-output-cont="documentation">
 						<iframe id="mainoutput" class="container-fluid" frameborder="0" border="0" spacing="0"></iframe>
 					</div>
 					<div class="m-2" id="settings" data-output-cont="settings">
@@ -100,21 +100,21 @@
 							</div>
 						</div>
 					</div>
+					<div data-output="settings"></div>
+					<footer class="container-fluid p-2">
+						<hr class="mb-2">
+						<div class="d-block text-center"><img src="icon64.png" class="brandimg"></div>
+						<p class="small text-muted text-center mb-0">&copy; 2018 <a href="//bkdev.co.uk/" target="_blank">BKDev</a> &amp; <a href="//reddit.com/u/magicwings" target="_blank">/u/magicwings</a>. All rights reserved. App v<span data-manifest-meta="version"></span>. <a href="//github.com/benkahandevelopment/rmt" target="_blank">Fork me on GitHub &raquo;</a></p>
+					</footer>
 				</div>
-				<div class="col-9 p-0" data-output="settings"></div>
 			</div>
 		</div> <!-- /container -->
 	</main>
 
-	<footer class="container-fluid">
-		<hr>
-		<p>&copy; 2018 <a href="//bkdev.co.uk/" target="_blank">BKDev</a>/<a href="//reddit.com/u/magicwings" target="_blank">/u/magicwings</a>. All rights reserved. <a href="//github.com/benkahandevelopment/rmt" target="_blank">Fork me on GitHub &raquo;</a></p>
-	</footer>
-	<div id="logoutput-cont"><ul id="logoutput"></ul></div>
+	<div id="logoutput-cont"><ul id="logoutput" class="small"></ul></div>
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jqueryui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript" src="mainfest.json"></script>
 	<script type="text/javascript" src="js/settings.js"></script>
 	<script type="text/javascript" src="js/options.js"></script>
   </body>
