@@ -17,5 +17,6 @@ icon*.png
 *.psd
 *.old.*
 
-#exclude other git files
+#exclude other
 *.md
+*.DS_Store

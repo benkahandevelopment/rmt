@@ -19,7 +19,7 @@ $(function(){
 
 	//Check to see if page already specified
 	if(window.location.hash){
-		setTimeout(function(){
+    	setTimeout(function(){
 			$("a[data-output="+window.location.hash.slice(1)+"]").click();
 		}, 100);
 	} else {
@@ -72,17 +72,19 @@ function loadPage(pageName, $this, isSettings){
 	} else {
 		debug("Loading '"+pageName+"' page");
 		$("[data-output-cont=settings]").hide();
-		$("[data-output-cont=documentation]").show().find("iframe:eq(0)").attr("src","docs/"+pageName+".html");
+		//$("[data-output-cont=documentation]").show().find("iframe:eq(0)").attr("src","docs/"+pageName+".html");
+		$("[data-output-cont=documentation]").load(chrome.runtime.getURL("docs/"+pageName+".html")).show();
+        loader(0);
 
 		//Adjust iframe size
-		var iframeid = document.getElementById("mainoutput");
+		/*var iframeid = document.getElementById("mainoutput");
 		if(iframeid){
 			setTimeout(function(){
 				iframeid.height = "";
 				iframeid.height = iframeid.contentWindow.document.body.scrollHeight+"px";
 				loader(0);
 			},150);
-		} else { loader(0); }
+		} else { loader(0); }*/
 	}
 }
 
