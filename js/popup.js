@@ -253,6 +253,18 @@
         $("#modal-editcommentary").modal('hide');
     });
 
+    //Generator
+    /*$("button[data-generate]").click(function(e){
+        var $t = $(this);
+        var options = {
+            type: $t.attr("data-generate")
+        };
+        if(options.type=="matchthread"){
+            $("textarea[data-generator=matchthread]").html(getCommentary());
+        } else {
+            //$("textarea[data-generator=postmatchthread]").html();
+        }
+    });*/
 
     //Auto-save on unfocus
     $("input, textarea, select").focusout(saveInputs);

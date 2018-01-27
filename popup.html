@@ -10,17 +10,20 @@
 <body>
 	<div id="body">
 		<ul class="nav row text-center" id="navigation">
-			<li class="nav-item col col-3 active text-center" data-nav="meta">
+			<li class="nav-item col col-xs-5ths active text-center" data-nav="meta">
 				<a class="nav-link" href="#"><i class="fas fa-info"></i><span class="badge">Meta</span></a>
 			</li>
-			<li class="nav-item col col-3 text-center" data-nav="teams">
+			<li class="nav-item col col-xs-5ths text-center" data-nav="teams">
 				<a class="nav-link" href="#"><i class="fas fa-list"></i><span class="badge">Teams</span></a>
 			</li>
-			<li class="nav-item col col-3 text-center" data-nav="stats">
+			<li class="nav-item col col-xs-5ths text-center" data-nav="stats">
 				<a class="nav-link" href="#"><i class="fas fa-chart-bar"></i><span class="badge">Stats</span></a>
 			</li>
-			<li class="nav-item col col-3 text-center" data-nav="updates">
+			<li class="nav-item col col-xs-5ths text-center" data-nav="updates">
 				<a class="nav-link" href="#"><i class="fas fa-comment-alt"></i><span class="badge">Updates</span></a>
+			</li>
+			<li class="nav-item col col-xs-5ths text-center" data-nav="generator">
+				<a class="nav-link" href="#"><i class="fas fa-upload"></i><span class="badge">Generator</span></a>
 			</li>
 		</ul>
 
@@ -577,6 +580,35 @@
 				</div>
 			</div>
 			<!-- /commentary -->
+
+			<!-- generator -->
+			<div class="container container-fluid page" data-page="generator" style="display:none;">
+				<h4>Generator</h4>
+				<div class="form-group">
+					<div class="row">
+						<div class="col-6">
+							<label class="col-form-label col-form-label-sm">Match Thread</label>
+						</div>
+						<div class="col-6">
+							<button type="button" class="btn btn-sm btn-light btn-block" data-generate="matchthread">Generate</button>
+						</div>
+					</div>
+					<textarea class="form-control form-control-sm mt-2" data-generator="matchthread"></textarea>
+				</div>
+				<hr />
+				<div class="form-group">
+					<div class="row">
+						<div class="col-6">
+							<label class="col-form-label col-form-label-sm">Post-Match Thread</label>
+						</div>
+						<div class="col-6">
+							<button type="button" class="btn btn-sm btn-light btn-block" data-generate="postmatchthread">Generate</button>
+						</div>
+					</div>
+					<textarea class="form-control form-control-sm mt-2" data-generator="postmatchthread"></textarea>
+				</div>
+			</div>
+			<!-- /generator -->
 		</div>
 		<div class="container p-0">
 			<div class="form-group" id="confirmOutput">

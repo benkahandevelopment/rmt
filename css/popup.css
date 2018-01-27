@@ -45,3 +45,40 @@ span.sprite-cont { padding: 3px 4px 5px 4px !important; background-color: white;
 input.player-cont { border-left: none; }
 /*.sprite-cont a { margin: 0 2px }*/
 .sprite-cont a[href^="#icon"]{ width:12px; height:12px; background-size: 12px 492px; }
+
+/* 5 columns */
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+
+@media (min-width: 768px) {
+    .col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}
