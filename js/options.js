@@ -50,6 +50,9 @@ $(function(){
 		e.preventDefault();
 		return false;
 	});
+
+    //Other
+    $("[data-toggle='popover']").popover({html:true});
 });
 
 //Load page function

@@ -7,37 +7,35 @@
 
 var $log = {};
 var $settings;
+$.getScript("settings.js", function(){
+	chrome.storage.sync.get("settings", function(o){
+		$settings = o.settings;
+	});
 
+	//On receiving data
+	chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
+		debug("Received data from popup on "+dateTime()+"...");
+		$log.time_start = new Date().getTime();
 
-(function(){
-	//On page load
-	chrome.storage.sync.get({"settings" : def_settings}, function(o){ $settings = o.settings; });
-})();
+		//Update current post - received "data"
+		if(request.data){
+			//Get access
+			var $editBtn = $("#siteTable a.edit-usertext");
+			if($editBtn.length<1) {
+				debug("Invalid editing permissions for this post",1);
+				return false;
+			}
+			$("#siteTable a.edit-usertext")[0].click();
+			debug("Post edit process started");
 
-//On receiving data
-chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
-	debug("Received data from popup on "+dateTime()+"...");
-	$log.time_start = new Date().getTime();
+			//Start data handling
+			var d = request.data;
+			var u = request.commentary;
+			var $textarea = $(".md-container .md textarea:eq(0)");
+			var c = $textarea.val();
 
-	//Update current post - received "data"
-	if(request.data){
-		//Get access
-		var $editBtn = $("#siteTable a.edit-usertext");
-		if($editBtn.length<1) {
-			debug("Invalid editing permissions for this post",1);
-			return false;
-		}
-		$("#siteTable a.edit-usertext")[0].click();
-		debug("Post edit process started");
-
-		//Start data handling
-		var d = request.data;
-		var u = request.commentary;
-		var $textarea = $(".md-container .md textarea:eq(0)");
-		var c = $textarea.val();
-
-		//Meta
-		c = replaceMeta(c, [
+			//Meta
+			c = replaceMeta(c, [
 				"META_HOMETEAM",
 				"META_AWAYTEAM",
 				"META_VENUE",
@@ -55,35 +53,37 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse){
 				"sprite-tournament"
 			], d);
 
-		//Teams
-		c = replaceTeams(c, d);
+			//Teams
+			c = replaceTeams(c, d);
 
-		//Stats
-		c = replaceStats(c, d);
+			//Stats
+			c = replaceStats(c, d);
 
-		//Commentary
-		c = replaceCommentary(c, u);
+			//Commentary
+			c = replaceCommentary(c, u);
 
-		//Other
-		debug("Generating 'footer'",2);
-		c = c.replace(/\{\{FOOTER\}\}/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
+			//Other
+			debug("Generating 'footer'",2);
+			c = c.replace(/\{\{FOOTER\}\}/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
 			c = c.replace(/\[\]\(\#rmt\-start\-footer\)[\s\S]*\[\]\(\#rmt\-end\-footer\)/g, "[](#rmt-start-footer)"+output("footer")+"[](#rmt-end-footer)");
 
-		debug("Generating 'timestamp'",2);
-		c = c.replace(/\{\{TIMESTAMP\}\}/g, "[](#rmt-start-timestamp)"+output("timestamp")+"[](#rmt-end-timestamp)");
+			debug("Generating 'timestamp'",2);
+			c = c.replace(/\{\{TIMESTAMP\}\}/g, "[](#rmt-start-timestamp)"+output("timestamp")+"[](#rmt-end-timestamp)");
 			c = c.replace(/\[\]\(\#rmt\-start\-timestamp\).*\[\]\(\#rmt\-end\-timestamp\)/g, "[](#rmt-start-timestamp)"+output("timestamp")+"[](#rmt-end-timestamp)");
 
-		debug("Generating 'reddit stream link'",2);
-		c = c.replace(/\{\{RSTREAM\}\}/g, "[](#rmt-start-rstream)"+output("rstream")+"[](#rmt-end-rstream)");
+			debug("Generating 'reddit stream link'",2);
+			c = c.replace(/\{\{RSTREAM\}\}/g, "[](#rmt-start-rstream)"+output("rstream")+"[](#rmt-end-rstream)");
 			c = c.replace(/\[\]\(\#rmt\-start\-rstream\).*\[\]\(\#rmt\-end\-rstream\)/g, "[](#rmt-start-rstream)"+output("rstream")+"[](#rmt-end-rstream)");
 
-		//Add to textarea and save post
-		$textarea.val(c);
-		$log.time_end = new Date().getTime();
-		debug("Process completed in "+($log.time_end-$log.time_start)+"ms");
-		if($settings.gen_submit) $("#siteTable div.usertext-buttons button.save")[0].click();
-	}
+			//Add to textarea and save post
+			$textarea.val(c);
+			$log.time_end = new Date().getTime();
+			debug("Process completed in "+($log.time_end-$log.time_start)+"ms");
+			if($settings.gen_submit) $("#siteTable div.usertext-buttons button.save")[0].click();
+		}
+	});
 });
+
 
 
 /* Functions ------------------------------------------------------------------*/
@@ -176,43 +176,51 @@ function replaceStats(startVal, requestData){
 	var stats_full = "";
 			h = parseInt(findVal(requestData, "stat-home-shotson"));
 			a = parseInt(findVal(requestData, "stat-away-shotson"));
-			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
-			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")|Shots (on target)|["+a+"](#bar-"+al+"-"+ac+")  \n";
 			h = parseInt(findVal(requestData, "stat-home-shotsoff"));
 			a = parseInt(findVal(requestData, "stat-away-shotsoff"));
-			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
-			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Shots (off target) |["+a+"](#bar-"+al+"-"+ac+")  \n";
 			h = parseInt(findVal(requestData, "stat-home-possession"));
 			a = parseInt(findVal(requestData, "stat-away-possession"));
-			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
-			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full += " "+"["+h+"%](#bar-"+hl+"-"+hc+")| Possession |["+a+"%](#bar-"+al+"-"+ac+")  \n";
 			h = parseInt(findVal(requestData, "stat-home-corners"));
 			a = parseInt(findVal(requestData, "stat-away-corners"));
-			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
-			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Corners |["+a+"](#bar-"+al+"-"+ac+")  \n";
 			h = parseInt(findVal(requestData, "stat-home-fouls"));
 			a = parseInt(findVal(requestData, "stat-away-fouls"));
-			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
-			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Fouls |["+a+"](#bar-"+al+"-"+ac+")  \n";
 			h = parseInt(findVal(requestData, "stat-home-offsides"));
 			a = parseInt(findVal(requestData, "stat-away-offsides"));
-			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
-			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Offsides |["+a+"](#bar-"+al+"-"+ac+")  \n";
 			h = parseInt(findVal(requestData, "stat-home-yellows"));
 			a = parseInt(findVal(requestData, "stat-away-yellows"));
-			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
-			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Bookings |["+a+"](#bar-"+al+"-"+ac+")  \n";
 			h = parseInt(findVal(requestData, "stat-home-reds"));
 			a = parseInt(findVal(requestData, "stat-away-reds"));
-			hl = isNaN(h) ? 0 : (h>16||a>16 ? Math.round(h/(h+a)*10)*2 : h);
-			al = isNaN(a) ? 0 : (h>16||a>16 ? 16-hl : a);
+			hl = isNaN(h) ? 0 : Math.round(h/(h+a)*16);
+			al = isNaN(a) ? 0 : 16-hl;
+			if(a==0&&h==0) { al=8; hl=8; }
 		stats_full += " "+"["+h+"](#bar-"+hl+"-"+hc+")| Sending Offs |["+a+"](#bar-"+al+"-"+ac+")  \n";
 
 	var stats_full_reverse = "";
@@ -365,8 +373,8 @@ function debug(message,mode){
 			standard: "color:inherit;font-weight:normal",
 			error: "color:red;font-weight:bold",
 			errormsg: "color:red;font-weight:normal",
-			process: "color:#9954BB;font-weight:bold",
-			processmsg: "color:#9954BB;font-weight:normal",
+			process: "color:#2780e3;font-weight:bold",
+			processmsg: "color:#2780e3;font-weight:normal",
 			caller: "color:#777;font-style:italic"
 		}
 
