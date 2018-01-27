@@ -79,7 +79,16 @@ $.getScript("settings.js", function(){
 			$textarea.val(c);
 			$log.time_end = new Date().getTime();
 			debug("Process completed in "+($log.time_end-$log.time_start)+"ms");
-			if($settings.gen_submit) $("#siteTable div.usertext-buttons button.save")[0].click();
+
+			var len = c.length; var lenNice = numberWithCommas(len);
+			if(len>39999) {
+				debug("Length of post too long to submit (40k character limit, this post is "+lenNice+" chars)",1);
+			} else {
+				if(len>34999) debug("Length of post approaching 40k limit ("+lenNice+")",3);
+					else debug("Length of post: "+lenNice+" chars");
+				if($settings.gen_submit) $("#siteTable div.usertext-buttons button.save")[0].click();
+			}
+
 		}
 	});
 });
@@ -373,6 +382,8 @@ function debug(message,mode){
 			standard: "color:inherit;font-weight:normal",
 			error: "color:red;font-weight:bold",
 			errormsg: "color:red;font-weight:normal",
+			warning: "color:#ff5722;font-weight:bold",
+			warningmsg: "color:#ff5722;font-weight:normal",
 			process: "color:#2780e3;font-weight:bold",
 			processmsg: "color:#2780e3;font-weight:normal",
 			caller: "color:#777;font-style:italic"
@@ -389,6 +400,14 @@ function debug(message,mode){
 		} else if(mode==2){
 			if($settings.adv_debug_verbose && debug.caller.name!="") console.log(prefix+"%cUpdating: %c"+message,css.br,css.process,css.processmsg,css.caller);
 			else console.log(prefix+"%cUpdating: %c"+message,css.br,css.process,css.processmsg);
+		} else if(mode==3){
+			if($settings.adv_debug_verbose && debug.caller.name!="") console.log(prefix+"%cWARNING: %c"+message,css.br,css.warning,css.warningmsg,css.caller);
+			else console.log(prefix+"%cWARNING: %c"+message,css.br,css.warning,css.warningmsg);
 		}
 	}
+}
+
+//Adding commas...
+function numberWithCommas(x) {
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
