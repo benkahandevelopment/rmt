@@ -67,13 +67,15 @@
                 $p.find("select[data-input=meta-away-colour]")[0].selectedIndex = 5;
             } else if(n=="teams"){
                 $p.find("input").val("");
+                setTimeout(refreshSprites,50);
             } else if(n=="commentary"){
                 $p = $(".page[data-page='updates']");
                 $p.find("ul[data-output=commentary]").html("");
                 $p.find("input, textarea").val("");
                 $p.find("select").each(function(){
                     $(this)[0].selectedIndex = 0;
-                })
+                });
+                saveCommentary();
             } else return false;
             saveInputs();
             return true;
