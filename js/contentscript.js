@@ -366,15 +366,21 @@ function debug(message,mode){
 			error: "color:red;font-weight:bold",
 			errormsg: "color:red;font-weight:normal",
 			process: "color:#9954BB;font-weight:bold",
-			processmsg: "color:#9954BB;font-weight:normal"
+			processmsg: "color:#9954BB;font-weight:normal",
+			caller: "color:#777;font-style:italic"
 		}
+
+		message += (($settings.adv_debug_verbose)&&(debug.caller.name!="")) ? `\n\t\t%cCalled by function "${debug.caller.name}"` : "";
 		var prefix = "%crMT > "
 		if(mode==0){
-			console.log(prefix+"%c"+message,css.br,css.standard);
+			if($settings.adv_debug_verbose && debug.caller.name!="") console.log(prefix+"%c"+message,css.br,css.standard,css.caller);
+			else console.log(prefix+"%c"+message,css.br,css.standard);
 		} else if(mode==1){
-			console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg);
+			if($settings.adv_debug_verbose && debug.caller.name!="") console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg,css.caller);
+			else console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg);
 		} else if(mode==2){
-			console.log(prefix+"%cUpdating: %c"+message,css.br,css.process,css.processmsg);
+			if($settings.adv_debug_verbose && debug.caller.name!="") console.log(prefix+"%cUpdating: %c"+message,css.br,css.process,css.processmsg,css.caller);
+			else console.log(prefix+"%cUpdating: %c"+message,css.br,css.process,css.processmsg);
 		}
 	}
 }

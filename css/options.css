@@ -126,3 +126,11 @@ body {
 	left: 50%;
 	transform: translate(-50%,-50%);
 }
+
+#settings div.form-group:not(.text-muted).d-flex.align-items-center:hover {
+	background-color:rgba(0,0,0,0.1);
+}
+
+#settings div.form-group:not(.text-muted) .fa-2x {
+	color: #2780e3;
+}

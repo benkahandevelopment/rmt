@@ -28,6 +28,12 @@ $(function(){
 		}, 100);
 	}
 
+    //Settings manouvering
+    $("[data-input-settings='adv_debug']:checkbox").change(function(){
+        $("[data-input-settings='adv_debug_verbose']:checkbox").prop("disabled",($(this).prop("checked") ? false : "disabled"));
+        $(this).parent().parent().next("div.form-group").addClass($(this).prop("checked") ? "" : "text-muted").removeClass($(this).prop("checked") ? "text-muted" : "");
+    })
+
 	//On save button click (settings)
 	$("#saveBtn").click(saveAll);
 
@@ -89,10 +95,18 @@ function retrieveAll(){
 			return [[i,n]]
 		});
 		a.forEach(function(v,i){
+            debug(`Retrieved setting "${v[0]}": "`+(v[1].length>32?v[1].slice(0,15)+"...\" {truncated}":v[1]+"\""));
 			var $f = $("[data-input-settings='"+v[0]+"']");
 			if($f.attr("type")=="checkbox") $f.prop("checked",v[1]?"checked":false);
 				else $f.val(v[1]);
 		});
+
+        //Setting specific values
+            //Debugging Mode
+            $("[data-input-settings='adv_debug_verbose']:checkbox").prop("disabled",($("[data-input-settings='adv_debug']:checkbox").prop("checked") ? false : "disabled"));
+            $("[data-input-settings='adv_debug']:checkbox").parent().parent().next("div.form-group").addClass($("[data-input-settings='adv_debug']:checkbox").prop("checked") ? "" : "text-muted").removeClass($("[data-input-settings='adv_debug']:checkbox").prop("checked") ? "text-muted" : "");
+
+        $(this).parent().parent().next("div.form-group").addClass($(this).prop("checked") ? "" : "text-muted").removeClass($(this).prop("checked") ? "text-muted" : "");
 	});
 	loader(0);
 }
@@ -128,18 +142,22 @@ function debug(message,mode){
 			br: "color:#9954BB;font-weight:900;text-shadow:0 1px 0 rgba(255,255,255,0.4),0 -1px 0 rgba(0,0,0,0.3);",
 			standard: "color:inherit;font-weight:normal;",
 			error: "color:red;font-weight:bold;",
-			errormsg: "color:red;font-weight:normal"
+			errormsg: "color:red;font-weight:normal",
+            caller: "color:#777;font-style:italic"
 		}
 
 		/* Modes
 		0 		default		rMT > {message}
 		1		error		rMT > ERROR: {message}
 		*/
+        message += (($settings.adv_debug_verbose)&&(debug.caller.name!="")) ? `\n\t\t\t%cCalled by function "${debug.caller.name}"` : "";
 		var prefix = "%crMT > "
 		if(mode==0){
-			console.log(prefix+"%c"+message,css.br,css.standard);
+            if($settings.adv_debug_verbose&&debug.caller.name!="") console.log(prefix+"%c"+message,css.br,css.standard,css.caller);
+			else console.log(prefix+"%c"+message,css.br,css.standard);
 		} else if(mode==1){
-			console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg);
+            if($settings.adv_debug_verbose&&debug.caller.name!="") console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg,css.caller);
+			else console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg);
 		}
 	}
 }
@@ -150,7 +168,9 @@ function executeSettings(){
 
     $("[data-manifest-meta]").each(function(){
         var $t = $(this);
-        $t.html($settings.manifest[$t.data("manifest-meta")]);
+        if($t.html()==""){
+            try { $t.html($settings.manifest[$t.data("manifest-meta")]); } catch(e) { debug("Error reading manifest\n\t\t\t"+e,1);}
+        }
     });
 }
 

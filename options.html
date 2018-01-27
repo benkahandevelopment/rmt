@@ -70,29 +70,57 @@
 									</div>
 									<div class="tab-content card-body">
 										<div class="tab-pane show active" role="tabpanel" id="settings-general">
+
+											<!-- settings - general - saving -->
+											<p class="h4">Saving &amp; Processing</p>
 											<div class="form-group d-flex align-items-center">
+												<div class="col-1 text-center"><i class="far fa-save fa-2x"></i></div>
 												<div class="col-6">
 													<label class="form-check-label">Auto submit post on save</label>
 													<small class="text-muted d-block">When checked, clicking "save" will submit the post and your changes will be visible</small>
 												</div>
-												<div class="col-6">
+												<div class="col-5">
 													<input type="checkbox" class="form-check-input ml-1" data-input-settings="gen_submit">
 												</div>
 											</div>
+
 											<hr>
-											<div class="form-group d-flex align-items-center">
+
+											<!-- settings - general - defaults -->
+											<p class="h4">Defaults</p>
+											<div class="form-group d-flex align-items-center text-muted">
+												<div class="col-1 text-center"><i class="far fa-keyboard fa-2x"></i></div>
 												<div class="col-6">
 													<label class="form-group-label mb-0">Default post template (Match Threads)</label>
 													<small class="text-muted d-block">Placeholder for future use (changing this does not affect anything as of v1.0.0)</small>
 												</div>
-												<div class="col-6">
-													<textarea class="form-control form-control-sm" data-input-settings="gen_template_default"></textarea>
+												<div class="col-5">
+													<textarea class="form-control form-control-sm" data-input-settings="gen_template_default" disabled></textarea>
 												</div>
 											</div>
 										</div>
 
 										<div class="tab-pane" role="tabpanel" id="settings-advanced">
-											<label class="pl-4 form-check-label"><input type="checkbox" class="form-check-input" data-input-settings="adv_debug">Enable debug mode</label>
+
+											<!-- settings - advanced - debugging -->
+											<p class="h4">Debugging</p>
+											<div class="form-group d-flex align-items-center">
+												<div class="col-1 text-center"><i class="fas fa-terminal fa-2x"></i></div>
+												<div class="col-6">
+													<label class="form-check-label">Enable Debug Mode</label>
+													<small class="text-muted d-block">When checked, logging will be output to console</small>
+												</div>
+												<div class="col-5"><input type="checkbox" class="form-check-input ml-1" data-input-settings="adv_debug"></div>
+											</div>
+											<div class="form-group d-flex align-items-center">
+												<div class="col-1 text-center"></div>
+												<div class="col-6">
+													<label class="form-check-label">Enable Verbose Debugging Mode</label>
+													<small class="text-muted d-block">When checked, additional debug info will be pushed to console (timestamp, function callers etc.)</small>
+												</div>
+												<div class="col-5"><input type="checkbox" class="form-check-input ml-1" data-input-settings="adv_debug_verbose"></div>
+											</div>
+
 										</div>
 									</div>
 									<div class="card-footer text-muted"><button type="submit" id="saveBtn" class="btn btn-success">Save All</button></div>
