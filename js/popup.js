@@ -342,6 +342,8 @@ function addCommentary(){
     var com = $("input[data-input=comm-text]").val();
 
     if(min.length<1) { $("input[data-input=comm-minute]").focus(); return false; }
+    min = min.replace(/[^\d\+]/g,"");
+    console.log(min);
     $("input[data-input=comm-minute]").val("");
     $("select[data-input=comm-prepend] option:eq(0)").prop("selected","selected");
     $("input[data-input=comm-text]").val("");
