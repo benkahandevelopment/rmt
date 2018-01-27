@@ -113,7 +113,6 @@ function retrieveAll(){
 
         $(":checkbox").each(function(){
             var $t = $(this);
-            debug($t.prop("disabled"));
             $t.bootstrapSwitch({
                 checked : $t.prop("checked"),
                 size : "small",
