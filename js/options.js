@@ -110,6 +110,16 @@ function retrieveAll(){
             $("[data-input-settings='adv_debug']:checkbox").parent().parent().next("div.form-group").addClass($("[data-input-settings='adv_debug']:checkbox").prop("checked") ? "" : "text-muted").removeClass($("[data-input-settings='adv_debug']:checkbox").prop("checked") ? "text-muted" : "");
 
         $(this).parent().parent().next("div.form-group").addClass($(this).prop("checked") ? "" : "text-muted").removeClass($(this).prop("checked") ? "text-muted" : "");
+
+        $(":checkbox").each(function(){
+            var $t = $(this);
+            debug($t.prop("disabled"));
+            $t.bootstrapSwitch({
+                checked : $t.prop("checked"),
+                size : "small",
+                disabled : $t.prop("disabled")=="disabled" ? true : false
+            });
+        });
 	});
 	loader(0);
 }
@@ -153,7 +163,7 @@ function debug(message,mode){
 		0 		default		rMT > {message}
 		1		error		rMT > ERROR: {message}
 		*/
-        message += (($settings.adv_debug_verbose)&&(debug.caller.name!="")) ? `\n\t\t\t%cCalled by function "${debug.caller.name}"` : "";
+        message += (($settings.adv_debug_verbose)&&(debug.caller.name!="")) ? `\n\t\t%cCalled by function "${debug.caller.name}"\n\t\ton `+getTimestamp() : "";
 		var prefix = "%crMT > "
 		if(mode==0){
             if($settings.adv_debug_verbose&&debug.caller.name!="") console.log(prefix+"%c"+message,css.br,css.standard,css.caller);
@@ -175,6 +185,16 @@ function executeSettings(){
             try { $t.html($settings.manifest[$t.data("manifest-meta")]); } catch(e) { debug("Error reading manifest\n\t\t\t"+e,1);}
         }
     });
+}
+
+function getTimestamp(){
+	var currentdate = new Date();
+	return currentdate.getDate() + "/"
+			+ (currentdate.getMonth()+1)  + "/"
+			+ currentdate.getFullYear() + " @ "
+			+ currentdate.getHours() + ":"
+			+ currentdate.getMinutes() + ":"
+			+ currentdate.getSeconds();
 }
 
 /*

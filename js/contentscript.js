@@ -360,13 +360,7 @@ function output(n){
 	if(n=="footer"){
 		return "  \n\n---\n\n^(Managed by the **reddit Match Threader** by /u/magicwings. Last updated on "+dateTime()+")";
 	} else if(n=="timestamp"){
-		var currentdate = new Date();
-		return currentdate.getDate() + "/"
-                + (currentdate.getMonth()+1)  + "/"
-                + currentdate.getFullYear() + " @ "
-                + currentdate.getHours() + ":"
-                + currentdate.getMinutes() + ":"
-                + currentdate.getSeconds();
+		getTimestamp();
 	} else if(n=="rstream"){
 		var l = "https://reddit-stream.com"+window.location.href.split("reddit.com")[1];
 		return "[reddit Stream]("+l+")";
@@ -389,7 +383,7 @@ function debug(message,mode){
 			caller: "color:#777;font-style:italic"
 		}
 
-		message += (($settings.adv_debug_verbose)&&(debug.caller.name!="")) ? `\n\t\t%cCalled by function "${debug.caller.name}"` : "";
+		message += (($settings.adv_debug_verbose)&&(debug.caller.name!="")) ? `\n\t\t%cCalled by function "${debug.caller.name}"\n\t\ton `+getTimestamp() : "";
 		var prefix = "%crMT > "
 		if(mode==0){
 			if($settings.adv_debug_verbose && debug.caller.name!="") console.log(prefix+"%c"+message,css.br,css.standard,css.caller);
@@ -410,4 +404,14 @@ function debug(message,mode){
 //Adding commas...
 function numberWithCommas(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function getTimestamp(){
+	var currentdate = new Date();
+	return currentdate.getDate() + "/"
+			+ (currentdate.getMonth()+1)  + "/"
+			+ currentdate.getFullYear() + " @ "
+			+ currentdate.getHours() + ":"
+			+ currentdate.getMinutes() + ":"
+			+ currentdate.getSeconds();
 }
