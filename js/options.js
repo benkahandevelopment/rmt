@@ -52,7 +52,10 @@ $(function(){
 	});
 
     //Other
-    $("[data-toggle='popover']").popover({html:true});
+    $("[data-toggle='popover']").popover({
+        html : true,
+        template : '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body p-0"></div></div>'	
+    });
 });
 
 //Load page function
@@ -110,15 +113,6 @@ function retrieveAll(){
             $("[data-input-settings='adv_debug']:checkbox").parent().parent().next("div.form-group").addClass($("[data-input-settings='adv_debug']:checkbox").prop("checked") ? "" : "text-muted").removeClass($("[data-input-settings='adv_debug']:checkbox").prop("checked") ? "text-muted" : "");
 
         $(this).parent().parent().next("div.form-group").addClass($(this).prop("checked") ? "" : "text-muted").removeClass($(this).prop("checked") ? "text-muted" : "");
-
-        $(":checkbox").each(function(){
-            var $t = $(this);
-            $t.bootstrapSwitch({
-                checked : $t.prop("checked"),
-                size : "small",
-                disabled : $t.prop("disabled")=="disabled" ? true : false
-            });
-        });
 	});
 	loader(0);
 }
