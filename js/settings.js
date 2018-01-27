@@ -4,7 +4,8 @@ var gen_template_default = "#{{SPRITE_TOURNAMENT}} {{META_HOMETEAM}} vs {{META_A
 var manifest = chrome.runtime.getManifest();
 
 var def_settings = {
-    adv_debug : false,
+    adv_debug : true,
+    adv_debug_verbose : false,
 	gen_submit : true,
     gen_template_default : gen_template_default,
     manifest : manifest

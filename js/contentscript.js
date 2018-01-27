@@ -7,8 +7,14 @@
 
 var $log = {};
 var $settings;
-$.getScript("settings.js", function(){
-	chrome.storage.sync.get("settings", function(o){
+var def_settings = {
+    adv_debug : true,
+	adv_debug_verbose : false,
+	gen_submit : true
+};
+
+$(function(){
+	chrome.storage.sync.get({"settings":def_settings}, function(o){
 		$settings = o.settings;
 	});
 
