@@ -254,17 +254,20 @@
     });
 
     //Generator
-    /*$("button[data-generate]").click(function(e){
+    $("button[data-button=generate]").click(function(e){
+        const input = $("textarea[data-generator='matchthread']").val();
+        createPostMatchThread(input);
+    });
+
+    new Clipboard("button[data-button=copy]");
+    $("button[data-button=copy]").click(function(){
         var $t = $(this);
-        var options = {
-            type: $t.attr("data-generate")
-        };
-        if(options.type=="matchthread"){
-            $("textarea[data-generator=matchthread]").html(getCommentary());
-        } else {
-            //$("textarea[data-generator=postmatchthread]").html();
-        }
-    });*/
+        debug("Copied Post-Match Thread to clipboard");
+        $t.html("Copied").attr("disabled",true);
+        setTimeout(function(){
+            $t.html("Copy to Clipboard").attr("disabled",false);
+        },1000);
+    });
 
     //Auto-save on unfocus
     $("input, textarea, select").focusout(saveInputs);
@@ -403,4 +406,97 @@ function comString(min,ico,com){
             "</div>"+
         "</div>";
     return actualOutput;
+}
+
+//Create post-match thread from match thread input
+function createPostMatchThread(input){
+    /*
+        //Include
+        sprite-tournament
+        meta-home
+        meta-away
+        meta-venue
+        meta-kickoff
+        meta-referee
+        meta-home
+        meta-away
+        lineups-full
+        stats-full
+        stats-full-reverse
+     */
+    const availableMacros = [
+        "sprite-tournament",
+        "meta-home",
+        "meta-away",
+        "meta-venue",
+        "meta-kickoff",
+        "meta-referee",
+        "meta-home",
+        "meta-away",
+        "lineups-full",
+        "stats-full",
+        "stats-full-reverse"
+    ];
+
+    /*
+        //Delete Line
+        rstream
+        footer
+    */
+
+   const unavailableMacros = [
+       "rstream"
+   ];
+
+    /*
+        //Delete segment
+        footer
+    */
+
+   const unavailableSegments = [
+       "footer"
+   ];
+
+   var result = replaceMacros(input, availableMacros, unavailableMacros, unavailableSegments);
+   $('[data-generator="postmatchthread"]').val(result);
+
+
+}
+
+Array.prototype.isArray = true;
+function replaceMacros(source, availableMacros, unavailableMacros, unavailableSegments){
+    var tempSource = source;
+    availableMacros = availableMacros.isArray ? availableMacros : [availableMacros];
+    availableMacros.forEach(function(macro,index){
+        var regEx = new RegExp(sanitise("[](#rmt-start-"+macro+")")+"([\\s\\S]*?)"+sanitise("[](#rmt-end-"+macro+")"),"gi");
+        debug(`Replacing macro '${macro}' with value...`,2);
+        tempSource = tempSource.replace(regEx,"$1");
+    });
+
+    unavailableMacros = unavailableMacros.isArray ? unavailableMacros : [unavailableMacros];
+    unavailableMacros.forEach(function(macro,index){
+        var regEx = new RegExp(".*"+sanitise("[](#rmt-start-"+macro+")")+"([\\s\\S]*?)"+sanitise("[](#rmt-end-"+macro+")")+".*\\n","gi");
+        debug(`Removing lines containing '${macro}'...`, 2);
+        tempSource = tempSource.replace(regEx,"");
+    });
+
+    unavailableSegments = unavailableSegments.isArray ? unavailableSegments : [unavailableSegments];
+    unavailableSegments.forEach(function(macro,index){
+        var regEx = new RegExp(sanitise("[](#rmt-start-"+macro+")")+"[\\s\\S]*?"+sanitise("[](#rmt-end-"+macro+")"),"gi");
+        debug(`Removing segment '${macro}'...`,2);
+        tempSource = tempSource.replace(regEx,"");
+    });
+
+    //Keep only highlights from commentary
+    var commentary = tempSource.split("[](#rmt-start-full-commentary)")[1].split("[](#rmt-end-full-commentary)")[0];//.split("[](#rmt-end-commentary)")[0];
+    var regEx = /\d{1,3}\+?\d{0,3}\'\|\|.*\n/gi;
+    commentary = commentary.replace(regEx,"");
+    regEx = new RegExp(sanitise("[](#rmt-start-full-commentary)")+"([\\s\\S]*?)"+sanitise("[](#rmt-end-full-commentary)"),"gi");
+    tempSource = tempSource.replace(regEx,commentary);
+
+    return tempSource;
+}
+
+function escapeRegExp(stringToGoIntoTheRegex) {
+    return stringToGoIntoTheRegex.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 }

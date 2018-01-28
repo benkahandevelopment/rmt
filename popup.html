@@ -590,10 +590,10 @@
 							<label class="col-form-label col-form-label-sm">Match Thread</label>
 						</div>
 						<div class="col-6">
-							<button type="button" class="btn btn-sm btn-light btn-block" data-generate="matchthread">Generate</button>
+							<button type="button" class="btn btn-sm btn-light btn-block" data-button="generate">Generate</button>
 						</div>
 					</div>
-					<textarea class="form-control form-control-sm mt-2" data-generator="matchthread"></textarea>
+					<textarea class="form-control form-control-sm mt-2 ignore" data-generator="matchthread"></textarea>
 				</div>
 				<hr />
 				<div class="form-group">
@@ -602,10 +602,10 @@
 							<label class="col-form-label col-form-label-sm">Post-Match Thread</label>
 						</div>
 						<div class="col-6">
-							<button type="button" class="btn btn-sm btn-light btn-block" data-generate="postmatchthread">Generate</button>
+							<button type="button" class="btn btn-sm btn-light btn-block" data-button="copy" data-clipboard-target="[data-generator='postmatchthread']">Copy to Clipboard</button>
 						</div>
 					</div>
-					<textarea class="form-control form-control-sm mt-2" data-generator="postmatchthread"></textarea>
+					<textarea class="form-control form-control-sm mt-2 ignore" data-generator="postmatchthread" readonly></textarea>
 				</div>
 			</div>
 			<!-- /generator -->
@@ -754,6 +754,9 @@
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="js/settings.js"></script>
+	<script type="text/javascript" src="js/debug.js"></script>
+	<script type="text/javascript" src="js/clipboard.min.js"></script>
+	<script type="text/javascript" src="js/replacements.js"></script>
 	<script type="text/javascript" src="js/popup.js"></script>
 </body>
 </html>

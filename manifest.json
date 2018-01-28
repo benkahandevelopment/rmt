@@ -20,6 +20,8 @@
             "js": [
                 "js/jquery.min.js",
                 "js/jqueryui.min.js",
+                "js/debug.js",
+                "js/replacements.js",
                 "js/contentscript.js"
             ],
             "css": ["css/contentscript.css"],
@@ -30,6 +32,8 @@
     "web_accessible_resources": [
         "js/jquery.min.js",
         "js/jqueryui.min.js",
+        "js/debug.js",
+        "js/replacements.js",
         "js/settings.js"
     ],
     "icons": {

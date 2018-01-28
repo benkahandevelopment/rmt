@@ -54,7 +54,7 @@ $(function(){
     //Other
     $("[data-toggle='popover']").popover({
         html : true,
-        template : '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body p-0"></div></div>'	
+        template : '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body p-0"></div></div>'
     });
 });
 
@@ -140,34 +140,6 @@ function saveAll(){
 function getVal(field){
 	var $f = $("[data-input-settings='"+field+"']");
 	return $f.attr("type")=="checkbox" ? $f.prop("checked") : $f.val();
-}
-
-//Debug messages
-function debug(message,mode){
-	if($settings.adv_debug){
-		var mode = mode || 0;
-		var css = {
-			br: "color:#9954BB;font-weight:900;text-shadow:0 1px 0 rgba(255,255,255,0.4),0 -1px 0 rgba(0,0,0,0.3);",
-			standard: "color:inherit;font-weight:normal;",
-			error: "color:red;font-weight:bold;",
-			errormsg: "color:red;font-weight:normal",
-            caller: "color:#777;font-style:italic"
-		}
-
-		/* Modes
-		0 		default		rMT > {message}
-		1		error		rMT > ERROR: {message}
-		*/
-        message += (($settings.adv_debug_verbose)&&(debug.caller.name!="")) ? `\n\t\t%cCalled by function "${debug.caller.name}"\n\t\ton `+getTimestamp() : "";
-		var prefix = "%crMT > "
-		if(mode==0){
-            if($settings.adv_debug_verbose&&debug.caller.name!="") console.log(prefix+"%c"+message,css.br,css.standard,css.caller);
-			else console.log(prefix+"%c"+message,css.br,css.standard);
-		} else if(mode==1){
-            if($settings.adv_debug_verbose&&debug.caller.name!="") console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg,css.caller);
-			else console.log(prefix+"%cERROR: %c"+message,css.br,css.error,css.errormsg);
-		}
-	}
 }
 
 function executeSettings(){
