@@ -7,12 +7,12 @@ var $l = $("#logoutput");
 /* On pageload */
 $(function(){
 	//For debugging
-    var exLog = console.log;
+    /*var exLog = console.log;
     console.log = function(msg) {
         exLog.apply(this, arguments);
 		$l.append(`<li>`+new Date().format("HH:MM:ss.l")+` > `+msg.replace(/\%c/g,"").replace(/rMT\s+\>+/g,"")+`</li>`);
 		$l.scrollTop($l[0].scrollHeight);
-    }
+    }*/
 
 	//Execute settings...
 	executeSettings();
