@@ -90,11 +90,11 @@
 
 											<!-- settings - general - defaults -->
 											<p class="h4">Defaults</p>
-											<div class="form-group form-group-row d-flex align-items-center text-muted">
+											<div class="form-group form-group-row d-flex align-items-center">
 												<div class="col-1 text-center"><i class="far fa-keyboard fa-2x"></i></div>
 												<div class="col-6">
 													<label class="form-group-label mb-0">Default post template (Match Threads)</label>
-													<small class="text-muted d-block">Placeholder for future use (changing this does not affect anything as of v1.0.0)</small>
+													<small class="text-muted d-block">Select your desired template for creating match threads (see Templates tab for more details)</small>
 												</div>
 												<div class="col-5">
 													<!--<textarea class="form-control form-control-sm" data-input-settings="gen_template_default" disabled></textarea>-->
@@ -106,8 +106,19 @@
 										<div class="tab-pane" role="tabpanel" id="settings-templates">
 											<!-- settings - templates -->
 											<p class="h4">My Templates</p>
-											<div class="form-group form-group-row d-flex align-items-center">
+											<div class="row">
 												<div class="card-deck" data-output-settings="gen_templates"></div>
+											</div>
+
+											<hr />
+											<p class="h4">Upload New Template</p>
+											<div class="row">
+												<div class="col-8">
+													<input type="file" class="form-control form-control-sm ignore" accept=".template.json,.template.JSON,.TEMPLATE.json,TEMPLATE.JSON" data-input="gen_template_upload">
+												</div>
+												<div class="col-4">
+													<button type="submit" class="btn btn-primary btn-sm h-100 w-100" data-button="gen_template_upload">Upload</button>
+												</div>
 											</div>
 										</div>
 

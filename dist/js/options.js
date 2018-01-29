@@ -86,13 +86,13 @@ function loader(o){
 //Retrieve all settings saved data
 function retrieveAll(){
 	debug("Retrieving settings and saved data");
-	chrome.storage.sync.get("settings", function(o){
+	chrome.storage.sync.get({"settings": $settings}, function(o){
 		var s = o.settings;
 		var a = $.map(s, function(n,i){
 			return [[i,n]]
 		});
 		a.forEach(function(v,i){
-            debug(`Retrieved setting "${v[0]}": "`+(v[1].length>32?v[1].slice(0,15)+"...\" {truncated}":v[1]+"\""));
+            //debug(`Retrieved setting "${v[0]}": "`+(v[1].length>32?v[1].slice(0,15)+"...\" {truncated}":v[1]+"\""));
 			var $f = $("[data-input-settings='"+v[0]+"']");
 			if($f.attr("type")=="checkbox") $f.prop("checked",v[1]?"checked":false);
 				else $f.val(v[1]);
