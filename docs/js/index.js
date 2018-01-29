@@ -42,7 +42,7 @@ function loadPage(pageName, $this, isSettings){
 	$("a[data-output]").removeClass("active");
 	$("a[data-output="+pageName+"]").addClass("active"); //$t.addClass("active");
 	$("[data-output-cont=settings]").hide();
-	$("[data-output-cont=documentation]").load(pageName+".html").show();
+	$("[data-output-cont=documentation]").load("docs/"+pageName+".html").show();
 	loader(0);
 
 }

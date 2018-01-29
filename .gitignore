@@ -13,7 +13,6 @@
 /docs/css/bootstrap*
 
 #exclude icons/older files
-icon*.png
 *.psd
 *.old.*
 
