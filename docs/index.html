@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="css/sprites.css">
 
 	<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
 <body>
 	<div id="loader"><div class="loadimg"><i class="fas fa-spinner fa-lg fa-spin"></i></div></div>
@@ -17,9 +18,9 @@
 		<span class="navbar-brand"><span class="rmt-br">rMT</span> reddit Match Threader</span>
 	</nav>
 	<main role="main">
-		<div class="container-fluid">
-			<div class="row">
-				<nav class="col-3 d-none d-sm-block bg-light sidebar">
+		<div class="container-fluid h-100">
+			<div class="row h-100">
+				<nav class="col-md-3 d-none d-sm-block bg-light pb-2">
 					<h5 class="mb-1 mt-2">Documentation</h5>
 					<ul class="nav nav-pills flex-column">
 						<li class="nav-item"><a class="nav-link" href="#getting_started" data-output="getting_started"><i class="fas fa-fw fa-star"></i>&nbsp;Getting Started</a></li>
@@ -29,19 +30,15 @@
 						<li class="nav-item"><a class="nav-link i-3" href="#teams" data-output="teams"><i class="fas fa-fw fa-clipboard"></i>&nbsp;Teams</a></li>
 						<li class="nav-item"><a class="nav-link i-3" href="#stats" data-output="stats"><i class="fas fa-fw fa-chart-bar"></i>&nbsp;Stats</a></li>
 						<li class="nav-item"><a class="nav-link i-3" href="#commentary" data-output="commentary"><i class="fas fa-fw fa-comment"></i>&nbsp;Commentary</a></li>
+						<li class="nav-item"><a class="nav-link i-1" href="#pasting" data-output="pasting"><i class="fas fa-fw fa-paste"></i>&nbsp;Importing/Pasting Data</a></li>
 						<li class="nav-item"><a class="nav-link i-1" href="#sending_to_reddit" data-output="sending_to_reddit"><i class="fas fa-fw fa-share-square"></i>&nbsp;Sending to reddit</a></li>
 						<li class="nav-item"><a class="nav-link i-3" href="#new_post" data-output="new_post"><i class="fas fa-fw fa-square"></i>&nbsp;New post</a></li>
 						<li class="nav-item"><a class="nav-link i-3" href="#existing_post" data-output="existing_post"><i class="fas fa-fw fa-plus-square"></i>&nbsp;Existing post</a></li>
 						<li class="nav-item"><a class="nav-link disabled" href="#templates" data-output="templates"><i class="fas fa-fw fa-copy"></i>&nbsp;Templates</a></li>
 						<li class="nav-item"><a class="nav-link disabled" href="#macros" data-output="macros"><i class="fas fa-fw fa-list-alt"></i>&nbsp;Macro Appendix</a></li>
 					</ul>
-					<hr>
-					<h5 class="mb-1 mt-2">Settings</h5>
-					<ul class="nav nav-pills flex-column">
-						<li class="nav-item"><a class="nav-link disabled" href="#settings">Settings</a></li>
-					</ul>
 				</nav>
-				<div class="col-9 p-0">
+				<div class="col-md-9 p-0">
 					<div class="jumbotron jumbotron-fluid">
 						<div class="bg"></div>
 						<div class="container text-center">
@@ -50,22 +47,19 @@
 							<p><a class="btn btn-primary btn-lg" href="#getting_started" role="button" data-output="getting_started">Getting Started &raquo;</a></p>
 						</div>
 					</div>
-					<div class="row m-2" id="">
-						<iframe id="mainoutput" class="container-fluid" frameborder="0" border="0" spacing="0"></iframe>
-						<!--<div id="mainoutput" class="container-fluid"></div>-->
-					</div>
+					<div class="m-2" id="documentation" data-output-cont="documentation"></div>
+					<footer class="container-fluid p-2">
+						<hr class="mb-2">
+						<div class="d-block text-center"><img src="../icon64.png" class="brandimg"></div>
+						<p class="small text-muted text-center mb-0">&copy; 2018 <a href="//bkdev.co.uk/" target="_blank">BKDev</a> &amp; <a href="//reddit.com/u/magicwings" target="_blank">/u/magicwings</a>. All rights reserved. App v<span data-manifest-meta="version"></span>. <a href="//github.com/benkahandevelopment/rmt" target="_blank">Fork me on GitHub &raquo;</a></p>
+					</footer>
 				</div>
 			</div>
 		</div> <!-- /container -->
 	</main>
-
-	<footer class="container-fluid">
-		<hr>
-		<p>&copy; 2018 <a href="//bkdev.co.uk/" target="_blank">BKDev</a>/<a href="//reddit.com/u/magicwings" target="_blank">/u/magicwings</a>. All rights reserved. <a href="//github.com/benkahandevelopment/rmt" target="_blank">Fork me on GitHub &raquo;</a></p>
-	</footer>
-	<script src="js/jquery.min.js"></script>
-	<script src="js/jqueryui.min.js"></script>
-	<script src="js/bootstrap.bundle.min.js"></script>
-	<script src="js/index.js"></script>
+	<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jqueryui.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>
+	<script type="text/javascript" src="js/index.js"></script>
   </body>
 </html>

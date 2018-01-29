@@ -1,21 +1,8 @@
 /* Settings variables */
-var $settings;
-chrome.storage.sync.get({"settings" : def_settings}, function(o){ $settings = o.settings; });
 var $o = $("#mainoutput");
-var $l = $("#logoutput");
 
 /* On pageload */
 $(function(){
-	//For debugging
-    var exLog = console.log;
-    console.log = function(msg) {
-        exLog.apply(this, arguments);
-		$l.append(`<li>`+new Date().format("HH:MM:ss.l")+` > `+msg.replace(/\%c/g,"").replace(/rMT\s+\>+/g,"")+`</li>`);
-		$l.scrollTop($l[0].scrollHeight);
-    }
-
-	//Execute settings...
-	executeSettings();
 
 	//Check to see if page already specified
 	if(window.location.hash){
@@ -54,18 +41,10 @@ function loadPage(pageName, $this, isSettings){
 	loader(1);
 	$("a[data-output]").removeClass("active");
 	$("a[data-output="+pageName+"]").addClass("active"); //$t.addClass("active");
-	if(s){
-		debug("Loading 'settings' page");
-		retrieveAll();
-		$("[data-output-cont=settings]").show();
-		$("[data-output-cont=documentation]").hide();
-		loader(0);
-	} else {
-		debug("Loading '"+pageName+"' page");
-		$("[data-output-cont=settings]").hide();
-		$("[data-output-cont=documentation]").load(pageName+".html").show();
-        loader(0);
-	}
+	$("[data-output-cont=settings]").hide();
+	$("[data-output-cont=documentation]").load(pageName+".html").show();
+	loader(0);
+
 }
 
 //Show/hide loader
