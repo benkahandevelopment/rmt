@@ -40,40 +40,6 @@ footer img.brandimg {
 .i-3 { padding-left: 4rem; }
 .i-4 { padding-left: 5rem; }
 
-/* For sticky footer */
-html {
-  position: relative;
-  min-height: 100%;
-}
-body {
-  margin-bottom: 65px; /* Margin bottom by footer height */
-}
-#logoutput-cont {
-	background: white;
-	padding: 5px;
-	border: 1px solid rgba(0,0,0,0.1);
-	border-radius: 2px;
-	font-size: small;
-	height: 60px;
-	position: fixed;
-    bottom: 0;
-    width: 100%;
-}
-
-#logoutput {
-	height: 50px;
-	line-height: 20px;
-	margin: 0; padding: 0;
-	overflow-x: auto;
-	overflow-y: visible;
-	color: #868e96;
-	background-color: rgba(0,0,0,0.03);
-	border: 1px solid rgba(0,0,0,0.1);
-	border-radius: 2px;
-	padding: 0 5px;
-}
-
-
 .jumbotron {
 	position: relative;
 	background: rgba(255,255,255,0.5);
