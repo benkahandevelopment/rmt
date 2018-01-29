@@ -1,0 +1,135 @@
+/* Globals */
+
+/*@font-face {
+	font-family: "Font Awesome 5 Free";
+	src: url("/webfonts/fa-regular-400.eot");
+	src: url("/webfonts/fa-regular-400.eot#iefix") format("embedded-opentype"),
+		 url("/webfonts/fa-regular-400.svg") format("svg"),
+		 url("/webfonts/fa-regular-400.ttf") format("truetype"),
+		 url("/webfonts/fa-regular-400.woff") format("woff"),
+		 url("/webfonts/fa-regular-400.woff2") format("woff2");
+}
+@import "fa.css";*/
+
+
+img.inline { display: inline; }
+img.ico { border: 1px solid rgba(0,0,0,0.2); background: rgba(0,0,0,0.1); border-radius: 2px; margin: 3px; padding: 2px }
+
+.navbar-brand img {
+	height: 30px;
+    padding-right: 0.5em;
+    margin-top: -7px;
+}
+
+footer img.brandimg {
+	-webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+	max-width: 30px;
+	opacity: 0.5;
+}
+
+.rmt-br {
+	/*border: 1px solid rgba(153,84,187,0.5);
+	border-radius: 2px;
+	padding: 2px 6px;*/
+	color: #9954BB;
+	font-size: 1.2em;
+	font-weight: 900;
+	line-height: 1.2em;
+	text-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.3);
+}
+
+.navbar .rmt-br {
+	margin-right: 1rem;
+	text-shadow: 0 1px 0 rgba(0,0,0,0.3), 0 -1px 0 rgba(255,255,255,0.4), 0 2px 2px rgba(0,0,0,0.2);
+}
+
+.inset-box { box-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.3); }
+.inset-text { text-shadow: 0 1px 0 rgba(255,255,255,0.4), 0 -1px 0 rgba(0,0,0,0.3); }
+
+.i-1 { padding-left: 2rem; }
+.i-2 { padding-left: 3rem; }
+.i-3 { padding-left: 4rem; }
+.i-4 { padding-left: 5rem; }
+
+/* For sticky footer */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 65px; /* Margin bottom by footer height */
+}
+#logoutput-cont {
+	background: white;
+	padding: 5px;
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 2px;
+	font-size: small;
+	height: 60px;
+	position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+#logoutput {
+	height: 50px;
+	line-height: 20px;
+	margin: 0; padding: 0;
+	overflow-x: auto;
+	overflow-y: visible;
+	color: #868e96;
+	background-color: rgba(0,0,0,0.03);
+	border: 1px solid rgba(0,0,0,0.1);
+	border-radius: 2px;
+	padding: 0 5px;
+}
+
+
+.jumbotron {
+	position: relative;
+	background: rgba(255,255,255,0.5);
+	overflow: hidden;
+}
+
+.jumbotron .bg {
+	position: absolute;
+	top: -5px; left: -5px; right: -5px; bottom: -5px;
+	background-image: url(https://i.imgur.com/cWzLTIN.jpg);
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+	-webkit-filter: blur(3px);
+	-moz-filter: blur(3px);
+	-o-filter: blur(3px);
+	-ms-filter: blur(3px);
+	filter: blur(3px);
+	z-index: -1;
+
+	/*background-attachment: fixed;*/
+}
+
+#loader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	background: rgba(255,255,255,0.5);
+	z-index: 99999;
+}
+
+.loadimg {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
+
+/*#settings div.form-group:not(.text-muted).d-flex.align-items-center:hover { background-color:rgba(0,0,0,0.1); }*/
+#settings div.form-group:not(.text-muted) .fa-2x { color: #2780e3; }
+
+a[data-toggle="popover"] { cursor: pointer; }
+
+.popover {max-width: 100%;}
