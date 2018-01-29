@@ -1,0 +1,23 @@
+{
+    "name" : "rMT 2018 Alternate",
+    "author" : "benkahandevelopment",
+    "version" : "1.0.0",
+    "description" : "Alternate default theme for rMT. Uses Reverse stats display. Contains several default macros and includes sprites for tournament, full meta, redditStream link, full lineups.",
+    "template_version" : 1,
+    "macros" : [
+        "sprite-tournament",
+        "meta-home",
+        "meta-away",
+        "meta-venue",
+        "meta-kickoff",
+        "meta-referee",
+        "meta-home",
+        "meta-away",
+        "lineups-full",
+        "stats-full-reverse",
+        "rstream",
+        "footer"
+    ],
+    "image" : "https://i.imgur.com/9VHNMhk.jpg",
+    "template" : "#{{SPRITE_TOURNAMENT}} {{META_HOMETEAM}} vs {{META_AWAYTEAM}}\n\n*Venue:* {{META_VENUE}}  \n*Kickoff:* {{META_KICKOFF}}  \n*Referee:* {{META_REFEREE}}  \n\n###[](#icon-notes) Teams\n\n[](#icon-spacer)[](#icon-spacer)[](#icon-spacer)|{{META_HOMETEAM}}|{{META_AWAYTEAM}}|[](#icon-spacer)[](#icon-spacer)[](#icon-spacer)\n:-:|-:|:-|:-:  \n{{LINEUPS_FULL}}\n\n###[](#icon-info) Match Stats\n\n{{META_HOMETEAM}}||{{META_AWAYTEAM}}\n-:|:-:|:-\n{{STATS_FULL_REVERSE}}\n\n###[](#icon-ball) Live Updates\n\n[](#icon-clock)|||\n-:|:-:|:-\n\n{{FULL_COMMENTARY}}\n\n{{FOOTER}}"
+}

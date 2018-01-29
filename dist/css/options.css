@@ -139,3 +139,11 @@ a[data-toggle="popover"] { cursor: pointer; }
 	margin: 0 auto;
 	transform: translateY(-50%);
 }
+
+.card-screenshot {
+	width:100%;
+	height:250px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	border-bottom: 1px solid rgba(0,0,0,0.1);
+}

@@ -92,7 +92,7 @@ function retrieveAll(){
 			return [[i,n]]
 		});
 		a.forEach(function(v,i){
-            debug(`Retrieved setting "${v[0]}": "`+(v[1].length>32?v[1].slice(0,15)+"...\" {truncated}":v[1]+"\""));
+            //debug(`Retrieved setting "${v[0]}": "`+(v[1].length>32?v[1].slice(0,15)+"...\" {truncated}":v[1]+"\""));
 			var $f = $("[data-input-settings='"+v[0]+"']");
 			if($f.attr("type")=="checkbox") $f.prop("checked",v[1]?"checked":false);
 				else $f.val(v[1]);
