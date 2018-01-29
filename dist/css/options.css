@@ -1,17 +1,5 @@
 /* Globals */
 
-/*@font-face {
-	font-family: "Font Awesome 5 Free";
-	src: url("/webfonts/fa-regular-400.eot");
-	src: url("/webfonts/fa-regular-400.eot#iefix") format("embedded-opentype"),
-		 url("/webfonts/fa-regular-400.svg") format("svg"),
-		 url("/webfonts/fa-regular-400.ttf") format("truetype"),
-		 url("/webfonts/fa-regular-400.woff") format("woff"),
-		 url("/webfonts/fa-regular-400.woff2") format("woff2");
-}
-@import "fa.css";*/
-
-
 img.inline { display: inline; }
 img.ico { border: 1px solid rgba(0,0,0,0.2); background: rgba(0,0,0,0.1); border-radius: 2px; margin: 3px; padding: 2px }
 
@@ -127,7 +115,6 @@ body {
 	transform: translate(-50%,-50%);
 }
 
-/*#settings div.form-group:not(.text-muted).d-flex.align-items-center:hover { background-color:rgba(0,0,0,0.1); }*/
 #settings div.form-group:not(.text-muted) .fa-2x { color: #2780e3; }
 
 a[data-toggle="popover"] { cursor: pointer; }
