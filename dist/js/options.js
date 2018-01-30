@@ -86,7 +86,7 @@ function loader(o){
 //Retrieve all settings saved data
 function retrieveAll(){
 	debug("Retrieving settings and saved data");
-	chrome.storage.sync.get("settings", function(o){
+	chrome.storage.sync.get({"settings": $settings}, function(o){
 		var s = o.settings;
 		var a = $.map(s, function(n,i){
 			return [[i,n]]

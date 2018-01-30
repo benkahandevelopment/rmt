@@ -70,8 +70,6 @@ const defaultTheme = {
         "meta-venue",
         "meta-kickoff",
         "meta-referee",
-        "meta-home",
-        "meta-away",
         "lineups-full",
         "stats-full",
         "rstream",
@@ -94,8 +92,6 @@ const defaultThemeAlt = {
         "meta-venue",
         "meta-kickoff",
         "meta-referee",
-        "meta-home",
-        "meta-away",
         "lineups-full",
         "stats-full-reverse",
         "rstream",
@@ -106,10 +102,9 @@ const defaultThemeAlt = {
 };
 
 var defaultThemeHash = ""+(defaultTheme.name+defaultTheme.author).hashCode();
+    defaultTheme.uid = defaultThemeHash.replace(/[^\d]/g,"");
 var defaultThemeAltHash = ""+(defaultThemeAlt.name+defaultThemeAlt.author).hashCode();
-
-defaultThemeHash = defaultThemeHash.replace(/[^\d]/g,"");
-defaultThemeAltHash = defaultThemeAltHash.replace(/[^\d]/g,"");
+    defaultThemeAlt.uid = defaultThemeAltHash.replace(/[^\d]/g,"");
 
 $(function(){
     loadTemplates();
@@ -138,7 +133,7 @@ $(function(){
  * Function to load templates
  */
 function loadTemplates(){
-    chrome.storage.sync.get({"templates":[defaultTheme]}, function(o){
+    chrome.storage.sync.get({"templates":[defaultTheme, defaultThemeAlt]}, function(o){
         var templates = o.templates;
         $("[data-output-settings='gen_templates']").html("");
         var $s = $('select[data-input-settings="gen_template_default"]');
@@ -147,11 +142,14 @@ function loadTemplates(){
         var settingDefault;
         chrome.storage.sync.get("settings",function(s){
             s = s.settings;
-            if(!s.gen_template_default){
-                s.gen_template_default = defaultThemeHash;
-                settingDefault = defaultThemeHash;
-                chrome.storage.sync.set({"settings":s});
-            } else settingDefault = s.gen_template_default;
+            try {
+                if(!s.gen_template_default){
+                    s.gen_template_default = defaultThemeHash;
+                    settingDefault = defaultThemeHash;
+                } else settingDefault = s.gen_template_default;
+            } catch(e) {
+                debug("Please select a default template!",3);
+            }
 
             templates.forEach(function(v,i){
                 var macro_display;
@@ -172,7 +170,7 @@ function loadTemplates(){
                             "</ul>"+
                         "</div>"+
                         "<div class='card-footer text-center'>"+
-                            "<small class='text-muted d-block'>by <strong>"+v.author+"</strong><br>v"+v.version+" - \#"+v.uid+((v.uid === defaultThemeHash) || (v.uid === defaultThemeAltHash) ? "" : " - <a href='#' data-template-delete='"+v.uid+"'><i class='far fa-fw fa-trash-alt'></i></a></small>")+
+                            "<small class='text-muted d-block'>by <strong>"+v.author+"</strong><br>v"+v.version+" - \#"+v.uid+((v.uid === defaultTheme.uid) || (v.uid === defaultThemeAlt.uid) ? "" : " - <a href='#' data-template-delete='"+v.uid+"'><i class='far fa-fw fa-trash-alt'></i></a></small>")+
                         "</div>"+
                     "</div>");
             });
