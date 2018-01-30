@@ -147,3 +147,7 @@ a[data-toggle="popover"] { cursor: pointer; }
 	background-repeat: no-repeat;
 	border-bottom: 1px solid rgba(0,0,0,0.1);
 }
+
+.dropdown-item:not(.active):not(.disabled){
+	color: #2780E3;
+}
