@@ -56,6 +56,20 @@ $(function(){
         html : true,
         template : '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body p-0"></div></div>'
     });
+
+	//Save template as default
+	$("body").on("click", "button[data-btn-default-template]", function(e){
+		var $t = $(this);
+		var $s = $('select[data-input-settings="gen_template_default"]');
+		$t.html("Setting...").attr("disabled",true);
+
+		var tid = $t.attr("data-btn-default-template");
+		$s.find("option[value='"+tid+"']").prop("selected","selected").trigger("change");
+		saveAll();
+
+		$t.html("Success!");
+		setTimeout(function(){ $t.html("Set as Default").attr("disabled",false); }, 2000);
+	});
 });
 
 //Load page function

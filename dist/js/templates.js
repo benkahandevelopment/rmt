@@ -154,7 +154,7 @@ function loadTemplates(){
             templates.forEach(function(v,i){
                 var macro_display;
                 if(!v.macros||v.macros.length<1) macro_display = "None provided in template file";
-                else macro_display = "<em>"+v.macros.sort().join("</em>, <em>")+"</em>";
+                else macro_display = "<span class='badge badge-secondary'>"+v.macros.sort().join("</span>&nbsp;<span class='badge badge-secondary'>")+"</span>";
 
                 //Theme Defaults
                 $s.append("<option value='"+v.uid+"'"+(v.uid==settingDefault ? " selected=selected" : "")+">"+v.name+"</option>");
@@ -165,10 +165,11 @@ function loadTemplates(){
                         (v.image && v.image!="" ? "<div class='card-screenshot' style='background-image:url("+v.image+");'></div><a href='"+v.image+"' target='_blank' class='btn btn-sm btn-link text-muted mb-0'>Open Screenshot</a>" : "")+
                         "<div class='card-body px-0'>"+
                             "<ul class='list-group list-group-flush mb-2'>"+
-                                "<li class='list-group-item card-text'><span class='text-muted'>Description</span>: "+v.description+"</li>"+
-                                "<li class='list-group-item card-text'><span class='text-muted'>Macros</span>: "+macro_display+
+                                "<li class='list-group-item card-text'><span class='text-muted'>Description</span><br>"+v.description+"</li>"+
+                                "<li class='list-group-item card-text'><span class='text-muted'>Macros</span><br>"+macro_display+
                             "</ul>"+
                         "</div>"+
+                        "<button type='button' class='btn btn-warning btn-block' data-btn-default-template='"+v.uid+"'>Set as Default</button>"+
                         "<div class='card-footer text-center'>"+
                             "<small class='text-muted d-block'>by <strong>"+v.author+"</strong><br>v"+v.version+" - \#"+v.uid+((v.uid === defaultTheme.uid) || (v.uid === defaultThemeAlt.uid) ? "" : " - <a href='#' data-template-delete='"+v.uid+"'><i class='far fa-fw fa-trash-alt'></i></a></small>")+
                         "</div>"+
