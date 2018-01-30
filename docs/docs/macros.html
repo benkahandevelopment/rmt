@@ -1,0 +1,95 @@
+<h1>Macro Appendix</h1>
+<h2>Overview</h2>
+<p>Add macros to your post or theme to add dynamic values from the Popup to your post.</p>
+<p>For example, if your home team is "Spurs", you can add the macro <code>{{META_HOME}}</code>, which will be replaced by <code>[](#rmt-start-meta-home)Spurs[](#rmt-end-meta-home)</code>. This will output <code>Spurs</code>.</p>
+
+<hr>
+<h2>Macros</h2>
+<table class="table table-striped table-hover table-sm">
+    <thead>
+        <th scope="col">Macro</th>
+        <th scope="col">Code</th>
+        <th scope="col">Description</th>
+        <th scope="col">Notes</th>
+        <th scope="col">Version Added</th>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">sprite-tournament</th>
+            <td><code>{{SPRITE_TOURNAMENT}}</code></td>
+            <td>Sprite icon for the selected tournament</td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">meta-home</th>
+            <td><code>{{META_HOME}}</code></td>
+            <td>Home team name</td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">meta-away</th>
+            <td><code>{{META_AWAY}}</code></td>
+            <td>Away team name</td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">meta-venue</th>
+            <td><code>{{META_VENUE}}</code></td>
+            <td>Stadium/venue name</td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">meta-kickoff</th>
+            <td><code>{{META_KICKOFF}}</code></td>
+            <td>Kickoff value</td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">meta-referee</th>
+            <td><code>{{META_REFEREE}}</code></td>
+            <td>Referee name</td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">lineups-full</th>
+            <td><code>{{LINEUPS_FULL}}</code></td>
+            <td>Full lineups table. Starts at first row (does not include team names/table layout). Row looks like <code>[sprites]|Home Player|Away Player|[sprites]</code></td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">stats-full</th>
+            <td><code>{{STATS_FULL}}</code></td>
+            <td>Full stats table. Starts at first row (does not include team names/table layout). Row looks like <code>[home team bar]|Stat|[away team bar]</code></td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">stats-full-reverse</th>
+            <td><code>{{STATS_FULL_REVERSE}}</code></td>
+            <td>Full lineups table with stats in the middle instead of on the outside. Starts at first row (does not include team names/table layout). Row looks like <code>Stat|[home team bar][away team bar]</code></td>
+            <td>Displays awkwardly on mobile</td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">rstream</th>
+            <td><code>{{RSTREAM}}</code></td>
+            <td>Link to reddit stream (may require applying twice)</td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+        <tr>
+            <th scope="row">footer</th>
+            <td><code>{{FOOTER}}</code></td>
+            <td>Adds preset footer with timestamp of last edit</td>
+            <td></td>
+            <td>1.0.0</td>
+        </tr>
+    </tbody>
+</table>
