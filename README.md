@@ -1,10 +1,16 @@
 # reddit Match Threader
 
-A WIP Chrome extension to provide easy updating of reddit Match Thread posts.
+## Overview
 
-## Installation
+redditMatchThreader is a Chrome extension to create, manage and automatically format Match Threads using reddit markup.
 
-The files are an unpackaged Chrome extension. Enable "Developer Mode" on chrome://extensions/ and click "Load Unpacked Extension". Select the root folder of this project and the browser will add the extension.
+## How it Works
+
+The Popup tool allows inputting of meta, teamsheets, statistics and commentary updates, each of them editable and expandible - for example, you can allocate sprite images to players to signify goals, red cards etc.
+
+## Documentation
+
+See full documentation with installation and usage instructions at https://benkahandevelopment.github.com/rmt.
 
 ## Contribution
 
