@@ -1,6 +1,6 @@
 #exclude directories
-/octicons*
-/webfonts
+/dist/octicons*
+/dist/webfonts
 /docs/webfonts
 /templates
 
