@@ -1,8 +1,8 @@
 /* Settings variables */
 var $settings;
 chrome.storage.sync.get({"settings" : def_settings}, function(o){ $settings = o.settings; });
-var $o = $("#mainoutput");
-var $l = $("#logoutput");
+const $o = $("#mainoutput");
+const $l = $("#logoutput");
 
 /* On pageload */
 $(function(){
@@ -23,9 +23,8 @@ $(function(){
 			$("a[data-output="+window.location.hash.slice(1)+"]").click();
 		}, 100);
 	} else {
-		setTimeout(function(){
-			$("a[data-output=getting_started]").click();
-		}, 100);
+		$("#settings").hide();
+		loader(0);
 	}
 
     //Settings manouvering
@@ -41,7 +40,7 @@ $(function(){
 	$("a[data-output]:not(.disabled)").click(function(e){
 		var d = $(this).attr("data-output");
 		s = d.substr(0,8)=="settings" ? true : false;
-		$("main[role=main]").attr("id",d);
+		$("body").attr("id",d);
 		loadPage(d,$(this),s);
 	});
 
@@ -146,8 +145,8 @@ function getVal(field){
 }
 
 function executeSettings(){
-	if($settings.adv_debug) $("#logoutput-cont").show();
-		else $("#logoutput-cont").hide();
+	// if($settings.adv_debug) $l.show();
+	// 	else $l.hide();
 
     $("[data-manifest-meta]").each(function(){
         var $t = $(this);

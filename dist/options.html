@@ -66,18 +66,19 @@
 					</ul>
 				</nav>
 				<div class="col-md-9 p-0">
-					<div class="jumbotron jumbotron-fluid">
-						<div class="bg"></div>
-						<div class="container text-center">
-							<h1 class="display-3">reddit Match Threader</h1>
-							<p>Use these tools to make your experience with <span class="rmt-br">rMT</span> a breeze</p>
-							<p>
-								<a class="btn btn-info btn-lg" href="#settings" role="button" data-output="settings"><i class="fas fa-cogs"></i> Settings</a>
-								<a class="btn btn-primary btn-lg" href="#getting_started" role="button" data-output="getting_started">Getting Started &raquo;</a>
-							</p>
+					<div class="m-2" id="documentation" data-output-cont="documentation">
+						<div class="jumbotron jumbotron-fluid">
+							<div class="bg"></div>
+							<div class="container text-center">
+								<h1 class="display-3">reddit Match Threader</h1>
+								<p>Use these tools to make your experience with <span class="rmt-br">rMT</span> a breeze</p>
+								<p>
+									<a class="btn btn-info btn-lg" href="#settings" role="button" data-output="settings"><i class="fas fa-cogs"></i> Settings</a>
+									<a class="btn btn-primary btn-lg" href="#getting_started" role="button" data-output="getting_started">Getting Started &raquo;</a>
+								</p>
+							</div>
 						</div>
 					</div>
-					<div class="m-2" id="documentation" data-output-cont="documentation"></div>
 					<div class="m-2" id="settings" data-output-cont="settings">
 						<h1>Settings</h1>
 						<div class="container-fluid">
@@ -126,13 +127,7 @@
 
 										<div class="tab-pane" role="tabpanel" id="settings-templates">
 											<!-- settings - templates -->
-											<p class="h4">My Templates</p>
-											<div class="row">
-												<div class="card-deck" data-output-settings="gen_templates"></div>
-											</div>
-
-											<hr />
-											<p class="h4">Upload New Template</p>
+											<p class="h4">Upload Template</p>
 											<div class="row">
 												<div class="col-8">
 													<input type="file" class="form-control form-control-sm ignore" accept=".template.json,.template.JSON,.TEMPLATE.json,TEMPLATE.JSON" data-input="gen_template_upload">
@@ -140,6 +135,68 @@
 												<div class="col-4">
 													<button type="submit" class="btn btn-primary btn-sm h-100 w-100" data-button="gen_template_upload">Upload</button>
 												</div>
+											</div>
+
+											<hr />
+											<p class="h4">My Templates</p>
+											<div class="row">
+												<div class="card-deck" data-output-settings="gen_templates"></div>
+											</div>
+
+											<hr />
+											<p class="h4">Create New Template</p>
+											<div class="container-fluid">
+												<div class="form-group row">
+													<label class="col-sm-2 col-form-label col-form-label-sm">Template Name</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control form-control-sm" data-template-input="name">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-sm-2 col-form-label col-form-label-sm">Author</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control form-control-sm" data-template-input="author">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-sm-2 col-form-label col-form-label-sm">Version</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control form-control-sm" data-template-input="version">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-sm-2 col-form-label col-form-label-sm">Description</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control form-control-sm" data-template-input="description">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-sm-2 col-form-label col-form-label-sm">Macros (separated by comma)</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control form-control-sm" data-template-input="macros">
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-sm-2 col-form-label col-form-label-sm">Image URL</label>
+													<div class="col-sm-10">
+														<input type="text" class="form-control form-control-sm" data-template-input="image">
+														<small class="text-muted d-block">Recommended domain: Imgur.com</small>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-sm-2 col-form-label col-form-label-sm">Template</label>
+													<div class="col-sm-10">
+														<textarea class="form-control form-control-sm" data-template-input="template"></textarea>
+													</div>
+												</div>
+												<div class="form-group row">
+													<label class="col-sm-2 col-form-label col-form-label-sm">Output</label>
+													<div class="col-sm-10">
+														<textarea class="form-control form-control-sm form-control-plaintext" data-template-output="template" readonly></textarea>
+														<small class="text-muted d-block">Save to <code>.template.json</code> file for distribution</small>
+													</div>
+												</div>
+												<div class="form-group"><button type="submit" class="btn btn-primary btn-block" data-button="gen_template_create">Create</button></div>
 											</div>
 										</div>
 
@@ -175,7 +232,6 @@
 							</div>
 						</div>
 					</div>
-					<div data-output="settings"></div>
 					<footer class="container-fluid p-2">
 						<hr class="mb-2">
 						<div class="d-block text-center"><img src="icon64.png" class="brandimg"></div>
@@ -186,7 +242,7 @@
 		</div> <!-- /container -->
 	</main>
 
-	<div id="logoutput-cont" class="d-none d-md-block"><ul id="logoutput" class="small"></ul></div>
+	<!--<div id="logoutput-cont" class="d-none d-md-block"><ul id="logoutput" class="small"></ul></div>-->
 	<script type="text/javascript" src="js/jquery.min.js"></script>
 	<script type="text/javascript" src="js/jqueryui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.bundle.min.js"></script>

@@ -127,6 +127,17 @@ $(function(){
              processTemplate(JSON.parse(uploadedData));
          }
      });
+
+     $('button[data-button="gen_template_create"]').click(function(e){
+         $(this).html("Processing...").attr("disabled","disabled");
+         createTemplate();
+     });
+
+     $("body").on("click", "[data-template-delete]", function(e){
+         var uid = $(this).attr("data-template-delete");
+         removeTemplate(uid);
+         e.preventDefault();
+     });
 });
 
 /*
@@ -160,7 +171,7 @@ function loadTemplates(){
                 $s.append("<option value='"+v.uid+"'"+(v.uid==settingDefault ? " selected=selected" : "")+">"+v.name+"</option>");
 
                 //Template list
-                $("[data-output-settings='gen_templates']").append("<div class='card'>"+
+                $("[data-output-settings='gen_templates']").append("<div class='card' data-uid='"+v.uid+"'>"+
                         "<div class='card-header text-center'>"+v.name+"</div>"+
                         (v.image && v.image!="" ? "<div class='card-screenshot' style='background-image:url("+v.image+");'></div><a href='"+v.image+"' target='_blank' class='btn btn-sm btn-link text-muted mb-0'>Open Screenshot</a>" : "")+
                         "<div class='card-body px-0'>"+
@@ -267,6 +278,24 @@ function removeDuplicates(arr, key){
     }
 }
 
+/*
+ * Function to remove template by UID
+ */
+function removeTemplate(uid){
+    debug("Removing template with UID "+uid+"...")
+    chrome.storage.sync.get("templates", function(o){
+        tmps = o.templates;
+        var newtmp = [];
+        tmps.forEach(function(v,i){
+            if(v.uid!=uid){
+                newtmp.push(v);
+            }
+        });
+        chrome.storage.sync.set({"templates" : newtmp});
+        $("[data-uid='"+uid+"']").remove();
+        debug("Template removal successful");
+    });
+};
 
 /*
  * Function to remove all templates
@@ -277,4 +306,116 @@ function removeTemplates(){
     setTimeout(function(){
         processTemplate(defaultThemeAlt);
     },100);
+}
+
+/*
+ * Function to create templates
+ */
+function createTemplate(){
+    const $btn = $('button[data-button="gen_template_create"]');
+    var tmp = {};
+    tmp.template_version = 1;
+
+    //Check all values exist
+    tmp.name        = $.trim($("[data-template-input='name'").val());
+    tmp.author      = $.trim($("[data-template-input='author'").val());
+    tmp.version     = $.trim($("[data-template-input='version'").val());
+    tmp.description = $.trim($("[data-template-input='description'").val());
+    tmp.image  = $.trim($("[data-template-input='image'").val());
+    tmp.macros      = $.trim($("[data-template-input='macros'").val());
+    tmp.image       = $.trim($("[data-template-input='image'").val());
+    tmp.template    = $.trim($("[data-template-input='template'").val());
+
+
+    //Check all values are valid
+    if(tmp.name==""
+        ||tmp.author==""
+        ||tmp.version==""
+        ||tmp.description==""
+        ||tmp.macros==""
+        ||tmp.image==""
+        ||tmp.template==""){
+            debug("Invalid data input - please ensure all fields are filled in",2);
+            alert("Error:\nInvalid data input - please ensure all fields are filled in");
+            $btn.html("Error!");
+            setTimeout(function(){
+                $btn.prop("disabled",false).html("Create");
+            },2000);
+            return false;
+        }
+
+    //Parse values (macros, image, version)
+    tmp.macros = $.map(tmp.macros.split(","),$.trim);
+    tmp.version = tmp.version.replace(/[^\d\.]/g,"");
+
+    if(parseInt(tmp.version).length<1){
+        debug("Invalid version number",2);
+        alert("Error:\nInvalid version number");
+        $btn.html("Error!");
+        setTimeout(function(){
+            $btn.prop("disabled",false).html("Create");
+        },2000);
+        return false;
+    }
+
+    if(!isUrl(tmp.image)){
+        debug(tmp.image);
+        debug("Invalid image URL",2);
+        alert("Error:\nInvalid image URL");
+        $btn.html("Error!");
+        setTimeout(function(){
+            $btn.prop("disabled",false).html("Create");
+        },2000);
+        return false;
+    }
+
+    //Create JSON output and add it to textarea
+    $('[data-template-output="template"]').val(JSON.stringify(tmp));
+    $btn.html("Created!");
+    createFile(JSON.stringify(tmp),tmp.name.replace(/[^a-zA-Z]/g,"")+".template.json");
+    setTimeout(function(){
+        $btn.prop("disabled",false).html("Create");
+    },2000);
+}
+
+/*
+ * Function to check URL validity
+ */
+function isUrl(url) {
+    return /^(https?|s?ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i.test(url);
+}
+
+
+function createFile(data, filename){
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(data));
+    element.setAttribute('download', filename);
+    element.style.display = 'none';
+    document.body.appendChild(element);
+    element.click();
+    document.body.removeChild(element);
+
+    /*
+    window.requestFileSystem = window.requestFileSystem || window.webkitRequestFileSystem;
+    window.requestFileSystem(window.TEMPORARY, 1024*1024, function(fs) {
+       fs.root.getFile(filename, {create: true}, function(fileEntry) { // test.bin is filename
+           fileEntry.createWriter(function(fileWriter) {
+               var arr = new Uint8Array(3); // data length
+
+               arr[0] = 97; // byte data; these are codes for 'abc'
+               arr[1] = 98;
+               arr[2] = 99;
+
+               var blob = new Blob(data);
+
+               fileWriter.addEventListener("writeend", function() {
+                   // navigate to file, will download
+                   location.href = fileEntry.toURL();
+               }, false);
+
+               fileWriter.write(blob);
+           }, function() {});
+       }, function() {});
+    }, function() {});
+    */
 }
