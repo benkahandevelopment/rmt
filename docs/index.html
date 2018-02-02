@@ -15,26 +15,26 @@
 <body>
 	<div id="loader"><div class="loadimg"><i class="fas fa-spinner fa-lg fa-spin"></i></div></div>
 	<nav class="navbar /*navbar-dark bg-dark*/ navbar-light bg-light">
-		<span class="navbar-brand"><img src="icon32.png"><span class="rmt-br">rMT</span> reddit Match Threader</span>
+		<span class="navbar-brand"><img src="icon32.png"><span class="rmt-br">rMT</span> <span class="d-none d-sm-inline">reddit Match Threader</span></span>
 		<div class="nav nav-pills pull-right d-sm-none">
 			<a class="dropdown-toggle" href="#" data-toggle="dropdown">Menu</a>
-			<div class="dropdown-menu dropdown-menu-right w-100 text-primary">
+			<div class="dropdown-menu dropdown-menu-right w-100">
 				<a class="dropdown-item my-1" href="#getting_started" data-output="getting_started"><i class="fas fa-fw fa-star"></i>&nbsp;Getting Started</a>
-				<a class="dropdown-item my-1" href="#installation" data-output="installation"><i class="fas fa-fw fa-hdd"></i>&nbsp;Installation</a>
-				<a class="dropdown-item my-1" href="#initial_settings" data-output="initial_settings"><i class="fas fa-fw fa-compass"></i>&nbsp;Initial Settings</a>
-				<a class="dropdown-item my-1" href="#meta" data-output="meta"><i class="fas fa-fw fa-newspaper"></i>&nbsp;Meta</a>
-				<a class="dropdown-item my-1" href="#teams" data-output="teams"><i class="fas fa-fw fa-clipboard"></i>&nbsp;Teams</a>
-				<a class="dropdown-item my-1" href="#stats" data-output="stats"><i class="fas fa-fw fa-chart-bar"></i>&nbsp;Stats</a>
-				<a class="dropdown-item my-1" href="#commentary" data-output="commentary"><i class="fas fa-fw fa-comment"></i>&nbsp;Commentary</a>
-				<a class="dropdown-item my-1" href="#generator" data-output="generator"><i class="fas fa-fw fa-upload"></i>&nbsp;Generator</a>
+				<a class="dropdown-item my-1 i-1" href="#installation" data-output="installation"><i class="fas fa-fw fa-hdd"></i>&nbsp;Installation</a>
+				<a class="dropdown-item my-1 i-1" href="#initial_settings" data-output="initial_settings"><i class="fas fa-fw fa-compass"></i>&nbsp;Initial Settings</a>
+				<a class="dropdown-item my-1 i-3" href="#meta" data-output="meta"><i class="fas fa-fw fa-newspaper"></i>&nbsp;Meta</a>
+				<a class="dropdown-item my-1 i-3" href="#teams" data-output="teams"><i class="fas fa-fw fa-clipboard"></i>&nbsp;Teams</a>
+				<a class="dropdown-item my-1 i-3" href="#stats" data-output="stats"><i class="fas fa-fw fa-chart-bar"></i>&nbsp;Stats</a>
+				<a class="dropdown-item my-1 i-3" href="#commentary" data-output="commentary"><i class="fas fa-fw fa-comment"></i>&nbsp;Commentary</a>
+				<a class="dropdown-item my-1 i-3" href="#generator" data-output="generator"><i class="fas fa-fw fa-upload"></i>&nbsp;Generator</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item my-1" href="#pasting" data-output="pasting"><i class="fas fa-fw fa-paste"></i>&nbsp;Importing/Pasting Data</a>
-				<a class="dropdown-item my-1" href="#sending_to_reddit" data-output="sending_to_reddit"><i class="fas fa-fw fa-share-square"></i>&nbsp;Sending to reddit</a>
-				<a class="dropdown-item my-1" href="#new_post" data-output="new_post"><i class="fas fa-fw fa-square"></i>&nbsp;New post</a>
-				<a class="dropdown-item my-1" href="#existing_post" data-output="existing_post"><i class="fas fa-fw fa-plus-square"></i>&nbsp;Existing post</a>
+				<a class="dropdown-item my-1 i-1" href="#pasting" data-output="pasting"><i class="fas fa-fw fa-paste"></i>&nbsp;Importing/Pasting Data</a>
+				<a class="dropdown-item my-1 i-1" href="#sending_to_reddit" data-output="sending_to_reddit"><i class="fas fa-fw fa-share-square"></i>&nbsp;Sending to reddit</a>
+				<a class="dropdown-item my-1 i-3" href="#new_post" data-output="new_post"><i class="fas fa-fw fa-square"></i>&nbsp;New post</a>
+				<a class="dropdown-item my-1 i-3" href="#existing_post" data-output="existing_post"><i class="fas fa-fw fa-plus-square"></i>&nbsp;Existing post</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item my-1 disabled" href="#templates" data-output="templates"><i class="fas fa-fw fa-copy"></i>&nbsp;Templates</a>
-				<a class="dropdown-item my-1 disabled" href="#macros" data-output="macros"><i class="fas fa-fw fa-list-alt"></i>&nbsp;Macro Appendix</a>
+				<a class="dropdown-item my-1" href="#macros" data-output="macros"><i class="fas fa-fw fa-list-alt"></i>&nbsp;Macro Appendix</a>
 			</div>
 		</div>
 	</nav>
@@ -57,22 +57,26 @@
 						<li class="nav-item"><a class="nav-link i-3" href="#new_post" data-output="new_post"><i class="fas fa-fw fa-square"></i>&nbsp;New post</a></li>
 						<li class="nav-item"><a class="nav-link i-3" href="#existing_post" data-output="existing_post"><i class="fas fa-fw fa-plus-square"></i>&nbsp;Existing post</a></li>
 						<li class="nav-item"><a class="nav-link disabled" href="#templates" data-output="templates"><i class="fas fa-fw fa-copy"></i>&nbsp;Templates</a></li>
-						<li class="nav-item"><a class="nav-link disabled" href="#macros" data-output="macros"><i class="fas fa-fw fa-list-alt"></i>&nbsp;Macro Appendix</a></li>
+						<li class="nav-item"><a class="nav-link" href="#macros" data-output="macros"><i class="fas fa-fw fa-list-alt"></i>&nbsp;Macro Appendix</a></li>
 					</ul>
 				</nav>
 				<div class="col-md-9 p-0">
-					<div class="jumbotron jumbotron-fluid">
-						<div class="bg"></div>
-						<div class="container text-center">
-							<h1 class="display-3">reddit Match Threader</h1>
-							<p>Use these tools to make your experience with <span class="rmt-br">rMT</span> a breeze</p>
-							<p><a class="btn btn-primary btn-lg" href="#getting_started" role="button" data-output="getting_started">Getting Started &raquo;</a></p>
+					<div class="m-2" id="documentation" data-output-cont="documentation">
+						<div class="jumbotron jumbotron-fluid">
+							<div class="bg"></div>
+							<div class="container text-center">
+								<h1 class="display-3">reddit Match Threader</h1>
+								<p>Use these tools to make your experience with <span class="rmt-br">rMT</span> a breeze</p>
+								<p>
+									<a class="btn btn-info btn-lg" href="#settings" role="button" data-output="settings"><i class="fas fa-cogs"></i> Settings</a>
+									<a class="btn btn-primary btn-lg" href="#getting_started" role="button" data-output="getting_started">Getting Started &raquo;</a>
+								</p>
+							</div>
 						</div>
 					</div>
-					<div class="m-2" id="documentation" data-output-cont="documentation"></div>
 					<footer class="container-fluid p-2">
 						<hr class="mb-2">
-						<div class="d-block text-center"><img src="./icon64.png" class="brandimg"></div>
+						<div class="d-block text-center"><img src="icon64.png" class="brandimg"></div>
 						<p class="small text-muted text-center mb-0">&copy; 2018 <a href="//bkdev.co.uk/" target="_blank">BKDev</a> &amp; <a href="//reddit.com/u/magicwings" target="_blank">/u/magicwings</a>. All rights reserved. App v<span data-manifest-meta="version"></span>. <a href="//github.com/benkahandevelopment/rmt" target="_blank">Fork me on GitHub &raquo;</a></p>
 					</footer>
 				</div>
