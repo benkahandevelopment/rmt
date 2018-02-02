@@ -13,12 +13,10 @@
 /docs/js/jquery*
 /docs/css/bootstrap*
 
-#exclude analytics
+#exclude other
 ga.js
-
-#exclude icons/older files
 *.psd
 *.old.*
-
-#exclude other
 *.DS_Store
+*.zip
+*.rar
