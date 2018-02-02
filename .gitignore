@@ -3,6 +3,7 @@
 /dist/webfonts
 /docs/webfonts
 /templates
+/assets
 
 #exclude jquery, bootstrap js/css
 /js/bootstrap*
