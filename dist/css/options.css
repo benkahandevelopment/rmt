@@ -151,3 +151,7 @@ a[data-toggle="popover"] { cursor: pointer; }
 .dropdown-item:not(.active):not(.disabled){
 	color: #2780E3;
 }
+
+textarea.form-control-sm {
+	min-height: 2em;
+}

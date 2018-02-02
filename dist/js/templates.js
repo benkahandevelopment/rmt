@@ -180,6 +180,9 @@ function loadTemplates(){
                                 "<li class='list-group-item card-text'><span class='text-muted'>Macros</span><br>"+macro_display+
                             "</ul>"+
                         "</div>"+
+                        "<div class='form-group'>"+
+                            "<textarea data-template-markup='"+v.uid+"' class='form-control-sm w-100' rows=2>"+v.template+"</textarea>"+
+                        "</div>"+
                         "<button type='button' class='btn btn-warning btn-block' data-btn-default-template='"+v.uid+"'>Set as Default</button>"+
                         "<div class='card-footer text-center'>"+
                             "<small class='text-muted d-block'>by <strong>"+v.author+"</strong><br>v"+v.version+" - \#"+v.uid+((v.uid === defaultTheme.uid) || (v.uid === defaultThemeAlt.uid) ? "" : " - <a href='#' data-template-delete='"+v.uid+"'><i class='far fa-fw fa-trash-alt'></i></a></small>")+
