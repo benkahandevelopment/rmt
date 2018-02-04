@@ -41,26 +41,31 @@ $(function(){
 			var c = $textarea.val();
 
 			//Meta
-			c = replaceMeta(c, [
-				"META_HOMETEAM",
-				"META_AWAYTEAM",
-				"META_VENUE",
-				"META_KICKOFF",
-				"META_REFEREE",
-				"META_TOURNAMENT",
-				"SPRITE_TOURNAMENT",
-			], [
-				"meta-home",
-				"meta-away",
-				"meta-venue",
-				"meta-kickoff",
-				"meta-referee",
-				"meta-tournament",
-				"sprite-tournament"
-			], d);
+			c = doMacros(c, "replaceMeta", {
+                meta_name : [
+                    "META_HOMETEAM",
+                    "META_AWAYTEAM",
+                    "META_VENUE",
+                    "META_KICKOFF",
+                    "META_REFEREE",
+                    "META_TOURNAMENT",
+                    "SPRITE_TOURNAMENT"],
+                sprite_name : [
+                    "meta-home",
+    				"meta-away",
+    				"meta-venue",
+    				"meta-kickoff",
+    				"meta-referee",
+    				"meta-tournament",
+    				"sprite-tournament"
+                ],
+                requestData : d
+            });
 
 			//Teams
-			c = replaceTeams(c, d);
+			c = doMacros(c, "lineups_full", { requestData : d } );
+            c = doMacros(c, "lineups_full_home", { requestData : d } );
+            c = doMacros(c, "lineups_full_away", { requestData : d } );
 
 			//Stats
 			c = replaceStats(c, d);

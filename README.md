@@ -4,6 +4,9 @@
 
 redditMatchThreader is a Chrome extension to create, manage and automatically format Match Threads using reddit markup.
 
+**v1.0.0.2**
+- Added "LINEUPS_FULL_HOME" and "LINEUPS_FULL_AWAY" macros
+
 **v1.0.0.1**
 - Added template markdown under each template listing
 

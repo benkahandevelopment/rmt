@@ -1,13 +1,93 @@
-//Meta generator
-function replaceMeta(startVal, metaName, spriteName, requestData){
+/* Macro Handler */
+function doMacros(startVal, type, data){
+	var requestData = data.requestData;
 	var ret = startVal;
-	metaName.forEach(function(v,i){
-		var val = findVal(requestData,spriteName[i]);
-		var withMeta = ret.replace(new RegExp(sanitise("{{"+v+"}}"),"g"), "[](#rmt-start-"+spriteName[i]+")[](#rmt-end-"+spriteName[i]+")");
-		ret = withMeta.replace(new RegExp(sanitise("[](#rmt-start-"+spriteName[i]+")")+".*"+sanitise("[](#rmt-end-"+spriteName[i]+")"),"g"), "[](#rmt-start-"+spriteName[i]+")"+val+"[](#rmt-end-"+spriteName[i]+")");
-	});
-	debug("Meta",2);
-	return ret;
+
+	//Meta Generator
+	if(type=="replaceMeta"){
+		data.meta_name.forEach(function(v,i){
+			var val = findVal(data.requestData,data.sprite_name[i]);
+			ret = ret.replace(new RegExp(sanitise("{{"+v+"}}"),"g"), "[](#rmt-start-"+data.sprite_name[i]+")[](#rmt-end-"+data.sprite_name[i]+")");
+			ret = ret.replace(new RegExp(sanitise("[](#rmt-start-"+data.sprite_name[i]+")")+".*"+sanitise("[](#rmt-end-"+data.sprite_name[i]+")"),"g"), "[](#rmt-start-"+data.sprite_name[i]+")"+val+"[](#rmt-end-"+data.sprite_name[i]+")")
+		});
+		debug("Meta",2);
+		return ret;
+	}
+
+	//Teams
+	if(type=="lineups_full"){
+		var lineups_full =
+		" "+findSprites(requestData,"home-xi-0-sprites")+"|"+findVal(requestData,"home-xi-0")+"|"+findVal(requestData,"away-xi-0")+"|"+findSprites(requestData,"away-xi-0-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-1-sprites")+"|"+findVal(requestData,"home-xi-1")+"|"+findVal(requestData,"away-xi-1")+"|"+findSprites(requestData,"away-xi-1-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-2-sprites")+"|"+findVal(requestData,"home-xi-2")+"|"+findVal(requestData,"away-xi-2")+"|"+findSprites(requestData,"away-xi-2-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-3-sprites")+"|"+findVal(requestData,"home-xi-3")+"|"+findVal(requestData,"away-xi-3")+"|"+findSprites(requestData,"away-xi-3-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-4-sprites")+"|"+findVal(requestData,"home-xi-4")+"|"+findVal(requestData,"away-xi-4")+"|"+findSprites(requestData,"away-xi-4-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-5-sprites")+"|"+findVal(requestData,"home-xi-5")+"|"+findVal(requestData,"away-xi-5")+"|"+findSprites(requestData,"away-xi-5-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-6-sprites")+"|"+findVal(requestData,"home-xi-6")+"|"+findVal(requestData,"away-xi-6")+"|"+findSprites(requestData,"away-xi-6-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-7-sprites")+"|"+findVal(requestData,"home-xi-7")+"|"+findVal(requestData,"away-xi-7")+"|"+findSprites(requestData,"away-xi-7-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-8-sprites")+"|"+findVal(requestData,"home-xi-8")+"|"+findVal(requestData,"away-xi-8")+"|"+findSprites(requestData,"away-xi-8-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-9-sprites")+"|"+findVal(requestData,"home-xi-9")+"|"+findVal(requestData,"away-xi-9")+"|"+findSprites(requestData,"away-xi-9-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-xi-10-sprites")+"|"+findVal(requestData,"home-xi-10")+"|"+findVal(requestData,"away-xi-10")+"|"+findSprites(requestData,"away-xi-10-sprites")+"  \n" +
+		" |*Subs*|*Subs*|  \n" +
+		" "+findSprites(requestData,"home-bench-0-sprites")+"|"+findVal(requestData,"home-bench-0")+"|"+findVal(requestData,"away-bench-0")+"|"+findSprites(requestData,"away-bench-0-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-bench-1-sprites")+"|"+findVal(requestData,"home-bench-1")+"|"+findVal(requestData,"away-bench-1")+"|"+findSprites(requestData,"away-bench-1-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-bench-2-sprites")+"|"+findVal(requestData,"home-bench-2")+"|"+findVal(requestData,"away-bench-2")+"|"+findSprites(requestData,"away-bench-2-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-bench-3-sprites")+"|"+findVal(requestData,"home-bench-3")+"|"+findVal(requestData,"away-bench-3")+"|"+findSprites(requestData,"away-bench-3-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-bench-4-sprites")+"|"+findVal(requestData,"home-bench-4")+"|"+findVal(requestData,"away-bench-4")+"|"+findSprites(requestData,"away-bench-4-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-bench-5-sprites")+"|"+findVal(requestData,"home-bench-5")+"|"+findVal(requestData,"away-bench-5")+"|"+findSprites(requestData,"away-bench-5-sprites")+"  \n" +
+		" "+findSprites(requestData,"home-bench-6-sprites")+"|"+findVal(requestData,"home-bench-6")+"|"+findVal(requestData,"away-bench-6")+"|"+findSprites(requestData,"away-bench-6-sprites")+"  \n";
+
+
+		var ret = startVal.replace(/\{\{LINEUPS_FULL\}\}/g, "[](#rmt-start-lineups-full)"+lineups_full+"[](#rmt-end-lineups-full)");
+		ret = ret.replace(/\[\]\(\#rmt\-start\-lineups\-full\)[\s\S]*\[\]\(\#rmt\-end\-lineups\-full\)/g, "[](#rmt-start-lineups-full)"+lineups_full+"[](#rmt-end-lineups-full)");
+
+		debug("Teams",2);
+		return ret;
+	}
+
+	if(type=="lineups_full_home"){
+		var lineups_full_home =
+		"  " + findVal(requestData,"home-xi-0") + " | " + findSprites(requestData, "home-xi-0-sprites") + " | " + findVal(requestData,"home-bench-0") + " | " + findVal(requestData, "home-bench-0-sprites") + "  \n" +
+		"  " + findVal(requestData,"home-xi-1") + " | " + findSprites(requestData, "home-xi-1-sprites") + " | " + findVal(requestData,"home-bench-1") + " | " + findVal(requestData, "home-bench-1-sprites") + "  \n" +
+		"  " + findVal(requestData,"home-xi-2") + " | " + findSprites(requestData, "home-xi-2-sprites") + " | " + findVal(requestData,"home-bench-2") + " | " + findVal(requestData, "home-bench-2-sprites") + "  \n" +
+		"  " + findVal(requestData,"home-xi-3") + " | " + findSprites(requestData, "home-xi-3-sprites") + " | " + findVal(requestData,"home-bench-3") + " | " + findVal(requestData, "home-bench-3-sprites") + "  \n" +
+		"  " + findVal(requestData,"home-xi-4") + " | " + findSprites(requestData, "home-xi-4-sprites") + " | " + findVal(requestData,"home-bench-4") + " | " + findVal(requestData, "home-bench-4-sprites") + "  \n" +
+		"  " + findVal(requestData,"home-xi-5") + " | " + findSprites(requestData, "home-xi-5-sprites") + " | " + findVal(requestData,"home-bench-5") + " | " + findVal(requestData, "home-bench-5-sprites") + "  \n" +
+		"  " + findVal(requestData,"home-xi-6") + " | " + findSprites(requestData, "home-xi-6-sprites") + " | " + findVal(requestData,"home-bench-6") + " | " + findVal(requestData, "home-bench-6-sprites") + "  \n" +
+		"  " + findVal(requestData,"home-xi-7") + " | " + findSprites(requestData, "home-xi-7-sprites") + " | | " + "  \n" +
+		"  " + findVal(requestData,"home-xi-8") + " | " + findSprites(requestData, "home-xi-8-sprites") + " | | " + "  \n" +
+		"  " + findVal(requestData,"home-xi-9") + " | " + findSprites(requestData, "home-xi-9-sprites") + " | | " + "  \n" +
+		"  " + findVal(requestData,"home-xi-10") + " | " + findSprites(requestData, "home-xi-10-sprites") + " | |  \n";
+
+
+		var ret = startVal.replace(/\{\{LINEUPS_FULL_HOME\}\}/g, "[](#rmt-start-lineups-full-home)"+lineups_full_home+"[](#rmt-end-lineups-full-home)");
+		ret = ret.replace(/\[\]\(\#rmt\-start\-lineups\-full\-home\)[\s\S]*\[\]\(\#rmt\-end\-lineups\-full\-home\)/g, "[](#rmt-start-lineups-full-home)"+lineups_full_home+"[](#rmt-end-lineups-full-home)");
+
+		debug("Teams",2);
+		return ret;
+	}
+
+	if(type=="lineups_full_away"){
+		var lineups_full_away =
+		"  " + findVal(requestData,"away-xi-0") + " | " + findSprites(requestData, "away-xi-0-sprites") + " | " + findVal(requestData,"away-bench-0") + " | " + findVal(requestData, "away-bench-0-sprites") + "  \n" +
+		"  " + findVal(requestData,"away-xi-1") + " | " + findSprites(requestData, "away-xi-1-sprites") + " | " + findVal(requestData,"away-bench-1") + " | " + findVal(requestData, "away-bench-1-sprites") + "  \n" +
+		"  " + findVal(requestData,"away-xi-2") + " | " + findSprites(requestData, "away-xi-2-sprites") + " | " + findVal(requestData,"away-bench-2") + " | " + findVal(requestData, "away-bench-2-sprites") + "  \n" +
+		"  " + findVal(requestData,"away-xi-3") + " | " + findSprites(requestData, "away-xi-3-sprites") + " | " + findVal(requestData,"away-bench-3") + " | " + findVal(requestData, "away-bench-3-sprites") + "  \n" +
+		"  " + findVal(requestData,"away-xi-4") + " | " + findSprites(requestData, "away-xi-4-sprites") + " | " + findVal(requestData,"away-bench-4") + " | " + findVal(requestData, "away-bench-4-sprites") + "  \n" +
+		"  " + findVal(requestData,"away-xi-5") + " | " + findSprites(requestData, "away-xi-5-sprites") + " | " + findVal(requestData,"away-bench-5") + " | " + findVal(requestData, "away-bench-5-sprites") + "  \n" +
+		"  " + findVal(requestData,"away-xi-6") + " | " + findSprites(requestData, "away-xi-6-sprites") + " | " + findVal(requestData,"away-bench-6") + " | " + findVal(requestData, "away-bench-6-sprites") + "  \n" +
+		"  " + findVal(requestData,"away-xi-7") + " | " + findSprites(requestData, "away-xi-7-sprites") + " | | " + "  \n" +
+		"  " + findVal(requestData,"away-xi-8") + " | " + findSprites(requestData, "away-xi-8-sprites") + " | | " + "  \n" +
+		"  " + findVal(requestData,"away-xi-9") + " | " + findSprites(requestData, "away-xi-9-sprites") + " | | " + "  \n" +
+		"  " + findVal(requestData,"away-xi-10") + " | " + findSprites(requestData, "away-xi-10-sprites") + " | |  \n";
+
+
+		var ret = startVal.replace(/\{\{LINEUPS_FULL_AWAY\}\}/g, "[](#rmt-start-lineups-full-away)"+lineups_full_away+"[](#rmt-end-lineups-full-away)");
+		ret = ret.replace(/\[\]\(\#rmt\-start\-lineups\-full\-away\)[\s\S]*\[\]\(\#rmt\-end\-lineups\-full\-away\)/g, "[](#rmt-start-lineups-full-away)"+lineups_full_away+"[](#rmt-end-lineups-full-away)");
+
+		debug("Teams",2);
+		return ret;
+	}
 }
 
 //Commentary generator
