@@ -21,7 +21,3 @@ See full documentation with installation and usage instructions at https://benka
 ## Contribution
 
 Please get in touch via GitHub or reddit (/u/magicwings) for details on how to contribute to this project.
-
-## Authors
-
-* **Ben Kahan** - [Ben Kahan Development](https://github.com/benkahandevelopment), [/u/magicwings](https://reddit.com/u/magicwings)
